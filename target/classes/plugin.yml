@@ -1,0 +1,10 @@
+name: Bytes and Bot Plugin
+main: bytesandbots.custom.customrules.Main
+version: 1.0
+author: Fernando
+commands:
+   hello:
+      description: This is a test hello.
+      usage: /<command> [player]
+      permission: <plugin name>.basic
+      permission-message: You don't have <permission>
