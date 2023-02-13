@@ -4,17 +4,24 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-
 public final class Main extends JavaPlugin {
+	
+	
+
 	@Override
     public void onEnable() {
         // TODO Insert logic to be performed when the plugin is enabled
+
+		getServer().getPluginManager().registerEvents(new LoginListener() , this);
     }
     
+	
     @Override
     public void onDisable() {
         // TODO Insert logic to be performed when the plugin is disabled
     }
+    
+    
     
     
     @Override
@@ -28,8 +35,9 @@ public final class Main extends JavaPlugin {
     		if (!(sender instanceof Player)) {
     			sender.sendMessage("This command can only be run by a player.");
     		} else {
+    			
     			Player player = (Player) sender;
-    			player.sendTitle("Hello!", "This is a secret");
+    			player.sendTitle("Hello!", "This is a secret",10,70,20);
     			// do something
     		}
     		return true;
