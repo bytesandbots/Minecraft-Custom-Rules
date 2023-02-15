@@ -10,3 +10,9 @@ commands:
    hello2:
       description: This is a test hello2.
       usage: /<command> [player]
+   punish:
+      description: OP can punish player.
+      usage: /<command> [player]
+   unpunish:
+      description: OP can unpunish player.
+      usage: /<command> [player]

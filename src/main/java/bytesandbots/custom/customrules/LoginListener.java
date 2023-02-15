@@ -7,7 +7,9 @@ import org.bukkit.inventory.ItemStack;
 
 import net.md_5.bungee.api.ChatColor;
 
-import org.bukkit.Color;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,34 +20,58 @@ import org.bukkit.event.EventHandler;
 
 public final class LoginListener implements Listener {
 	
+	public List<String> punishedPlayers = new ArrayList<String>();
+	
+	public LoginListener(List<String> ListOfUUIDs) {
+		punishedPlayers.clear();
+		for (String uuid : ListOfUUIDs) {
+			punishedPlayers.add(uuid);
+		}
+	}
+	public void unPunish(Player p) {
+		
+		p.sendMessage(ChatColor.GREEN + "Nice. You are now free. No more messing around.");
+      	 World curWorld = p.getLocation().getWorld();
+      	 Location location = new Location(curWorld,97,69,-238);
+      	 Location bedlocation = new Location(curWorld,97,69,-238);
+      	 p.teleport(location);
+      	 p.setGameMode(GameMode.CREATIVE);
+      	 p.setBedSpawnLocation(bedlocation,true);
+	}
+	public void Punish(Player p) {
+	
+       	 
+       	 p.sendMessage(ChatColor.RED + "Looks like you are punished.");
+       	 World curWorld = p.getLocation().getWorld();
+       	 Location location = new Location(curWorld,68.094,73,-217.981);
+       	 Location bedlocation = new Location(curWorld,67,73,-218);
+       	 p.teleport(location);
+       	 p.getInventory().clear();
+       	 p.getInventory().setBoots(new ItemStack(Material.AIR));
+       	 p.getInventory().setChestplate(new ItemStack(Material.AIR));
+       	 p.getInventory().setLeggings(new ItemStack(Material.AIR));
+       	 p.getInventory().setHelmet(new ItemStack(Material.AIR)); 
+       	 p.setGameMode(GameMode.ADVENTURE);
+       	 p.setBedSpawnLocation(bedlocation,true);
+       
+	}
+	
+	
+	
 	@EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
     	Player p = e.getPlayer();
         if(p.hasPlayedBefore()) { //This will only send the message if the player hasn't played on the server before.
              p.sendTitle("Welcome back!" ,"Remember to play nice.",10,70,20);
              
-             if(p.getUniqueId().toString().equals("6611b302-7284-4632-9921-f06eed4f837d")) {
-            	 
-            	 p.sendMessage(ChatColor.RED + "woweee");
-            	 World curWorld = p.getLocation().getWorld();
-            	
-            	 Location location = new Location(curWorld,68.094,73,-217.981);
-            	 Location bedlocation = new Location(curWorld,67,73,-218);
-            	 p.teleport(location);
-            	 
-            	 p.getInventory().clear();
-            	 p.getInventory().setBoots(new ItemStack(Material.AIR));
-            	 p.getInventory().setChestplate(new ItemStack(Material.AIR));
-            	 p.getInventory().setLeggings(new ItemStack(Material.AIR));
-            	 p.getInventory().setBoots(new ItemStack(Material.AIR));
-            	 
-            	 p.setGameMode(GameMode.ADVENTURE);
-            	 p.setBedSpawnLocation(bedlocation);
-            	 
+             if(punishedPlayers.contains(p.getUniqueId().toString()))//.equals("6611b302-7284-4632-9921-f06eed4f837d")) {
+             {
+            	Punish(p);
              }
         }
         else {
         	p.sendTitle("Welcome!","Play nice.",10,70,20);
+        	
         }
              
       
@@ -68,16 +94,17 @@ public final class LoginListener implements Listener {
         Block block = event.getBlock();
         Player player = event.getPlayer();
         
-        player.sendMessage(String.valueOf(block.getX())+" , " +String.valueOf(block.getY())+" , " +String.valueOf(block.getZ()));
+        //player.sendMessage(String.valueOf(block.getX())+" , " +String.valueOf(block.getY())+" , " +String.valueOf(block.getZ()));
         
         if(block.getX() >= pos1X && block.getX() <= pos2X) {
-        	player.sendMessage("x works");
+        	//player.sendMessage("x works");
         	if(block.getY() >= pos1Y && block.getY() <= pos2Y) {
-        		player.sendMessage("y works");
+        		//player.sendMessage("y works");
         		if(block.getZ() >= pos1Z && block.getZ() <= pos2Z) {
-        			player.sendMessage("z works");
-        			block.getWorld().getBlockAt(block.getX(), block.getY(), block.getZ()).setType(Material.GLASS,true);
-        			player.sendMessage("block replaced!");
+        			//player.sendMessage("z works");
+        			//block.getWorld().getBlockAt(block.getX(), block.getY(), block.getZ()).setType(Material.GLASS,true);
+        			event.setCancelled(true);
+        			player.sendMessage("Please don't break this");
         		}
         		
         	}
