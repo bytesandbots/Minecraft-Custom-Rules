@@ -19,11 +19,13 @@ public final class Main extends JavaPlugin {
 	List<String> PunishedPlayers = new ArrayList<String>();
 	LoginListener actions;
 	
+	String punishedPlayerFileName = "plugins/CustomRules/punishedPlayerNames.txt";
+	
 	@Override
     public void onEnable() {
         // TODO Insert logic to be performed when the plugin is enabled
 		try {
-		      File myObj = new File("/plugins/CustomRules/punishedPlayerNames.txt");
+		      File myObj = new File(punishedPlayerFileName);
 		      Scanner myReader = new Scanner(myObj);
 		      while (myReader.hasNextLine()) {
 		        String data = myReader.nextLine();
@@ -34,16 +36,16 @@ public final class Main extends JavaPlugin {
 		      
 		      
 		    } catch (FileNotFoundException e) {
-		      System.out.println("An error occurred. with reading the file punishedPlayerNames.txt . Maybe it's not there? Creating a new file");
+		      //System.out.println("An error occurred. with reading the file punishedPlayerNames.txt . Maybe it's not there? Creating a new file");
 		      try {
-		          File myObj = new File("/plugins/CustomRules/punishedPlayerNames.txt");
+		          File myObj = new File(punishedPlayerFileName);
 		          if (myObj.createNewFile()) {
-		            System.out.println("File created: " + myObj.getName());
+		            //System.out.println("File created: " + myObj.getName());
 		          } else {
-		            System.out.println("File already exists.");
+		            //System.out.println("File already exists.");
 		          }
 		        } catch (IOException ed) {
-		          System.out.println("An error occurred. Probably Server permissions. idk");
+		          //System.out.println("An error occurred. Probably Server permissions. idk");
 		          ed.printStackTrace();
 		        }
 		      e.printStackTrace();
@@ -61,6 +63,25 @@ public final class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         // TODO Insert logic to be performed when the plugin is disabled
+    }
+    
+    public void WriteToFile() {
+    	try {
+		      FileWriter myWriter = new FileWriter(punishedPlayerFileName);
+		      for (String playerUUID : PunishedPlayers) {
+		    	  myWriter.write(playerUUID+"\n");
+		    
+
+		      }
+		      	
+		      myWriter.close();
+		      //System.out.println("Successfully saved names.");
+		    } 
+		catch (IOException e) {
+		      //System.out.println("An error writting to file occurred.");
+		      e.printStackTrace();
+		    }
+    	
     }
     
     public String RemovePlayertoPunishList(String name) {
@@ -83,24 +104,7 @@ public final class Main extends JavaPlugin {
     	
     }
     
-    public void WriteToFile() {
-    	try {
-		      FileWriter myWriter = new FileWriter("/plugins/CustomRules/punishedPlayerNames.txt");
-		      for (String playerUUID : PunishedPlayers) {
-		    	  myWriter.write(playerUUID+"\n");
-		    
-
-		      }
-		      	
-		      myWriter.close();
-		      System.out.println("Successfully saved names.");
-		    } 
-		catch (IOException e) {
-		      System.out.println("An error writting to file occurred.");
-		      e.printStackTrace();
-		    }
-    	
-    }
+    
     public String AddPlayertoPunishList(String name) {
     	Player p = Bukkit.getPlayer(name);
     	if(p == null) {
