@@ -1,7 +1,9 @@
 package bytesandbots.custom.customrules;
 
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -91,6 +93,14 @@ public final class LoginListener implements Listener {
 		int pos2Y = 76;
 		int pos2Z = -217;
 		
+		
+		int specialButtonsX = 80;
+		int specialButtonsX2 = 82;
+
+		int specialButtonsY = 66;
+		int specialButtonsZ = -242;
+		int specialButtonsZ2 = -241;
+		
         Block block = event.getBlock();
         Player player = event.getPlayer();
         
@@ -104,14 +114,60 @@ public final class LoginListener implements Listener {
         			//player.sendMessage("z works");
         			//block.getWorld().getBlockAt(block.getX(), block.getY(), block.getZ()).setType(Material.GLASS,true);
         			event.setCancelled(true);
-        			player.sendMessage("Please don't break this");
+        			//player.sendMessage("Please don't break this");
         		}
         		
         	}
         	
         }
         
+        if(block.getX() == specialButtonsX || block.getX() == specialButtonsX2 ) {
+            if(block.getZ() == specialButtonsZ || block.getZ() == specialButtonsZ2 ) {
+	        	if(block.getY() == specialButtonsY ) {
+	        		
+	        		event.setCancelled(true);
+	        	}
+        	
+            }
+        }
+        
   
     }
+	//82 66 -242
+	//80 66 -242
+	@EventHandler
+    public void onPlayerInteract(PlayerInteractEvent event) {
+		int specialButtonsX = 80;
+		int specialButtonsX2 = 82;
+
+		int specialButtonsY = 66;
+		int specialButtonsZ = -242;
+		
+		if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+			Block clicked = event.getClickedBlock();
+			if (clicked != null) {
+				if (clicked.getType().name().endsWith("_BUTTON")) {
+					Player player = event.getPlayer();
+			        if(clicked.getY() == specialButtonsY && clicked.getZ() == specialButtonsZ) {
+			        	if(clicked.getX() == specialButtonsX2 ) {
+			        		player.setGameMode(GameMode.SURVIVAL);
+			        		player.sendMessage("You are now in Survival Mode!");
+			        	}
+			        	if(clicked.getX() == specialButtonsX ) {
+			        		
+			        		player.setGameMode(GameMode.CREATIVE);
+			        		player.sendMessage("You are now in Creative Mode!");
+			        	}
+			        	
+			        }
+			        	
+			        
+					
+					
+					
+                }
+			}
+		}
+	}
 	
 }
