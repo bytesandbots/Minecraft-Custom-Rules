@@ -7,9 +7,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.HashMap;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -20,7 +24,7 @@ public final class Main extends JavaPlugin {
 	LoginListener actions;
 	
 	String punishedPlayerFileName = "plugins/CustomRules/punishedPlayerNames.txt";
-	
+	HashMap<String, HashMap<String, Location>> homes = new HashMap<>();
 	@Override
     public void onEnable() {
         // TODO Insert logic to be performed when the plugin is enabled
@@ -78,7 +82,7 @@ public final class Main extends JavaPlugin {
 		      //System.out.println("Successfully saved names.");
 		    } 
 		catch (IOException e) {
-		      //System.out.println("An error writting to file occurred.");
+		      //System.out.println("An error writing to file occurred.");
 		      e.printStackTrace();
 		    }
     	
@@ -197,7 +201,45 @@ public final class Main extends JavaPlugin {
     		}
     		return true;
     	}
-    	
+    	else if (cmd.getName().equalsIgnoreCase("sethome")) {
+    		if (args.length == 1) {
+    			String homeName = args[0];
+    			if (homes.containsKey(player.getUniqueId().toString())){
+    				HashMap<String, Location> currenthomes = homes.get(player.getUniqueId().toString());
+    				currenthomes.put(args[0], player.getLocation());
+    				homes.put(player.getUniqueId().toString(), currenthomes);
+    				player.sendMessage("You set a home");
+    			}
+    			else{
+    				HashMap<String, Location> newhome = new HashMap<>();
+    				newhome.put(args[0], player.getLocation());
+    				homes.put(player.getUniqueId().toString(), newhome);
+    				player.sendMessage("You set a home");
+    			}
+    		}
+    		else {
+    			player.sendMessage(ChatColor.RED + "You have not set a home name, please do /sethome <name>");
+    		}
+    		return true;
+    	}
+    	else if (cmd.getName().equalsIgnoreCase("homes")) {
+    		if (args.length < 1) {
+    			if (homes.containsKey(player.getUniqueId().toString())) {
+    				player.sendMessage(ChatColor.YELLOW + "Homes: ");
+    				for (Map.Entry<String, Location> allhomes : homes.get(player.getUniqueId().toString()).entrySet()) {
+    					player.sendMessage(ChatColor.GOLD + allhomes.getKey());
+    				}
+    			}
+    		}
+    		return true;
+    	}
+    	else if (cmd.getName().equalsIgnoreCase("home")) {
+    		if (args.length == 1) {
+    			if (homes.containsKey(player.getUniqueId().toString())) {
+    				HashMap<String, Location> gethomes = homes.get(player.getUniqueId().toString());
+    			}
+    		}
+    	}
     	return false; 
     }
 	

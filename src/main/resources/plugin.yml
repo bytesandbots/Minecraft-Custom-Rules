@@ -16,3 +16,9 @@ commands:
    unpunish:
       description: OP can unpunish player.
       usage: /<command> [player]
+   sethome:
+      description: Set your home
+      usage: /<command> [name]
+   homes:
+      description: See all your homes
+      usage: /<command>
