@@ -23,6 +23,7 @@ import org.bukkit.event.EventHandler;
 public final class LoginListener implements Listener {
 	
 	public List<String> punishedPlayers = new ArrayList<String>();
+	public boolean canOPbreak;
 	
 	public LoginListener(List<String> ListOfUUIDs) {
 		punishedPlayers.clear();
@@ -113,7 +114,9 @@ public final class LoginListener implements Listener {
         		if(block.getZ() >= pos1Z && block.getZ() <= pos2Z) {
         			//player.sendMessage("z works");
         			//block.getWorld().getBlockAt(block.getX(), block.getY(), block.getZ()).setType(Material.GLASS,true);
-        			event.setCancelled(true);
+        			if(!canOPbreak ) {
+        				event.setCancelled(true);
+        			}
         			//player.sendMessage("Please don't break this");
         		}
         		

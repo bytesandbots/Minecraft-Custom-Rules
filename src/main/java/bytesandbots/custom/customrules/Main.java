@@ -157,7 +157,10 @@ public final class Main extends JavaPlugin {
     			}
     			else if(args.length < 1) {
     				
-    				player.sendMessage("Need a name. ex. /punish <playername>");
+    				//player.sendMessage("Need a name. ex. /punish <playername>");
+    				String playerName = player.getName();
+	    			String response =  AddPlayertoPunishList(playerName);
+	    			player.sendMessage(response);
     			}
     			
     		}
@@ -181,7 +184,10 @@ public final class Main extends JavaPlugin {
     			}
     			else if(args.length < 1) {
     				
-    				player.sendMessage("Need a name. ex. /unpunish <playername>");
+    				//player.sendMessage("Need a name. ex. /unpunish <playername>");
+    				String playerName = player.getName();
+	    			String response =  RemovePlayertoPunishList(playerName);
+	    			player.sendMessage(response);
     			}
     			
     		}
@@ -201,18 +207,36 @@ public final class Main extends JavaPlugin {
     		}
     		return true;
     	}
+    	else if( cmd.getName().equalsIgnoreCase("breakable")) {
+    		if(player.isOp()) {
+    			actions.canOPbreak = !actions.canOPbreak;
+    			if(actions.canOPbreak) {
+    				player.sendMessage("You can break stuff");
+    				
+    			}
+    			else {
+    				player.sendMessage("breaking stuff is now blocked");
+    				
+    			}
+    			
+    		}
+    		
+    		
+    	}
+    	
+    	
     	else if (cmd.getName().equalsIgnoreCase("sethome")) {
     		if (args.length == 1) {
     			String homeName = args[0];
     			if (homes.containsKey(player.getUniqueId().toString())){
     				HashMap<String, Location> currenthomes = homes.get(player.getUniqueId().toString());
-    				currenthomes.put(args[0], player.getLocation());
+    				currenthomes.put(homeName, player.getLocation());
     				homes.put(player.getUniqueId().toString(), currenthomes);
     				player.sendMessage("You set a home");
     			}
     			else{
     				HashMap<String, Location> newhome = new HashMap<>();
-    				newhome.put(args[0], player.getLocation());
+    				newhome.put(homeName, player.getLocation());
     				homes.put(player.getUniqueId().toString(), newhome);
     				player.sendMessage("You set a home");
     			}

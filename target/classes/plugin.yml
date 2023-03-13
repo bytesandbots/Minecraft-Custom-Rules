@@ -22,3 +22,6 @@ commands:
    homes:
       description: See all your homes
       usage: /<command>
+   breakable:
+      description: OP can break unbreakable things
+      usage: /<command>
