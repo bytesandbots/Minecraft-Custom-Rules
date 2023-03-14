@@ -22,3 +22,6 @@ commands:
    homes:
       description: See all your homes
       usage: /<command>
+   home:
+      description: Teleport to a home
+      usage: /<command> [name]

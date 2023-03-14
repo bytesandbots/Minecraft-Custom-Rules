@@ -237,6 +237,13 @@ public final class Main extends JavaPlugin {
     		if (args.length == 1) {
     			if (homes.containsKey(player.getUniqueId().toString())) {
     				HashMap<String, Location> gethomes = homes.get(player.getUniqueId().toString());
+    				if (gethomes.containsKey(args[0])) {
+    					player.teleport(gethomes.get(args[0]));
+    					player.sendMessage(ChatColor.YELLOW + "Sent you to " + ChatColor.GOLD + args[0]);
+    				}
+    			}
+    			else {
+    				player.sendMessage(ChatColor.GOLD  + "Sorry, you have no homes!");
     			}
     		}
     	}
