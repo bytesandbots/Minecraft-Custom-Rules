@@ -3,6 +3,8 @@ package bytesandbots.custom.customrules;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPistonExtendEvent;
+import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -79,13 +81,43 @@ public final class LoginListener implements Listener {
              
       
     }
-	
-	@EventHandler
-    public void onPlayerBreakBlock(BlockBreakEvent event) {
+	public boolean brokeButtons(Block block) {
+		int specialButtonsX = 80;
+		int specialButtonsX2 = 82;
+
+		int specialButtonsY = 67;
+		int specialButtonsY2 = 65;
+		int specialButtonsZ = -242;
+		int specialButtonsZ2 = -241;
 		
-		//pos1 = 69 72 -220
-		//pos2 = 66 72 -217
 		
+		if(block.getX() <= specialButtonsX2 && block.getX() >= specialButtonsX  ) {
+            if(block.getZ() == specialButtonsZ  ) {
+            	if(block.getY() == 66) {
+            		if(!canOPbreak ) {
+	        			return true;
+        			}
+            		
+            	}
+            }
+            if(block.getZ() == specialButtonsZ2  ) {
+            	if(block.getY() <= specialButtonsY && block.getY() >= specialButtonsY2 ) {
+            	
+            		if(!canOPbreak ) {
+	        			return true;
+        			}
+            	}
+            }
+	        	
+	        		 
+        }
+		
+		
+		
+        return false;
+		
+	}
+	public boolean brokePrison(Block block) {
 		int pos1X = 66;
 		int pos1Y = 72;
 		int pos1Z = -220;
@@ -94,17 +126,6 @@ public final class LoginListener implements Listener {
 		int pos2Y = 76;
 		int pos2Z = -217;
 		
-		
-		int specialButtonsX = 80;
-		int specialButtonsX2 = 82;
-
-		int specialButtonsY = 66;
-		int specialButtonsZ = -242;
-		int specialButtonsZ2 = -241;
-		
-        Block block = event.getBlock();
-        Player player = event.getPlayer();
-        
         //player.sendMessage(String.valueOf(block.getX())+" , " +String.valueOf(block.getY())+" , " +String.valueOf(block.getZ()));
         
         if(block.getX() >= pos1X && block.getX() <= pos2X) {
@@ -115,7 +136,7 @@ public final class LoginListener implements Listener {
         			//player.sendMessage("z works");
         			//block.getWorld().getBlockAt(block.getX(), block.getY(), block.getZ()).setType(Material.GLASS,true);
         			if(!canOPbreak ) {
-        				event.setCancelled(true);
+        				return true;
         			}
         			//player.sendMessage("Please don't break this");
         		}
@@ -123,16 +144,34 @@ public final class LoginListener implements Listener {
         	}
         	
         }
+        return false;
+		
+	}
+	
+	
+	public void onBlockBreak(BlockBreakEvent event) {
+        //Player player = event.getPlayer();
+        Block block = event.getBlock();
         
-        if(block.getX() == specialButtonsX || block.getX() == specialButtonsX2 ) {
-            if(block.getZ() == specialButtonsZ || block.getZ() == specialButtonsZ2 ) {
-	        	if(block.getY() == specialButtonsY ) {
-	        		
-	        		event.setCancelled(true);
-	        	}
-        	
-            }
-        }
+        event.setCancelled(brokePrison(block));
+        event.setCancelled(brokeButtons(block));
+    }
+	
+	
+	
+	@EventHandler
+    public void onPlayerBreakBlock(BlockBreakEvent event) {
+		
+
+		
+		
+		
+		
+        Block block = event.getBlock();
+        //Player player = event.getPlayer();
+        
+        event.setCancelled(brokePrison(block));
+        event.setCancelled(brokeButtons(block));
         
   
     }
@@ -170,6 +209,31 @@ public final class LoginListener implements Listener {
 					
                 }
 			}
+		}
+	}
+	
+	@EventHandler  
+	public void onPistonEvent(BlockPistonExtendEvent event)
+	{      
+		//Player player = event.getPlayer();
+		
+		for (Block block : event.getBlocks())
+		{
+		        
+		        event.setCancelled(brokePrison(block));
+		        event.setCancelled(brokeButtons(block));
+		}
+		
+       
+	}  
+	@EventHandler  
+	public void onPistonEvent(BlockPistonRetractEvent event)
+	{      
+		for (Block block : event.getBlocks())
+		{
+		        
+		        event.setCancelled(brokePrison(block));
+		        event.setCancelled(brokeButtons(block));
 		}
 	}
 	
