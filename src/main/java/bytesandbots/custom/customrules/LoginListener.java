@@ -3,6 +3,7 @@ package bytesandbots.custom.customrules;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -148,7 +149,7 @@ public final class LoginListener implements Listener {
 		
 	}
 	
-	
+	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
         //Player player = event.getPlayer();
         Block block = event.getBlock();
@@ -158,15 +159,19 @@ public final class LoginListener implements Listener {
     }
 	
 	
+	@EventHandler
+	public void onWaterPassThrough(BlockFromToEvent event){
+		
+		 Block block = event.getToBlock();
+	        //Player player = event.getPlayer();
+	        
+	        event.setCancelled(brokePrison(block));
+	        event.setCancelled(brokeButtons(block));
+	        
+	}
 	
 	@EventHandler
     public void onPlayerBreakBlock(BlockBreakEvent event) {
-		
-
-		
-		
-		
-		
         Block block = event.getBlock();
         //Player player = event.getPlayer();
         
