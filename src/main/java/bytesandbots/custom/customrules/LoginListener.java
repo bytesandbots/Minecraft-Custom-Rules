@@ -6,6 +6,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
@@ -220,7 +221,14 @@ public final class LoginListener implements Listener {
         event.setCancelled(brokePrison(block));
         event.setCancelled(brokeButtons(block));
     }
-	
+	@EventHandler
+	public void onBlockPlace(BlockPlaceEvent event)
+	{
+		Block block = event.getBlockPlaced();
+		event.setCancelled(brokePrison(block));
+        event.setCancelled(brokeButtons(block));
+        
+	}
 	
 	@EventHandler
 	public void onWaterPassThrough(BlockFromToEvent event){
