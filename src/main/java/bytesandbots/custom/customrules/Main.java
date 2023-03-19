@@ -137,13 +137,8 @@ public final class Main extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
     	
     	Player player = (Player) sender;
-    	
-    	
-    	if (cmd.getName().equalsIgnoreCase("hello")) { // If the player typed /basic then do the following, note: If you only registered this executor for one command, you don't need this
-    		// doSomething
-    		return true;
-    	}
-    	else if(cmd.getName().equalsIgnoreCase("punish")) {
+ 
+    	if(cmd.getName().equalsIgnoreCase("punish")) {
     		if (player.isOp()) {
     		    // Do something
     			if(args.length == 1) {
@@ -198,15 +193,7 @@ public final class Main extends JavaPlugin {
     		
     	}
     	
-    	else if (cmd.getName().equalsIgnoreCase("hello2")) {
-    		if (!(sender instanceof Player)) {
-    			sender.sendMessage("This command can only be run by a player.");
-    		} else {
-    			player.sendTitle("Hello!", "This is a secret",10,70,20);
-    			// do something
-    		}
-    		return true;
-    	}
+
     	else if( cmd.getName().equalsIgnoreCase("breakable")) {
     		if(player.isOp()) {
     			actions.canOPbreak = !actions.canOPbreak;

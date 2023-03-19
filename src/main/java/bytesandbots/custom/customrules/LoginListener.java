@@ -149,37 +149,7 @@ public final class LoginListener implements Listener {
 		
 	}
 	
-	@EventHandler
-	public void onBlockBreak(BlockBreakEvent event) {
-        //Player player = event.getPlayer();
-        Block block = event.getBlock();
-        
-        event.setCancelled(brokePrison(block));
-        event.setCancelled(brokeButtons(block));
-    }
 	
-	
-	@EventHandler
-	public void onWaterPassThrough(BlockFromToEvent event){
-		
-		 Block block = event.getToBlock();
-	        //Player player = event.getPlayer();
-	        
-	        event.setCancelled(brokePrison(block));
-	        event.setCancelled(brokeButtons(block));
-	        
-	}
-	
-	@EventHandler
-    public void onPlayerBreakBlock(BlockBreakEvent event) {
-        Block block = event.getBlock();
-        //Player player = event.getPlayer();
-        
-        event.setCancelled(brokePrison(block));
-        event.setCancelled(brokeButtons(block));
-        
-  
-    }
 	//82 66 -242
 	//80 66 -242
 	@EventHandler
@@ -241,5 +211,44 @@ public final class LoginListener implements Listener {
 		        event.setCancelled(brokeButtons(block));
 		}
 	}
+	
+	@EventHandler
+	public void onBlockBreak(BlockBreakEvent event) {
+        //Player player = event.getPlayer();
+        Block block = event.getBlock();
+        
+        event.setCancelled(brokePrison(block));
+        event.setCancelled(brokeButtons(block));
+    }
+	
+	
+	@EventHandler
+	public void onWaterPassThrough(BlockFromToEvent event){
+		
+		 Block block = event.getToBlock();
+	        //Player player = event.getPlayer();
+	        
+	        event.setCancelled(brokePrison(block));
+	        event.setCancelled(brokeButtons(block));
+	        
+	        
+	        Block block2 = event.getBlock();
+	        //Player player = event.getPlayer();
+	        
+	        event.setCancelled(brokePrison(block2));
+	        event.setCancelled(brokeButtons(block2));
+	        
+	}
+	
+	@EventHandler
+    public void onPlayerBreakBlock(BlockBreakEvent event) {
+        Block block = event.getBlock();
+        //Player player = event.getPlayer();
+        
+        event.setCancelled(brokePrison(block));
+        event.setCancelled(brokeButtons(block));
+        
+  
+    }
 	
 }

@@ -4,24 +4,17 @@ version: 1.0
 api-version: 1.19
 author: Fernando
 commands:
-   hello:
-      description: This is a test hello.
-      usage: /<command> [player]
-   hello2:
-      description: This is a test hello2.
-      usage: /<command> [player]
+
    punish:
       description: OP can punish player.
-      usage: /<command> [player]
    unpunish:
       description: OP can unpunish player.
-      usage: /<command> [player]
    sethome:
       description: Set your home
-      usage: /<command> [name]
    homes:
       description: See all your homes
-      usage: /<command>
    home:
       description: Teleport to a home
-      usage: /<command> [name]
+   breakable:
+      description: OP can break any block
+      
