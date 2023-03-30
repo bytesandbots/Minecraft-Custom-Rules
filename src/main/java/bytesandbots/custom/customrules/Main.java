@@ -13,6 +13,7 @@ import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -258,6 +259,16 @@ public final class Main extends JavaPlugin {
     			}
     		}
     	}
+    	else if (cmd.getName().equalsIgnoreCase("survival")) {
+    		player.setGameMode(GameMode.SURVIVAL);
+    				player.sendMessage(ChatColor.GOLD  + "YOU ARE NOW IN SURVIVAL YOU LAZY BUM, JUST PRESS!");
+    			
+    	}
+    	else if (cmd.getName().equalsIgnoreCase("creative")) {
+    		player.setGameMode(GameMode.CREATIVE);
+    				player.sendMessage(ChatColor.GOLD  + "YOU ARE NOW IN CREATIVE YOU LAZY BUM, JUST PRESS!");
+    	}
+    	
     	return false; 
     }
 	

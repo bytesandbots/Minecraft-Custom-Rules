@@ -89,19 +89,12 @@ public final class LoginListener implements Listener {
 
 		int specialButtonsY = 67;
 		int specialButtonsY2 = 65;
-		int specialButtonsZ = -242;
+		//int specialButtonsZ = -242;
 		int specialButtonsZ2 = -241;
 		
 		
 		if(block.getX() <= specialButtonsX2 && block.getX() >= specialButtonsX  ) {
-            if(block.getZ() == specialButtonsZ  ) {
-            	if(block.getY() == 66) {
-            		if(!canOPbreak ) {
-	        			return true;
-        			}
-            		
-            	}
-            }
+            
             if(block.getZ() == specialButtonsZ2  ) {
             	if(block.getY() <= specialButtonsY && block.getY() >= specialButtonsY2 ) {
             	
@@ -159,12 +152,12 @@ public final class LoginListener implements Listener {
 		int specialButtonsX2 = 82;
 
 		int specialButtonsY = 66;
-		int specialButtonsZ = -242;
+		int specialButtonsZ = -241;
 		
 		if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			Block clicked = event.getClickedBlock();
 			if (clicked != null) {
-				if (clicked.getType().name().endsWith("_BUTTON")) {
+				if (clicked.getType().name().endsWith("NOTE_BLOCK")) {
 					Player player = event.getPlayer();
 			        if(clicked.getY() == specialButtonsY && clicked.getZ() == specialButtonsZ) {
 			        	if(clicked.getX() == specialButtonsX2 ) {
