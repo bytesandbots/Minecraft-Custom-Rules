@@ -1,5 +1,7 @@
 package bytesandbots.custom.customrules;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -268,7 +270,11 @@ public final class Main extends JavaPlugin {
     		player.setGameMode(GameMode.CREATIVE);
     				player.sendMessage(ChatColor.GOLD  + "YOU ARE NOW IN CREATIVE YOU LAZY BUM, JUST PRESS!");
     	}
-    	
+    	else if (cmd.getName().equalsIgnoreCase("hummus")){
+    		player.sendMessage("CARROTS AND HUMMUS MUAHAHAHAHAHAHAHAHA")
+    		player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,Integer.MAX_VALUE,50));
+    		player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,Integer.MAX_VALUE,255));
+    	}
     	return false; 
     }
 	
