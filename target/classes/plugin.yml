@@ -1,23 +1,26 @@
 name: BytesandBotPlugin
 main: bytesandbots.custom.customrules.Main
-version: 1.0
+version: "1"
 api-version: 1.19
 author: Fernando
-commands:
-
-   punish:
-      description: OP can punish player.
-   unpunish:
-      description: OP can unpunish player.
-   sethome:
-      description: Set your home
-   homes:
-      description: See all your homes
-   home:
-      description: Teleport to a home
-   breakable:
-      description: OP can break any block
-   survival:
-      description: Puts you in survival
-   creative:
-      description: Puts you in creative
+commands: 
+  Curryisdelicous: 
+    description: Curry's custom command
+  hummus: 
+    description: CungDo's custom command
+  punish: 
+    description: OP can punish player.
+  unpunish: 
+    description: OP can unpunish player.
+  sethome: 
+    description: Set your home
+  homes: 
+    description: See all your homes
+  home: 
+    description: Teleport to a home
+  breakable: 
+    description: OP can break any block
+  survival: 
+    description: Puts you in survival
+  creative: 
+    description: Puts you in creative
