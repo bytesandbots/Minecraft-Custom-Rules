@@ -15,10 +15,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
+import org.bukkit.inventory.ItemStack;
 public final class Main extends JavaPlugin {
 	
 	List<String> PunishedPlayers = new ArrayList<String>();
@@ -267,6 +268,13 @@ public final class Main extends JavaPlugin {
     	else if (cmd.getName().equalsIgnoreCase("creative")) {
     		player.setGameMode(GameMode.CREATIVE);
     				player.sendMessage(ChatColor.GOLD  + "YOU ARE NOW IN CREATIVE YOU LAZY BUM, JUST PRESS!");
+    	}
+    	else if (cmd.getName().equalsIgnoreCase("Curryisdelicous")){
+    		
+    				player.sendMessage("FOOD");
+    				ItemStack mutton=new ItemStack(Material.COOKED_MUTTON,64);
+    				player.getInventory().addItem(mutton);
+    				return true;
     	}
     	
     	return false; 
