@@ -157,7 +157,7 @@ public final class LoginListener implements Listener {
 		if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			Block clicked = event.getClickedBlock();
 			if (clicked != null) {
-				if (clicked.getType().name().endsWith("NOTE_BLOCK")) {
+				if (clicked.getType().name().endsWith("NOTE BLOCK")) {
 					Player player = event.getPlayer();
 			        if(clicked.getY() == specialButtonsY && clicked.getZ() == specialButtonsZ) {
 			        	if(clicked.getX() == specialButtonsX2 ) {

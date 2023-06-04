@@ -18,6 +18,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -283,6 +284,12 @@ public final class Main extends JavaPlugin {
     		player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,Integer.MAX_VALUE,50));
     		player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,Integer.MAX_VALUE,255));
     		return true;
+    	}
+    	else if (cmd.getName().equalsIgnoreCase("pvp")){
+    		World curWorld = player.getLocation().getWorld();
+          	 Location location = new Location(curWorld,103,65,-257);
+          	 player.teleport(location);
+          	 return true;
     	}
     	return false; 
     }
