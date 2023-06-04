@@ -24,3 +24,5 @@ commands:
     description: Puts you in survival
   creative: 
     description: Puts you in creative
+  pvp: 
+    description: Puts you in pvp
