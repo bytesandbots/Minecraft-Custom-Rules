@@ -9,8 +9,9 @@ import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
-
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
@@ -28,6 +29,8 @@ public final class LoginListener implements Listener {
 	
 	public List<String> punishedPlayers = new ArrayList<String>();
 	public boolean canOPbreak;
+	
+	public List<String> arenaPlayers = new ArrayList<String>();
 	
 	public LoginListener(List<String> ListOfUUIDs) {
 		punishedPlayers.clear();
@@ -251,5 +254,67 @@ public final class LoginListener implements Listener {
         
   
     }
+	
+	@EventHandler
+	public void onMove(PlayerMoveEvent event) {
+	  //Location from = event.getFrom();
+	  Location to = event.getTo();
+	  
+	  Player p = event.getPlayer();
+	  if(to.getBlockX() > 85 && to.getBlockX()< 124) {
+		  if(to.getBlockY() > 63 && to.getBlockY() < 76)
+		  {
+			  if(to.getBlockZ() <= -257 && to.getBlockZ() >= -300) {
+				  
+				  if(!arenaPlayers.contains(p.getUniqueId().toString())) {
+					  
+			
+				  p.sendMessage("you entered the arena, break a leg");
+				  World curWorld = p.getLocation().getWorld();
+			       	 Location bedlocation = new Location(curWorld,103,65,-257);
+
+			       	 p.getInventory().clear();
+			       	 p.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
+			       	 p.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
+			       	 p.getInventory().setLeggings(new ItemStack(Material.IRON_LEGGINGS));
+			       	 p.getInventory().setHelmet(new ItemStack(Material.IRON_HELMET)); 
+			       	 p.getInventory().setItemInMainHand(new ItemStack(Material.IRON_SWORD));
+			       	 
+			       	 p.setGameMode(GameMode.SURVIVAL);
+			       	p.setBedSpawnLocation(bedlocation,true);
+			       	ItemStack bef=new ItemStack(Material.COOKED_BEEF,10);
+    				p.getInventory().addItem(bef);
+    				
+    				for (PotionEffect effect : p.getActivePotionEffects()) {
+    			        p.removePotionEffect(effect.getType());
+    				}
+    				
+			       	arenaPlayers.add(p.getUniqueId().toString());
+				  }
+			  }
+			  else {
+				  	if(arenaPlayers.contains(p.getUniqueId().toString())) {
+					  arenaPlayers.remove(p.getUniqueId().toString());
+				  	}
+				  }
+			
+			  }
+		  else {
+			  if(arenaPlayers.contains(p.getUniqueId().toString())) {
+				  arenaPlayers.remove(p.getUniqueId().toString());
+			  }
+			  
+		  }
+			  
+		  }
+	  else {
+		  if(arenaPlayers.contains(p.getUniqueId().toString())) {
+			  arenaPlayers.remove(p.getUniqueId().toString());
+		  }
+	  }
+		  
+	  }
+
+	
 	
 }
