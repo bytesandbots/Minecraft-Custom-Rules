@@ -23,6 +23,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 public final class Main extends JavaPlugin {
 	
 	List<String> PunishedPlayers = new ArrayList<String>();
@@ -62,6 +63,7 @@ public final class Main extends JavaPlugin {
 		
 		
 		actions = new LoginListener(PunishedPlayers);
+		
 	      
 	    getServer().getPluginManager().registerEvents(actions , this);
 
@@ -296,6 +298,12 @@ public final class Main extends JavaPlugin {
              Location location = new Location (curWorld,43,88,623);
              player.teleport(location);
              
+             saveMMOInventory(player); 
+             
+            
+             
+             
+             
     	}
     	else if (cmd.getName().equalsIgnoreCase("unmmo")) {
     		World curWorld=player.getLocation().getWorld();
@@ -306,5 +314,13 @@ public final class Main extends JavaPlugin {
     }
     	
 	
+    
+    public void saveMMOInventory(Player p) {
+    	
+    	String[] serializedInventory = InventorySerialization.playerInventoryToBase64(p.getInventory());
+    	
+        
+    	
+    }
 
 }
