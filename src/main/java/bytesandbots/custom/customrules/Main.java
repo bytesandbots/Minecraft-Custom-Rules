@@ -291,8 +291,20 @@ public final class Main extends JavaPlugin {
           	 player.teleport(location);
           	 return true;
     	}
+    	else if (cmd.getName().equalsIgnoreCase("mmo")) {
+    		World curWorld=player.getLocation().getWorld();
+             Location location = new Location (curWorld,43,88,623);
+             player.teleport(location);
+             
+    	}
+    	else if (cmd.getName().equalsIgnoreCase("unmmo")) {
+    		World curWorld=player.getLocation().getWorld();
+             Location location = new Location (curWorld,67,65,-256);
+             player.teleport(location);
+    	}     
     	return false; 
     }
+    	
 	
 
 }
