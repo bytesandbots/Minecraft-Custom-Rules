@@ -26,3 +26,8 @@ commands:
     description: Puts you in creative
   pvp: 
     description: Puts you in pvp
+  mmo:
+    description: Puts you in MMO mode, saves your inventory
+  unmmo:
+    description: sends you back to the normal creative world. Saves your mmo inventory
+    

@@ -3,16 +3,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.HashMap;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Hex;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
@@ -27,9 +34,17 @@ import org.bukkit.inventory.PlayerInventory;
 public final class Main extends JavaPlugin {
 	
 	List<String> PunishedPlayers = new ArrayList<String>();
+	List<String> currentMMOPlayers = new ArrayList<String>();
+
+	HashMap<String,String> MMOPlayerList = new HashMap<>();
+	HashMap<String,String> CreativePlayerList = new HashMap<>();
+	
 	LoginListener actions;
 	
 	String punishedPlayerFileName = "plugins/CustomRules/punishedPlayerNames.txt";
+	String mmoPlayerFileName = "plugins/CustomRules/MMOPlayerInventory.txt";
+	String creativePlayerFileName = "plugins/CustomRules/CreativePlayerInventory.txt";
+	
 	HashMap<String, HashMap<String, Location>> homes = new HashMap<>();
 	@Override
     public void onEnable() {
@@ -61,7 +76,61 @@ public final class Main extends JavaPlugin {
 		      e.printStackTrace();
 		}
 		
+		try {
+		      File myObj = new File(mmoPlayerFileName);
+		      Scanner myReader = new Scanner(myObj);
+		      while (myReader.hasNextLine()) {
+		        String data = myReader.nextLine();
+		        String[] arrOfStr = data.split(",", 2);
+		        MMOPlayerList.put(arrOfStr[0], arrOfStr[1]);
+		      }
+		      myReader.close();
+		      
+		      
+		      
+		    } catch (FileNotFoundException e) {
+		      //System.out.println("An error occurred. with reading the file punishedPlayerNames.txt . Maybe it's not there? Creating a new file");
+		      try {
+		          File myObj = new File(mmoPlayerFileName);
+		          if (myObj.createNewFile()) {
+		            //System.out.println("File created: " + myObj.getName());
+		          } else {
+		            //System.out.println("File already exists.");
+		          }
+		        } catch (IOException ed) {
+		          //System.out.println("An error occurred. Probably Server permissions. idk");
+		          ed.printStackTrace();
+		        }
+		      e.printStackTrace();
+		}
 		
+		try {
+		      File myObj = new File(creativePlayerFileName);
+		      Scanner myReader = new Scanner(myObj);
+		      while (myReader.hasNextLine()) {
+		        String data = myReader.nextLine();
+		        String[] arrOfStr = data.split(",", 2);
+		        CreativePlayerList.put(arrOfStr[0], arrOfStr[1]);
+		      }
+		      myReader.close();
+		      
+		      
+		      
+		    } catch (FileNotFoundException e) {
+		      //System.out.println("An error occurred. with reading the file punishedPlayerNames.txt . Maybe it's not there? Creating a new file");
+		      try {
+		          File myObj = new File(creativePlayerFileName);
+		          if (myObj.createNewFile()) {
+		            //System.out.println("File created: " + myObj.getName());
+		          } else {
+		            //System.out.println("File already exists.");
+		          }
+		        } catch (IOException ed) {
+		          //System.out.println("An error occurred. Probably Server permissions. idk");
+		          ed.printStackTrace();
+		        }
+		      e.printStackTrace();
+		}
 		actions = new LoginListener(PunishedPlayers);
 		
 	      
@@ -81,6 +150,53 @@ public final class Main extends JavaPlugin {
 		      FileWriter myWriter = new FileWriter(punishedPlayerFileName);
 		      for (String playerUUID : PunishedPlayers) {
 		    	  myWriter.write(playerUUID+"\n");
+		    
+
+		      }
+		      	
+		      myWriter.close();
+		      //System.out.println("Successfully saved names.");
+		    } 
+		catch (IOException e) {
+		      //System.out.println("An error writing to file occurred.");
+		      e.printStackTrace();
+		    }
+    	
+    }
+    public void saveCreativePlayers() {
+    	try {
+		      FileWriter myWriter = new FileWriter(creativePlayerFileName);
+		      for (Map.Entry<String, String> player : CreativePlayerList.entrySet()) {
+		    	  String uuid = player.getKey();
+		    	  String inventory = player.getValue();
+		    	  
+		    	  
+		    	  
+		    	  myWriter.write(uuid+","+inventory +"\n");
+		    
+
+		      }
+		      	
+		      myWriter.close();
+		      //System.out.println("Successfully saved names.");
+		    } 
+		catch (IOException e) {
+		      //System.out.println("An error writing to file occurred.");
+		      e.printStackTrace();
+		    }
+    	
+    }
+    
+    public void saveMMOPlayers() {
+    	try {
+		      FileWriter myWriter = new FileWriter(mmoPlayerFileName);
+		      for (Map.Entry<String, String> player : MMOPlayerList.entrySet()) {
+		    	  String uuid = player.getKey();
+		    	  String inventory = player.getValue();
+		    	  
+		    	  
+		    	  
+		    	  myWriter.write(uuid+","+inventory +"\n");
 		    
 
 		      }
@@ -294,32 +410,175 @@ public final class Main extends JavaPlugin {
           	 return true;
     	}
     	else if (cmd.getName().equalsIgnoreCase("mmo")) {
-    		World curWorld=player.getLocation().getWorld();
-             Location location = new Location (curWorld,43,88,623);
-             player.teleport(location);
-             
-             saveMMOInventory(player); 
-             
-            
-             
-             
+    		if(!currentMMOPlayers.contains(player.getUniqueId().toString()) ) {
+    			currentMMOPlayers.add(player.getUniqueId().toString());
+	    		World curWorld=player.getLocation().getWorld();
+	             Location location = new Location (curWorld,43,88,623);
+	             player.teleport(location);
+	             saveCreativeInventory(player);
+	             loadMMOInventory(player); 
+    		}
+    		else {
+    			player.sendMessage("You are already on MMO mode. If you want to leave type /unmmo .");
+    			
+    		}
              
     	}
     	else if (cmd.getName().equalsIgnoreCase("unmmo")) {
-    		World curWorld=player.getLocation().getWorld();
-             Location location = new Location (curWorld,67,65,-256);
-             player.teleport(location);
+    		
+    		if(!currentMMOPlayers.contains(player.getUniqueId().toString()) ) {
+    			player.sendMessage("You are not in MMO mode. Type /mmo to start.");
+    		}
+    		else {
+    			currentMMOPlayers.remove(player.getUniqueId().toString());
+    			World curWorld=player.getLocation().getWorld();
+                Location location = new Location (curWorld,67,65,-256);
+                player.teleport(location);
+	             saveMMOInventory(player);
+	             loadCreativeInventory(player); 
+	             
+    			
+    			
+    		}
+    		
+    		
+    		
     	}     
     	return false; 
     }
-    	
+
+public void loadCreativeInventory(Player p) {
+   	 p.getInventory().clear();
+      	 p.getInventory().setBoots(new ItemStack(Material.AIR));
+      	 p.getInventory().setChestplate(new ItemStack(Material.AIR));
+      	 p.getInventory().setLeggings(new ItemStack(Material.AIR));
+      	 p.getInventory().setHelmet(new ItemStack(Material.AIR)); 
+      	 p.setGameMode(GameMode.CREATIVE);
+      	 
+      	if(!CreativePlayerList.containsKey(p.getUniqueId().toString())) {
+      		
+      		 return;
+      	 }
+      	 
+      	 String unSerializedString = CreativePlayerList.get(p.getUniqueId().toString());
+      	String[] inventory = {};
+      	 
+      	 
+      	ByteArrayInputStream in = null;
+   	try {
+   		in = new ByteArrayInputStream(Hex.decodeHex(unSerializedString.toCharArray()));
+   	} catch (DecoderException e1) {
+   		// TODO Auto-generated catch block
+   		e1.printStackTrace();
+   	}
+   	
+       try {
+   		inventory = (String[]) new ObjectInputStream(in).readObject();
+   	} catch (ClassNotFoundException e) {
+   		// TODO Auto-generated catch block
+   		e.printStackTrace();
+   	} catch (IOException e) {
+   		// TODO Auto-generated catch block
+   		e.printStackTrace();
+   	}
+       
+       try {
+       	p.getInventory().setContents(InventorySerialization.itemStackArrayFromBase64(inventory[0]));
+       	p.getInventory().setArmorContents(InventorySerialization.itemStackArrayFromBase64(inventory[1]));
+   		
+   	} catch (IOException e) {
+   		// TODO Auto-generated catch block
+   		e.printStackTrace();
+   	}
+       
+   	 
+    }
+    
+ public void loadMMOInventory(Player p) {
+	 p.getInventory().clear();
+   	 p.getInventory().setBoots(new ItemStack(Material.AIR));
+   	 p.getInventory().setChestplate(new ItemStack(Material.AIR));
+   	 p.getInventory().setLeggings(new ItemStack(Material.AIR));
+   	 p.getInventory().setHelmet(new ItemStack(Material.AIR)); 
+   	 p.setGameMode(GameMode.SURVIVAL);
+   	 
+   	 if(!MMOPlayerList.containsKey(p.getUniqueId().toString())) {
+   		 return;
+   	 }
+   	 
+   	 String unSerializedString = MMOPlayerList.get(p.getUniqueId().toString());
+   	String[] inventory = {};
+   	 
+   	 
+   	ByteArrayInputStream in = null;
+	try {
+		in = new ByteArrayInputStream(Hex.decodeHex(unSerializedString.toCharArray()));
+	} catch (DecoderException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
 	
+    try {
+		inventory = (String[]) new ObjectInputStream(in).readObject();
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    
+    try {
+    	p.getInventory().setContents(InventorySerialization.itemStackArrayFromBase64(inventory[0]));
+    	p.getInventory().setArmorContents(InventorySerialization.itemStackArrayFromBase64(inventory[1]));
+		
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    
+	 
+ }
+    
+    
+ public void saveCreativeInventory(Player p) {
+    	
+    	String[] serializedInventory = InventorySerialization.playerInventoryToBase64(p.getInventory());
+    	ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+			new ObjectOutputStream(out).writeObject(serializedInventory);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        // your string
+        String bpString = new String(Hex.encodeHex(out.toByteArray()));
+        
+        CreativePlayerList.put(p.getUniqueId().toString(),bpString);
+    	
+    	saveMMOPlayers();
+    	
+    }
     
     public void saveMMOInventory(Player p) {
     	
     	String[] serializedInventory = InventorySerialization.playerInventoryToBase64(p.getInventory());
-    	
+    	ByteArrayOutputStream out = new ByteArrayOutputStream();
+        try {
+			new ObjectOutputStream(out).writeObject(serializedInventory);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+        // your string
+        String bpString = new String(Hex.encodeHex(out.toByteArray()));
         
+    	MMOPlayerList.put(p.getUniqueId().toString(),bpString);
+    		
+    
+    	saveMMOPlayers();
     	
     }
 
