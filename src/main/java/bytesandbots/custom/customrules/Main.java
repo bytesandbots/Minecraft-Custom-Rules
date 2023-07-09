@@ -29,9 +29,11 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.PlayerInventory;
 public final class Main extends JavaPlugin {
@@ -449,7 +451,36 @@ public final class Main extends JavaPlugin {
     		
     	}
     	
-    	 
+    	else if(cmd.getName().equalsIgnoreCase("createTrader")) {
+    		if(player.isOp()) {
+	    		Villager v = (Villager) player.getWorld().spawnEntity(player.getLocation(), EntityType.VILLAGER);
+	    		String customName = "Custom Villager";
+	    		if (args.length == 1) {
+		    		 
+	    			customName = args[0];
+		             
+	    		}
+	    		v.setCustomName(customName);
+	    		v.setAI(false);
+	    		player.sendMessage("Villager created!");
+	    		Merchant merchant = Bukkit.createMerchant(customName);
+	            List<MerchantRecipe> merchantRecipes = new ArrayList<MerchantRecipe>();
+
+
+	            ItemStack sellingItem = new ItemStack(Material.DIAMOND_SWORD, 1);
+	            MerchantRecipe newRecipe = new MerchantRecipe(sellingItem, 7);
+
+	            ItemStack buyItem1 = new ItemStack(Material.DIAMOND, 2);
+	            newRecipe.addIngredient(buyItem1);
+	            merchantRecipes.add(newRecipe);
+	            merchant.setRecipes(merchantRecipes);
+	            
+    		}
+    		else {
+    			player.sendMessage("only OP can summon a villager :(");
+    		}
+    		
+    	}
     	return false; 
     }
 

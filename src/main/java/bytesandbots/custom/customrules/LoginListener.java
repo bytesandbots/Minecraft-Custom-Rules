@@ -355,8 +355,6 @@ public final class LoginListener implements Listener {
     //custom merchant ------------
         Merchant merchant = Bukkit.createMerchant(customName);
         List<MerchantRecipe> merchantRecipes = new ArrayList<MerchantRecipe>();
-        //merchantRecipes = recipes;
-        //merchant.setRecipes(merchantRecipes);
 
 
         ItemStack sellingItem = new ItemStack(Material.DIAMOND_SWORD, 1);
@@ -364,7 +362,6 @@ public final class LoginListener implements Listener {
 
         ItemStack buyItem1 = new ItemStack(Material.DIAMOND, 2);
         newRecipe.addIngredient(buyItem1);
-        //newRecipe.addIngredient(buyItem2);
         merchantRecipes.add(newRecipe);
         merchant.setRecipes(merchantRecipes);
 
