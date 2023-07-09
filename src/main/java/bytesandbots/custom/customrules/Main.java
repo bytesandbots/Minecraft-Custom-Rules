@@ -261,43 +261,7 @@ public final class Main extends JavaPlugin {
     
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-      if (cmd.getName().equalsIgnoreCase("tradeDeals")) {
-    	  	//Npc npc = FancyNpcs.getInstance().getNpcManager().getNpc(name);
-    	  
-    	  	//Villager trader = (Villager)sender;
-    	    World world = Bukkit.getWorld("world");
-    		Villager trader = null;
-    		for(Entity en : world.getEntities()){
-    			System.out.println(en.getName());
-    		    if(en.getName().equals("Trader")){
-    		    	System.out.println(en.getName());
-    		        trader = (Villager)en;
-    		        // Do stuff
-
-    		    }
-    		}
-    		    
-    	  if(trader != null) {
-    			//Villager trader = (Villager)player;
-    		  System.out.println("trader found");
-    			List<MerchantRecipe> recipes = new ArrayList<MerchantRecipe>();
-    			
-    			
-    			ItemStack chicken = new ItemStack(Material.CHICKEN,2);
-    			MerchantRecipe recipe = new MerchantRecipe(chicken, Integer.MAX_VALUE);
-    			ItemStack oakLog = new ItemStack(Material.OAK_LOG,3);
-    			recipe.addIngredient(oakLog);
-    			recipe.setExperienceReward(true);
-    			
-    			trader.setRecipes(recipes);
-    		
-    		return true;
-    	}
-    	  else {
-    		  
-    		  return false;
-    	  }
-    }
+     
     	Player player = (Player) sender;
  
     	if(cmd.getName().equalsIgnoreCase("punish")) {
@@ -483,7 +447,9 @@ public final class Main extends JavaPlugin {
     		
     		
     		
-    	}     
+    	}
+    	
+    	 
     	return false; 
     }
 

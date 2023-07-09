@@ -7,11 +7,15 @@ import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
@@ -23,6 +27,8 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
+import org.bukkit.entity.Villager.Profession;
 import org.bukkit.event.EventHandler;
 
 public final class LoginListener implements Listener {
@@ -315,6 +321,54 @@ public final class LoginListener implements Listener {
 		  
 	  }
 
-	
+	@EventHandler
+
+    public void onVillagerClick(PlayerInteractAtEntityEvent event) {
+        if (event.isCancelled()) return;
+        event.setCancelled(true);
+        if (!(event.getRightClicked() instanceof Villager)) return;
+
+        Villager villager = (Villager) event.getRightClicked();
+        if (!villager.isAdult()) return;
+        
+       
+        Player player = event.getPlayer();
+        player.sendMessage("Clicked on adult LIBRARIAN with " + villager.getRecipeCount() + " trades.");
+
+
+        if (villager.isTrading()) return;
+        
+        //List<MerchantRecipe> recipes =villager.getRecipes();
+    
+
+        String customName = villager.getCustomName();
+        if (customName == null){
+            if (villager.getProfession()== Profession.LIBRARIAN) customName = "Librarian";
+            else if (villager.getProfession() == Profession.CARTOGRAPHER) customName = "Cartographer";
+            else {
+            	customName = "Trader";
+            	
+            }
+        }
+        player.sendMessage(customName);
+
+    //custom merchant ------------
+        Merchant merchant = Bukkit.createMerchant(customName);
+        List<MerchantRecipe> merchantRecipes = new ArrayList<MerchantRecipe>();
+        //merchantRecipes = recipes;
+        //merchant.setRecipes(merchantRecipes);
+
+
+        ItemStack sellingItem = new ItemStack(Material.DIAMOND_SWORD, 1);
+        MerchantRecipe newRecipe = new MerchantRecipe(sellingItem, 7);
+
+        ItemStack buyItem1 = new ItemStack(Material.DIAMOND, 2);
+        newRecipe.addIngredient(buyItem1);
+        //newRecipe.addIngredient(buyItem2);
+        merchantRecipes.add(newRecipe);
+        merchant.setRecipes(merchantRecipes);
+
+        player.openMerchant(merchant, true);
+    }
 	
 }
