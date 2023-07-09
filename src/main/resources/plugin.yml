@@ -30,4 +30,5 @@ commands:
     description: Puts you in MMO mode, saves your inventory
   unmmo:
     description: sends you back to the normal creative world. Saves your mmo inventory
-    
+  tradeDeals:
+    description: only used by trader

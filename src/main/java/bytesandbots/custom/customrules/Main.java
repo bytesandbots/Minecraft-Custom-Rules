@@ -28,8 +28,11 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.PlayerInventory;
 public final class Main extends JavaPlugin {
 	
@@ -258,7 +261,43 @@ public final class Main extends JavaPlugin {
     
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-    	
+      if (cmd.getName().equalsIgnoreCase("tradeDeals")) {
+    	  	//Npc npc = FancyNpcs.getInstance().getNpcManager().getNpc(name);
+    	  
+    	  	//Villager trader = (Villager)sender;
+    	    World world = Bukkit.getWorld("world");
+    		Villager trader = null;
+    		for(Entity en : world.getEntities()){
+    			System.out.println(en.getName());
+    		    if(en.getName().equals("Trader")){
+    		    	System.out.println(en.getName());
+    		        trader = (Villager)en;
+    		        // Do stuff
+
+    		    }
+    		}
+    		    
+    	  if(trader != null) {
+    			//Villager trader = (Villager)player;
+    		  System.out.println("trader found");
+    			List<MerchantRecipe> recipes = new ArrayList<MerchantRecipe>();
+    			
+    			
+    			ItemStack chicken = new ItemStack(Material.CHICKEN,2);
+    			MerchantRecipe recipe = new MerchantRecipe(chicken, Integer.MAX_VALUE);
+    			ItemStack oakLog = new ItemStack(Material.OAK_LOG,3);
+    			recipe.addIngredient(oakLog);
+    			recipe.setExperienceReward(true);
+    			
+    			trader.setRecipes(recipes);
+    		
+    		return true;
+    	}
+    	  else {
+    		  
+    		  return false;
+    	  }
+    }
     	Player player = (Player) sender;
  
     	if(cmd.getName().equalsIgnoreCase("punish")) {
@@ -409,6 +448,7 @@ public final class Main extends JavaPlugin {
           	 player.teleport(location);
           	 return true;
     	}
+    	
     	else if (cmd.getName().equalsIgnoreCase("mmo")) {
     		if(!currentMMOPlayers.contains(player.getUniqueId().toString()) ) {
     			currentMMOPlayers.add(player.getUniqueId().toString());
