@@ -7,6 +7,7 @@ import org.bukkit.event.block.BlockFromToEvent;
 import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -320,6 +321,14 @@ public final class LoginListener implements Listener {
 	  }
 		  
 	  }
+	@EventHandler
+	public void onEntityDamage(EntityDamageByEntityEvent event) {
+		if (event.getEntity() instanceof Villager && event.getEntity().getCustomName() != null) {
+			event.setCancelled(true);
+			
+		}
+	}
+	
 
 	@EventHandler
 
