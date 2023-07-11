@@ -365,6 +365,21 @@ public final class LoginListener implements Listener {
         Merchant merchant = Bukkit.createMerchant(customName);
         List<MerchantRecipe> merchantRecipes = new ArrayList<MerchantRecipe>();
 
+if(villager.getProfession()==Profession.WEAPONSMITH) {
+	ItemStack sellingItem = new ItemStack(Material.COBBLESTONE, 64);
+    MerchantRecipe newRecipe = new MerchantRecipe(sellingItem, 7);
+
+    ItemStack buyItem1 = new ItemStack(Material.IRON_SWORD, 1);
+    newRecipe.addIngredient(buyItem1);
+    merchantRecipes.add(newRecipe);	
+    sellingItem = new ItemStack(Material.IRON_INGOT, 32);
+     newRecipe = new MerchantRecipe(sellingItem, 7);
+
+  buyItem1 = new ItemStack(Material.DIAMOND, 3);
+    newRecipe.addIngredient(buyItem1);
+    merchantRecipes.add(newRecipe);
+}else {
+
 
         ItemStack sellingItem = new ItemStack(Material.COOKED_BEEF, 10);
         MerchantRecipe newRecipe = new MerchantRecipe(sellingItem, 7);
@@ -380,7 +395,7 @@ public final class LoginListener implements Listener {
         merchantRecipes.add(newRecipe);
         merchant.setRecipes(merchantRecipes);
         
-        
+}   
 
         player.openMerchant(merchant, true);
     }
