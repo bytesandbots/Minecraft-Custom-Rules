@@ -372,10 +372,10 @@ public final class LoginListener implements Listener {
         ItemStack buyItem1 = new ItemStack(Material.IRON_INGOT, 7);
         newRecipe.addIngredient(buyItem1);
         merchantRecipes.add(newRecipe);
-        sellingItem = new ItemStack(Material.COBBLESTONE, 32);
+        sellingItem = new ItemStack(Material.COOKED_CHICKEN,10);
         newRecipe = new MerchantRecipe(sellingItem, 7);
 
-        buyItem1 = new ItemStack(Material.COOKED_CHICKEN, 10);
+        buyItem1 = new ItemStack(Material.COBBLESTONE, 32);
         newRecipe.addIngredient(buyItem1);
         merchantRecipes.add(newRecipe);
         merchant.setRecipes(merchantRecipes);
