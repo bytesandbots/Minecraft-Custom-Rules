@@ -297,6 +297,46 @@ public final class Main extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
      
     	Player player = (Player) sender;
+    	if (cmd.getName().equalsIgnoreCase("mmo")) {
+    		if(!currentMMOPlayers.contains(player.getUniqueId().toString()) ) {
+    			currentMMOPlayers.add(player.getUniqueId().toString());
+	    		World curWorld=player.getLocation().getWorld();
+	             Location location = new Location (curWorld,43,88,623);
+	             player.teleport(location);
+	             saveCreativeInventory(player);
+	             loadMMOInventory(player); 
+    		}
+    		else {
+    			player.sendMessage("You are already on MMO mode. If you want to leave type /unmmo .");
+    			
+    		}
+             
+    	}
+    	else if (cmd.getName().equalsIgnoreCase("unmmo")) {
+    		
+    		if(!currentMMOPlayers.contains(player.getUniqueId().toString()) ) {
+    			player.sendMessage("You are not in MMO mode. Type /mmo to start.");
+    		}
+    		else {
+    			currentMMOPlayers.remove(player.getUniqueId().toString());
+    			World curWorld=player.getLocation().getWorld();
+                Location location = new Location (curWorld,67,65,-256);
+                player.teleport(location);
+	             saveMMOInventory(player);
+	             loadCreativeInventory(player); 
+    			
+    		}	
+    		
+    	}
+    		
+    	
+    	if(currentMMOPlayers.contains(player.getUniqueId().toString())) {
+    		
+    		return false;
+    	}
+    	
+    	
+    	
  
     	if(cmd.getName().equalsIgnoreCase("punish")) {
     		if (player.isOp()) {
@@ -420,24 +460,30 @@ public final class Main extends JavaPlugin {
     	}
     	else if (cmd.getName().equalsIgnoreCase("survival")) {
     		player.setGameMode(GameMode.SURVIVAL);
-    				player.sendMessage(ChatColor.GOLD  + "YOU ARE NOW IN SURVIVAL YOU LAZY BUM, JUST PRESS!");
     			
     	}
     	else if (cmd.getName().equalsIgnoreCase("creative")) {
-    		player.setGameMode(GameMode.CREATIVE);
-    				player.sendMessage(ChatColor.GOLD  + "YOU ARE NOW IN CREATIVE YOU LAZY BUM, JUST PRESS!");
+    			player.setGameMode(GameMode.CREATIVE);
+    			player.sendMessage(ChatColor.GOLD  + "Enjoy Creative.");
+    			
+    	
+    		
+    				
     	}
     	else if (cmd.getName().equalsIgnoreCase("Curryisdelicous")){
-    		
     				player.sendMessage("FOOD");
     				ItemStack mutton=new ItemStack(Material.COOKED_MUTTON,64);
     				player.getInventory().addItem(mutton);
     				return true;
+    		
     	}
     	else if (cmd.getName().equalsIgnoreCase("hummus")){
     		player.sendMessage("CARROTS AND HUMMUS MUAHAHAHAHAHAHAHAHA");
     		player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,Integer.MAX_VALUE,50));
     		player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,Integer.MAX_VALUE,255));
+    		player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,Integer.MAX_VALUE,255));
+    		player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,Integer.MAX_VALUE,255));
+    		
     		return true;
     	}
     	else if (cmd.getName().equalsIgnoreCase("pvp")){
@@ -447,41 +493,8 @@ public final class Main extends JavaPlugin {
           	 return true;
     	}
     	
-    	else if (cmd.getName().equalsIgnoreCase("mmo")) {
-    		if(!currentMMOPlayers.contains(player.getUniqueId().toString()) ) {
-    			currentMMOPlayers.add(player.getUniqueId().toString());
-	    		World curWorld=player.getLocation().getWorld();
-	             Location location = new Location (curWorld,43,88,623);
-	             player.teleport(location);
-	             saveCreativeInventory(player);
-	             loadMMOInventory(player); 
-    		}
-    		else {
-    			player.sendMessage("You are already on MMO mode. If you want to leave type /unmmo .");
-    			
-    		}
-             
-    	}
-    	else if (cmd.getName().equalsIgnoreCase("unmmo")) {
+    	
     		
-    		if(!currentMMOPlayers.contains(player.getUniqueId().toString()) ) {
-    			player.sendMessage("You are not in MMO mode. Type /mmo to start.");
-    		}
-    		else {
-    			currentMMOPlayers.remove(player.getUniqueId().toString());
-    			World curWorld=player.getLocation().getWorld();
-                Location location = new Location (curWorld,67,65,-256);
-                player.teleport(location);
-	             saveMMOInventory(player);
-	             loadCreativeInventory(player); 
-	             
-    			
-    			
-    		}
-    		
-    		
-    		
-    	}
     	
     	else if(cmd.getName().equalsIgnoreCase("createTrader")) {
     		if(player.isOp()) {

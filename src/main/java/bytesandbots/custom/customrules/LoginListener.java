@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -45,6 +46,8 @@ public final class LoginListener implements Listener {
 	public List<String> arenaPlayers = new ArrayList<String>();
 	
 	public Map<String,Map<EntityType,Integer>> killCount = new HashMap<String,Map<EntityType,Integer>>();
+	
+	public Map<String,ItemStack[]> PVPInventories = new HashMap<String,ItemStack[]>();
 	
 	public LoginListener(List<String> ListOfUUIDs) {
 		punishedPlayers.clear();
@@ -286,7 +289,9 @@ public final class LoginListener implements Listener {
 				  p.sendMessage("you entered the arena, break a leg");
 				  World curWorld = p.getLocation().getWorld();
 			       	 Location bedlocation = new Location(curWorld,103,65,-257);
-
+			       	 ItemStack[] oldInventory = p.getInventory().getContents();
+			       	PVPInventories.put(p.getUniqueId().toString(), oldInventory);
+			       	
 			       	 p.getInventory().clear();
 			       	 p.getInventory().setBoots(new ItemStack(Material.IRON_BOOTS));
 			       	 p.getInventory().setChestplate(new ItemStack(Material.IRON_CHESTPLATE));
@@ -309,6 +314,9 @@ public final class LoginListener implements Listener {
 			  else {
 				  	if(arenaPlayers.contains(p.getUniqueId().toString())) {
 					  arenaPlayers.remove(p.getUniqueId().toString());
+					  p.getInventory().clear();
+					  p.getInventory().setContents(PVPInventories.get(p.getUniqueId().toString()));
+					  PVPInventories.remove(p.getUniqueId().toString());
 				  	}
 				  }
 			
@@ -316,6 +324,9 @@ public final class LoginListener implements Listener {
 		  else {
 			  if(arenaPlayers.contains(p.getUniqueId().toString())) {
 				  arenaPlayers.remove(p.getUniqueId().toString());
+				  p.getInventory().clear();
+				  p.getInventory().setContents(PVPInventories.get(p.getUniqueId().toString()));
+				  PVPInventories.remove(p.getUniqueId().toString());
 			  }
 			  
 		  }
@@ -324,6 +335,9 @@ public final class LoginListener implements Listener {
 	  else {
 		  if(arenaPlayers.contains(p.getUniqueId().toString())) {
 			  arenaPlayers.remove(p.getUniqueId().toString());
+			  p.getInventory().clear();
+			  p.getInventory().setContents(PVPInventories.get(p.getUniqueId().toString()));
+			  PVPInventories.remove(p.getUniqueId().toString());
 		  }
 	  }
 		  
@@ -349,24 +363,20 @@ public final class LoginListener implements Listener {
         
        
         Player player = event.getPlayer();
-        player.sendMessage("Clicked on adult LIBRARIAN with " + villager.getRecipeCount() + " trades.");
+        //player.sendMessage("Clicked on adult LIBRARIAN with " + villager.getRecipeCount() + " trades.");
 
 
         if (villager.isTrading()) return;
         
-        //List<MerchantRecipe> recipes =villager.getRecipes();
     
 
         String customName = villager.getCustomName();
         if (customName == null){
-            if (villager.getProfession()== Profession.LIBRARIAN) customName = "Librarian";
-            else if (villager.getProfession() == Profession.CARTOGRAPHER) customName = "Cartographer";
-            else {
+           
             	customName = "Trader";
             	
-            }
+         
         }
-        player.sendMessage(customName);
 
     //custom merchant ------------
         Merchant merchant = Bukkit.createMerchant(customName);
