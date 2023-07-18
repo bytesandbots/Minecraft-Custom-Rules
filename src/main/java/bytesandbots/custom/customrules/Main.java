@@ -32,6 +32,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
+import org.bukkit.entity.Villager.Profession;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
@@ -49,11 +50,42 @@ public final class Main extends JavaPlugin {
 	String punishedPlayerFileName = "plugins/CustomRules/punishedPlayerNames.txt";
 	String mmoPlayerFileName = "plugins/CustomRules/MMOPlayerInventory.txt";
 	String creativePlayerFileName = "plugins/CustomRules/CreativePlayerInventory.txt";
+	String pestControlQuests = "plugins/CustomRules/pestControlQuests.txt";
 	
 	HashMap<String, HashMap<String, Location>> homes = new HashMap<>();
+	HashMap<String,Integer> pestQuests = new HashMap<String,Integer>();
 	@Override
     public void onEnable() {
         // TODO Insert logic to be performed when the plugin is enabled
+		try {
+		      File myObj = new File(pestControlQuests);
+		      Scanner myReader = new Scanner(myObj);
+		      while (myReader.hasNextLine()) {
+		        String data = myReader.nextLine();
+		        String[] arrOfStr = data.split(",", 2);
+		        pestQuests.put(arrOfStr[0],Integer.parseInt(arrOfStr[1]));
+		      }
+		      myReader.close();
+		      
+		      
+		      
+		    } catch (FileNotFoundException e) {
+		      //System.out.println("An error occurred. with reading the file punishedPlayerNames.txt . Maybe it's not there? Creating a new file");
+		      try {
+		          File myObj = new File(pestControlQuests);
+		          if (myObj.createNewFile()) {
+		            //System.out.println("File created: " + myObj.getName());
+		          } else {
+		            //System.out.println("File already exists.");
+		          }
+		        } catch (IOException ed) {
+		          //System.out.println("An error occurred. Probably Server permissions. idk");
+		          ed.printStackTrace();
+		        }
+		      e.printStackTrace();
+		}
+		
+		
 		try {
 		      File myObj = new File(punishedPlayerFileName);
 		      Scanner myReader = new Scanner(myObj);
@@ -462,6 +494,17 @@ public final class Main extends JavaPlugin {
 	    		}
 	    		v.setCustomName(customName);
 	    		v.setAI(false);
+	    		if(args.length == 2) {
+	    			Profession newProf = Profession.NONE;
+	    			switch(args[1]) {
+	    			case "weaponsmith":
+	    				newProf = Profession.WEAPONSMITH;
+	    			
+	    			}
+	    			v.setProfession(newProf);
+	    		}
+	    		
+	    		
 	    		player.sendMessage("Villager created!");
 	    		Merchant merchant = Bukkit.createMerchant(customName);
 	            List<MerchantRecipe> merchantRecipes = new ArrayList<MerchantRecipe>();
@@ -481,6 +524,46 @@ public final class Main extends JavaPlugin {
     		}
     		
     	}
+    	
+    	
+    	
+    	else if(cmd.getName().equalsIgnoreCase("pestcontrol")) {
+    		Map<EntityType,Integer>kills = actions.killCount.get(player.getUniqueId().toString());
+    		
+    		Boolean completedAll = true;
+    		for(Map.Entry<String, Integer> mob : pestQuests.entrySet()) {
+    			EntityType mobToKill = EntityType.valueOf(mob.getKey().toUpperCase());
+    			if(kills == null) {
+    				completedAll = false;
+    				player.sendMessage("Your new objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
+    				break;
+        			
+        		}
+    			
+    			if(kills.containsKey(mobToKill)) {
+	    			int mobsKilled = kills.get(mobToKill);
+	    			if(mobsKilled < mob.getValue()) {
+	    				completedAll = false;
+	    				int remaining = mobsKilled - mob.getValue();
+	    				player.sendMessage("You still need to defeat "+Integer.toString(remaining) + " " +mob.getKey().toString() );
+	    				break;
+	    			}
+    			}
+    			else {
+    				completedAll = false;
+    				player.sendMessage("Your new objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
+    				break;
+    			}
+    			
+    		}
+    		if(completedAll) {
+    			player.sendMessage("Congrats! You are done! Check back tommorow");
+    			
+    		}
+    		return true;
+    		
+    	}
+    	
     	return false; 
     }
 

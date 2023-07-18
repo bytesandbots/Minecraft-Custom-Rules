@@ -32,3 +32,6 @@ commands:
     description: sends you back to the normal creative world. Saves your mmo inventory
   createTrader:
     description: make a trader
+  pestcontrol:
+    description: command for pestcontrol
+ 

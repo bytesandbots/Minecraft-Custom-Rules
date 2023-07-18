@@ -8,6 +8,7 @@ import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -20,13 +21,17 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Villager.Profession;
@@ -38,6 +43,8 @@ public final class LoginListener implements Listener {
 	public boolean canOPbreak;
 	
 	public List<String> arenaPlayers = new ArrayList<String>();
+	
+	public Map<String,Map<EntityType,Integer>> killCount = new HashMap<String,Map<EntityType,Integer>>();
 	
 	public LoginListener(List<String> ListOfUUIDs) {
 		punishedPlayers.clear();
@@ -399,5 +406,40 @@ if(villager.getProfession()==Profession.WEAPONSMITH) {
 
         player.openMerchant(merchant, true);
     }
+	
+	
+	
+	
+	
+	@EventHandler
+	  public void onDeath(EntityDeathEvent e){
+	    Entity entity = e.getEntity();
+	    Entity killer = e.getEntity().getKiller();
+	  
+	    if (killer instanceof Player){
+	    	if(entity.getType().equals(EntityType.ZOMBIE)) {
+	    		Map<EntityType,Integer>kills = new HashMap<EntityType,Integer>();
+    			int count = 1;
+    			
+	    		if(killCount.containsKey(killer.getUniqueId().toString())) {
+	    			kills = killCount.get(killer.getUniqueId().toString());
+	    		
+	    			if(kills.containsKey(entity.getType())){
+	    				count = kills.get(entity.getType());
+	    				count += 1;
+	    				
+	    			}
+	    			
+	    		}
+	    		kills.put(entity.getType(), count);
+	    		killCount.put(killer.getUniqueId().toString(), kills);
+	    		
+	    	}
+	      //your code
+	    }
+	  }
+	
+	
+	
 	
 }
