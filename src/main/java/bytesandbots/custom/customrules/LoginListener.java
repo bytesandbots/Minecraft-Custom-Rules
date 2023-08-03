@@ -238,43 +238,73 @@ public final class LoginListener implements Listener {
         event.setCancelled(brokePrison(block));
         event.setCancelled(brokeButtons(block));
         
+        //village coords
+        if(block.getX() >= -43 && block.getX() <= 83) {
+        	if(block.getY() <= 118 && block.getY() >= 76) {
+        		if(block.getZ() >= 584 && block.getZ() <= 658) {
+        			event.setCancelled(true);
+        			return;
+        		}
+        		
+        	}
+        }
+        		
+        			
+
         
-        int delay = -1;
+        //cave coords
         
-        if (block.getType() == Material.LIME_STAINED_GLASS) {
-            delay = 5;
+        if(block.getX() >= 52 && block.getX() <= 131) {
+        	if(block.getY() <= 86 && block.getY() >= 25) {
+        		if(block.getZ() >= 74 && block.getZ() <= 128) {
+        			
+        			int delay = -1;
+        	        
+        	        if (block.getType() == Material.LIME_STAINED_GLASS) {
+        	            delay = 5;
+        	        }
+        	        else if (block.getType() == Material.MAGENTA_STAINED_GLASS) {
+        	            delay = 6;
+        	        }
+        	        else if (block.getType() == Material.RED_STAINED_GLASS) {
+        	            delay = 7;
+        	        }
+        	        else if (block.getType() == Material.WHITE_STAINED_GLASS) {
+        	            delay = 8;
+        	        }
+        	        else if (block.getType() == Material.ORANGE_STAINED_GLASS) {
+        	            delay = 9;
+        	        }
+        	        else if (block.getType() == Material.IRON_ORE) {
+        	            delay = 10;
+        	        }
+        	        else if (block.getType() == Material.DIAMOND_ORE) {
+        	            delay = 11;
+        	        }
+        	        else {
+        	        	event.setCancelled(true);
+            			return;
+        	        	
+        	        }
+        	        if(delay > -1) {
+        	        	blocksToRegenerate.add(block);
+        	        	matToRegenerate.add(block.getType());
+        		        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+        		            public void run() {
+        		               Block b = blocksToRegenerate.get(0);
+        		               b.setType(matToRegenerate.get(0));
+        		               blocksToRegenerate.remove(0);
+        		               matToRegenerate.remove(0);
+        		            }
+        		        }, delay);
+        	        
+        	        }   
+        		}
+        		
+        	}
+        	
         }
-        if (block.getType() == Material.MAGENTA_STAINED_GLASS) {
-            delay = 6;
-        }
-        if (block.getType() == Material.RED_STAINED_GLASS) {
-            delay = 7;
-        }
-        if (block.getType() == Material.WHITE_STAINED_GLASS) {
-            delay = 8;
-        }
-        if (block.getType() == Material.ORANGE_STAINED_GLASS) {
-            delay = 9;
-        }
-        if (block.getType() == Material.IRON_ORE) {
-            delay = 10;
-        }
-        if (block.getType() == Material.DIAMOND_ORE) {
-            delay = 11;
-        }
-        if(delay > -1) {
-        	blocksToRegenerate.add(block);
-        	matToRegenerate.add(block.getType());
-	        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
-	            public void run() {
-	               Block b = blocksToRegenerate.get(0);
-	               b.setType(matToRegenerate.get(0));
-	               blocksToRegenerate.remove(0);
-	               matToRegenerate.remove(0);
-	            }
-	        }, delay);
-        
-        }        
+             
         
     }
 	@EventHandler
@@ -283,6 +313,62 @@ public final class LoginListener implements Listener {
 		Block block = event.getBlockPlaced();
 		event.setCancelled(brokePrison(block));
         event.setCancelled(brokeButtons(block));
+        
+        
+        //village
+        if(block.getX() >= -43 && block.getX() <= 83) {
+        	if(block.getY() <= 118 && block.getY() >= 76) {
+        		if(block.getZ() >= 584 && block.getZ() <= 658) {
+        			event.setCancelled(true);
+        			return;
+        		}
+        		
+        	}
+        }
+        		
+        			
+
+        
+        
+        //cavern
+        if(block.getX() >= 52 && block.getX() <= 131) {
+        	if(block.getY() <= 86 && block.getY() >= 25) {
+        		if(block.getZ() >= 74 && block.getZ() <= 128) {
+        			
+        			int delay = -1;
+        	        
+        	        if (block.getType() == Material.LIME_STAINED_GLASS) {
+        	            delay = 5;
+        	        }
+        	        else if (block.getType() == Material.MAGENTA_STAINED_GLASS) {
+        	            delay = 6;
+        	        }
+        	        else if (block.getType() == Material.RED_STAINED_GLASS) {
+        	            delay = 7;
+        	        }
+        	        else if (block.getType() == Material.WHITE_STAINED_GLASS) {
+        	            delay = 8;
+        	        }
+        	        else if (block.getType() == Material.ORANGE_STAINED_GLASS) {
+        	            delay = 9;
+        	        }
+        	        else if (block.getType() == Material.IRON_ORE) {
+        	            delay = 10;
+        	        }
+        	        else if (block.getType() == Material.DIAMOND_ORE) {
+        	            delay = 11;
+        	        }
+        	        else {
+        	        	event.setCancelled(true);
+            			return;
+        	        	
+        	        }
+        	        
+        		}
+        		
+        	}
+        	
+        }
         
 	}
 	

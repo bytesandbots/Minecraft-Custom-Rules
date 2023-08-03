@@ -482,7 +482,7 @@ public final class Main extends JavaPlugin {
     		player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,Integer.MAX_VALUE,50));
     		player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,Integer.MAX_VALUE,255));
     		player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,Integer.MAX_VALUE,255));
-    		player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,Integer.MAX_VALUE,255));
+    		player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,500,255));
     		
     		return true;
     	}
