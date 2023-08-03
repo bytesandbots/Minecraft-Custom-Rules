@@ -17,6 +17,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -42,14 +43,17 @@ public final class LoginListener implements Listener {
 	
 	public List<String> punishedPlayers = new ArrayList<String>();
 	public boolean canOPbreak;
+	public List<Block> blocksToRegenerate = new ArrayList<Block>();
+	public List<Material> matToRegenerate = new ArrayList<Material>();
 	
 	public List<String> arenaPlayers = new ArrayList<String>();
 	
 	public Map<String,Map<EntityType,Integer>> killCount = new HashMap<String,Map<EntityType,Integer>>();
 	
 	public Map<String,ItemStack[]> PVPInventories = new HashMap<String,ItemStack[]>();
-	
-	public LoginListener(List<String> ListOfUUIDs) {
+	public Plugin plugin;
+	public LoginListener(List<String> ListOfUUIDs, Plugin p) {
+		plugin = p;
 		punishedPlayers.clear();
 		for (String uuid : ListOfUUIDs) {
 			punishedPlayers.add(uuid);
@@ -233,6 +237,45 @@ public final class LoginListener implements Listener {
         
         event.setCancelled(brokePrison(block));
         event.setCancelled(brokeButtons(block));
+        
+        
+        int delay = -1;
+        
+        if (block.getType() == Material.LIME_STAINED_GLASS) {
+            delay = 5;
+        }
+        if (block.getType() == Material.MAGENTA_STAINED_GLASS) {
+            delay = 6;
+        }
+        if (block.getType() == Material.RED_STAINED_GLASS) {
+            delay = 7;
+        }
+        if (block.getType() == Material.WHITE_STAINED_GLASS) {
+            delay = 8;
+        }
+        if (block.getType() == Material.ORANGE_STAINED_GLASS) {
+            delay = 9;
+        }
+        if (block.getType() == Material.IRON_ORE) {
+            delay = 10;
+        }
+        if (block.getType() == Material.DIAMOND_ORE) {
+            delay = 11;
+        }
+        if(delay > -1) {
+        	blocksToRegenerate.add(block);
+        	matToRegenerate.add(block.getType());
+	        Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+	            public void run() {
+	               Block b = blocksToRegenerate.get(0);
+	               b.setType(matToRegenerate.get(0));
+	               blocksToRegenerate.remove(0);
+	               matToRegenerate.remove(0);
+	            }
+	        }, delay);
+        
+        }        
+        
     }
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event)

@@ -168,7 +168,7 @@ public final class Main extends JavaPlugin {
 		        }
 		      e.printStackTrace();
 		}
-		actions = new LoginListener(PunishedPlayers);
+		actions = new LoginListener(PunishedPlayers,this);
 		
 	      
 	    getServer().getPluginManager().registerEvents(actions , this);
