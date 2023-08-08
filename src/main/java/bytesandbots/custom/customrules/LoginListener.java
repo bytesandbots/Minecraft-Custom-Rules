@@ -483,20 +483,16 @@ public final class LoginListener implements Listener {
 	@EventHandler
 
     public void onVillagerClick(PlayerInteractAtEntityEvent event) {
-		System.out.println("Event");
 		if (event.isCancelled()) return;
         event.setCancelled(true);
         if (!(event.getRightClicked() instanceof Villager)) return;
         
         
-        System.out.println("hihi");
         Villager villager = (Villager) event.getRightClicked();
         if (!villager.isAdult()) return;
         
        
         Player player = event.getPlayer();
-        System.out.println("yyyy");
-
         if (villager.isTrading()) return;
         
     
@@ -515,7 +511,6 @@ public final class LoginListener implements Listener {
 
         
         //weaponsmith
-        System.out.println(villager.getProfession().toString());
 		if(villager.getProfession()==Profession.WEAPONSMITH) {
 			
 			
