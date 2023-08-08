@@ -517,7 +517,7 @@ public final class LoginListener implements Listener {
 			
 			//Reciepe 1
 			ItemStack sellingItem = new ItemStack(Material.COBBLESTONE, 64);
-		    MerchantRecipe newRecipe = new MerchantRecipe(sellingItem, 7);
+		    MerchantRecipe newRecipe = new MerchantRecipe(sellingItem, 32);
 		
 		    ItemStack buyItem1 = new ItemStack(Material.IRON_SWORD, 1);
 		    newRecipe.addIngredient(buyItem1);
