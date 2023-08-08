@@ -25,9 +25,11 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -37,6 +39,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.RecipeChoice;
+import org.bukkit.inventory.ShapedRecipe;
+import org.bukkit.inventory.meta.ItemMeta;
 public final class Main extends JavaPlugin {
 	
 	List<String> PunishedPlayers = new ArrayList<String>();
@@ -172,9 +177,48 @@ public final class Main extends JavaPlugin {
 		
 	      
 	    getServer().getPluginManager().registerEvents(actions , this);
-
-		
+	
+	    customReciepes();
     }
+	
+	public void customReciepes() {
+		
+		ItemStack rum = new ItemStack(Material.MILK_BUCKET, 1);
+		ItemMeta meta= rum.getItemMeta();
+		meta.setDisplayName("Rum");
+		rum.setItemMeta(meta);
+		NamespacedKey nn = new NamespacedKey(this, "rum");
+		ShapedRecipe craftRum = new ShapedRecipe(nn,rum);
+		craftRum.shape("%*%","%$%","%$%");
+		
+		craftRum.setIngredient('%', Material.EMERALD);
+		craftRum.setIngredient('$', Material.SUGAR_CANE);
+		craftRum.setIngredient('*', Material.BUCKET);
+		
+		getServer().addRecipe(craftRum);
+		
+		
+		
+		
+		
+		ItemStack ironSword = new ItemStack(Material.IRON_SWORD, 1);
+		ItemMeta swordMeta= ironSword.getItemMeta();
+		swordMeta.setDisplayName("Titanium Sword");
+		
+		ironSword.addEnchantment(Enchantment.DAMAGE_ALL,5);
+		ironSword.addEnchantment(Enchantment.KNOCKBACK,2);
+		ironSword.setItemMeta(swordMeta);
+		NamespacedKey key1 = new NamespacedKey(this, "titanium_sword");
+		ShapedRecipe craftSword1 = new ShapedRecipe(key1,ironSword);
+		craftSword1.shape(" * "," * "," $ ");
+		
+		ItemStack titaniumReq = new ItemStack(Material.WHITE_STAINED_GLASS,32);
+
+		craftSword1.setIngredient('$', Material.STICK);
+		craftSword1.setIngredient('*', new RecipeChoice.ExactChoice(titaniumReq));
+		
+		getServer().addRecipe(craftSword1);
+	}
     
 	
     @Override
