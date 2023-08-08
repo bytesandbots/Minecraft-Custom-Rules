@@ -483,16 +483,19 @@ public final class LoginListener implements Listener {
 	@EventHandler
 
     public void onVillagerClick(PlayerInteractAtEntityEvent event) {
-        if (event.isCancelled()) return;
+		System.out.println("Event");
+		if (event.isCancelled()) return;
         event.setCancelled(true);
         if (!(event.getRightClicked() instanceof Villager)) return;
-
+        
+        
+        System.out.println("hihi");
         Villager villager = (Villager) event.getRightClicked();
         if (!villager.isAdult()) return;
         
        
         Player player = event.getPlayer();
-
+        System.out.println("yyyy");
 
         if (villager.isTrading()) return;
         
@@ -512,28 +515,31 @@ public final class LoginListener implements Listener {
 
         
         //weaponsmith
+        System.out.println(villager.getProfession().toString());
 		if(villager.getProfession()==Profession.WEAPONSMITH) {
 			
 			
 			//Reciepe 1
-			ItemStack sellingItem = new ItemStack(Material.COBBLESTONE, 64);
-		    MerchantRecipe newRecipe = new MerchantRecipe(sellingItem, 32);
+			ItemStack sellingItem = new ItemStack(Material.IRON_SWORD, 1);
+			MerchantRecipe newRecipe = new MerchantRecipe(sellingItem, 32);
 		
-		    ItemStack buyItem1 = new ItemStack(Material.IRON_SWORD, 1);
+			ItemStack buyItem1 = new ItemStack(Material.COBBLESTONE, 64);
 		    newRecipe.addIngredient(buyItem1);
 		    merchantRecipes.add(newRecipe);	
 		    
 		    //Reciepe 2
-		    sellingItem = new ItemStack(Material.IRON_INGOT, 32);
+
+		    sellingItem = new ItemStack(Material.DIAMOND, 3);
 		    newRecipe = new MerchantRecipe(sellingItem, 7);
-		
-		    buyItem1 = new ItemStack(Material.DIAMOND, 3);
+		    
+		    buyItem1 = new ItemStack(Material.IRON_INGOT, 32);
 		    newRecipe.addIngredient(buyItem1);
 		    merchantRecipes.add(newRecipe);
 		    
 		    
 		  //apply
-	        merchant.setRecipes(merchantRecipes);
+		    merchant.setRecipes(merchantRecipes);
+	        villager.setRecipes(merchantRecipes);
 		}
 		
 		else {
@@ -559,7 +565,7 @@ public final class LoginListener implements Listener {
 	        
 	      //apply
 	        merchant.setRecipes(merchantRecipes);
-        
+	        villager.setRecipes(merchantRecipes);
 		}   
 
         player.openMerchant(merchant, true);
