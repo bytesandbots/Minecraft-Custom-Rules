@@ -505,36 +505,69 @@ public final class Main extends JavaPlugin {
 	    			customName = args[0];
 		             
 	    		}
-	    		v.setCustomName(customName);
-	    		v.setAI(false);
+	    		
+	    		
 	    		if(args.length == 2) {
 	    			Profession newProf = Profession.NONE;
+	    			customName = args[0];
 	    			switch(args[1]) {
-	    			case "weaponsmith":
-	    				newProf = Profession.WEAPONSMITH;
-	    			
-	    			}
-	    			v.setProfession(newProf);
+		    			case "armorer":
+		    				newProf = Profession.ARMORER;
+		    				
+			    		case "butcher":
+		    				newProf = Profession.BUTCHER;
+		    			
+			    		case "cartographer":
+							newProf = Profession.CARTOGRAPHER;
+						
+				    	case "cleric":
+							newProf = Profession.CLERIC;
+							
+				    	case "farmer":
+							newProf = Profession.FARMER;
+						
+				    	case "fisherman":
+							newProf = Profession.FISHERMAN;
+						
+				    	case "fletcher":
+							newProf = Profession.FLETCHER;
+						
+				    	case "leatherworker":
+							newProf = Profession.LEATHERWORKER;
+						
+				    	case "librarian":
+							newProf = Profession.LIBRARIAN;
+						
+				    	case "mason":
+							newProf = Profession.MASON;
+						
+				    	case "nitwit":
+							newProf = Profession.NITWIT;
+						
+				    	case "shepherd":
+							newProf = Profession.SHEPHERD;
+						
+				    	case "toolsmith":
+							newProf = Profession.TOOLSMITH;
+							
+				    	case "weaponsmith":
+							newProf = Profession.WEAPONSMITH;
+						}
+    	
+    	
+		    			v.setProfession(newProf);
 	    		}
 	    		
-	    		
+	    		v.setCustomName(customName);
+	    		v.setAI(false);
 	    		player.sendMessage("Villager created!");
-	    		Merchant merchant = Bukkit.createMerchant(customName);
-	            List<MerchantRecipe> merchantRecipes = new ArrayList<MerchantRecipe>();
 
-
-	            ItemStack sellingItem = new ItemStack(Material.DIAMOND_SWORD, 1);
-	            MerchantRecipe newRecipe = new MerchantRecipe(sellingItem, 7);
-
-	            ItemStack buyItem1 = new ItemStack(Material.DIAMOND, 2);
-	            newRecipe.addIngredient(buyItem1);
-	            merchantRecipes.add(newRecipe);
-	            merchant.setRecipes(merchantRecipes);
 	            
     		}
     		else {
     			player.sendMessage("only OP can summon a villager :(");
     		}
+    		return true;
     		
     	}
     	
