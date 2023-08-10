@@ -245,14 +245,14 @@ public final class Main extends JavaPlugin {
 
 		
 		List<String> lore2 = new ArrayList<>();
-		lore.add("Made from pure Aetherstone,");
-		lore.add("very difficult to forge though");
+		lore2.add("Made from pure Aetherstone,");
+		lore2.add("very difficult to forge though");
 		
 		
-		swordMeta.setLore(lore2);
+		sword2Meta.setLore(lore2);
 		AttributeModifier damage2 = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",19,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
-		swordMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage2);
-		swordMeta.setUnbreakable(true);
+		sword2Meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage2);
+		sword2Meta.setUnbreakable(true);
 		
 		
 		StoneSword.setItemMeta(sword2Meta);
