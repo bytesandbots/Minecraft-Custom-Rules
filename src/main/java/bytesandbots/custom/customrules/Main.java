@@ -232,7 +232,45 @@ public final class Main extends JavaPlugin {
 		craftSword1.setIngredient('*', new RecipeChoice.ExactChoice(titaniumReq));
 		
 		getServer().addRecipe(craftSword1);
+		
+		
+		
+		
+		
+		
+		//Aetherstone
+		ItemStack StoneSword = new ItemStack(Material.STONE_SWORD, 1);
+		ItemMeta sword2Meta= StoneSword.getItemMeta();
+		sword2Meta.setDisplayName(ChatColor.BOLD+""+ChatColor.ITALIC+""+ChatColor.LIGHT_PURPLE+"Aetherstone Katana");
+
+		
+		List<String> lore2 = new ArrayList<>();
+		lore.add("Made from pure Aetherstone,");
+		lore.add("very difficult to forge though");
+		
+		
+		swordMeta.setLore(lore2);
+		AttributeModifier damage2 = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",19,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
+		swordMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage2);
+		swordMeta.setUnbreakable(true);
+		
+		
+		StoneSword.setItemMeta(sword2Meta);
+		
+		//Recipe for Aetherstone Sordeh
+		NamespacedKey key2 = new NamespacedKey(this, "aetherstone_sword");
+		ShapedRecipe craftSword2 = new ShapedRecipe(key2,StoneSword);
+		craftSword2.shape(" * "," * "," $ ");
+		
+		ItemStack aetherReq = new ItemStack(Material.MAGENTA_STAINED_GLASS,32);
+
+		craftSword2.setIngredient('$', Material.STICK);
+		craftSword2.setIngredient('*', new RecipeChoice.ExactChoice(aetherReq));
+		
+		getServer().addRecipe(craftSword2);
+		
 	}
+	
     
 	
     @Override
