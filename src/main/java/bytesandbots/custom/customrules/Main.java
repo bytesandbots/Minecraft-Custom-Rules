@@ -16,6 +16,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.UUID;
 import java.util.HashMap;
 
 import org.apache.commons.codec.DecoderException;
@@ -27,6 +28,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
@@ -35,6 +38,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Villager.Profession;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
@@ -203,10 +207,20 @@ public final class Main extends JavaPlugin {
 		
 		ItemStack ironSword = new ItemStack(Material.IRON_SWORD, 1);
 		ItemMeta swordMeta= ironSword.getItemMeta();
-		swordMeta.setDisplayName("Titanium Sword");
+		swordMeta.setDisplayName(ChatColor.BOLD+""+ChatColor.ITALIC+"Titanium Sword");
+
 		
-		ironSword.addEnchantment(Enchantment.DAMAGE_ALL,5);
-		ironSword.addEnchantment(Enchantment.KNOCKBACK,2);
+		List<String> lore = new ArrayList<>();
+		lore.add("A sword of strong titanium,");
+		lore.add("very difficult to forge though");
+		
+		
+		swordMeta.setLore(lore);
+		AttributeModifier damage = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",17,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
+		swordMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage);
+		swordMeta.setUnbreakable(true);
+		
+		
 		ironSword.setItemMeta(swordMeta);
 		NamespacedKey key1 = new NamespacedKey(this, "titanium_sword");
 		ShapedRecipe craftSword1 = new ShapedRecipe(key1,ironSword);

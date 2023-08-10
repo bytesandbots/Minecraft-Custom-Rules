@@ -232,16 +232,23 @@ public final class LoginListener implements Listener {
 	
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent event) {
-        //Player player = event.getPlayer();
+        Player player = event.getPlayer();
+        
+        if(player.isOp())
+        {
+        	return;
+        	
+        }
+        
         Block block = event.getBlock();
         
         event.setCancelled(brokePrison(block));
         event.setCancelled(brokeButtons(block));
         
         //village coords
-        if(block.getX() >= -43 && block.getX() <= 83) {
+        if(block.getX() >= -50 && block.getX() <= 100) {
         	if(block.getY() <= 118 && block.getY() >= 76) {
-        		if(block.getZ() >= 584 && block.getZ() <= 658) {
+        		if(block.getZ() >= 590 && block.getZ() <= 665) {
         			event.setCancelled(true);
         			return;
         		}
@@ -310,6 +317,14 @@ public final class LoginListener implements Listener {
 	@EventHandler
 	public void onBlockPlace(BlockPlaceEvent event)
 	{
+		Player player = event.getPlayer();
+        
+        if(player.isOp())
+        {
+        	return;
+        	
+        }
+        
 		Block block = event.getBlockPlaced();
 		event.setCancelled(brokePrison(block));
         event.setCancelled(brokeButtons(block));
@@ -335,34 +350,8 @@ public final class LoginListener implements Listener {
         	if(block.getY() <= 86 && block.getY() >= 25) {
         		if(block.getZ() >= 74 && block.getZ() <= 128) {
         			
-        			int delay = -1;
-        	        
-        	        if (block.getType() == Material.LIME_STAINED_GLASS) {
-        	            delay = 5;
-        	        }
-        	        else if (block.getType() == Material.MAGENTA_STAINED_GLASS) {
-        	            delay = 6;
-        	        }
-        	        else if (block.getType() == Material.RED_STAINED_GLASS) {
-        	            delay = 7;
-        	        }
-        	        else if (block.getType() == Material.WHITE_STAINED_GLASS) {
-        	            delay = 8;
-        	        }
-        	        else if (block.getType() == Material.ORANGE_STAINED_GLASS) {
-        	            delay = 9;
-        	        }
-        	        else if (block.getType() == Material.IRON_ORE) {
-        	            delay = 10;
-        	        }
-        	        else if (block.getType() == Material.DIAMOND_ORE) {
-        	            delay = 11;
-        	        }
-        	        else {
-        	        	event.setCancelled(true);
-            			return;
-        	        	
-        	        }
+        	
+        	        event.setCancelled(true);
         	        
         		}
         		
@@ -392,11 +381,31 @@ public final class LoginListener implements Listener {
 	
 	@EventHandler
     public void onPlayerBreakBlock(BlockBreakEvent event) {
+		Player player = event.getPlayer();
+        
+        if(player.isOp())
+        {
+        	return;
+        	
+        }
+        
         Block block = event.getBlock();
         //Player player = event.getPlayer();
         
         event.setCancelled(brokePrison(block));
         event.setCancelled(brokeButtons(block));
+        
+        
+        if(block.getX() >= -50 && block.getX() <= 100) {
+        	if(block.getY() <= 118 && block.getY() >= 76) {
+        		if(block.getZ() >= 590 && block.getZ() <= 665) {
+        			event.setCancelled(true);
+        			return;
+        		}
+        		
+        	}
+        }
+        
         
   
     }
