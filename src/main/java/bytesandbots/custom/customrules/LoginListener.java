@@ -615,7 +615,7 @@ public final class LoginListener implements Listener {
 		
 		String craftedObj = e.getRecipe().getResult().getItemMeta().getDisplayName();
 	
-		if(craftedObj.contains("Titanium Sword")) {
+		if(craftedObj.contains("Titanium Sword")||craftedObj.contains("Aetherstone Katana")) {
 			e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
 			
 			
@@ -637,6 +637,17 @@ public final class LoginListener implements Listener {
 		if(matrix[1] != null && matrix[4] != null && matrix[7] != null) {
 			if(matrix[1].getType().equals(Material.WHITE_STAINED_GLASS) &&
 					matrix[4].getType().equals(Material.WHITE_STAINED_GLASS) &&
+					matrix[7].getType().equals(Material.STICK)) {
+				
+				if(!(matrix[1].getAmount() == 32 && matrix[4].getAmount() == 32 && matrix[7].getAmount() == 1 )) {
+					e.getInventory().setResult(null);
+					
+				}
+			}
+		}
+		if(matrix[1] != null && matrix[4] != null && matrix[7] != null) {
+			if(matrix[1].getType().equals(Material.MAGENTA_STAINED_GLASS) &&
+					matrix[4].getType().equals(Material.MAGENTA_STAINED_GLASS) &&
 					matrix[7].getType().equals(Material.STICK)) {
 				
 				if(!(matrix[1].getAmount() == 32 && matrix[4].getAmount() == 32 && matrix[7].getAmount() == 1 )) {
