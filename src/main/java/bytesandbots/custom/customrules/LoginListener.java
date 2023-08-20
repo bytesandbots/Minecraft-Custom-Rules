@@ -9,10 +9,14 @@ import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.inventory.CraftingInventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
@@ -606,6 +610,42 @@ public final class LoginListener implements Listener {
 	      //your code
 	    }
 	  }
+	@EventHandler
+    public void OnCraft(CraftItemEvent e) {  
+		
+		String craftedObj = e.getRecipe().getResult().getItemMeta().getDisplayName();
+	
+		if(craftedObj.contains("Titanium Sword")) {
+			e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
+			
+			
+			
+			e.getInventory().setMatrix(new ItemStack[]{
+                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
+                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
+                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR)});
+			
+			
+		}
+		
+	}
+	
+	@EventHandler
+	  public void onPlayerCraftItem(PrepareItemCraftEvent e){
+		
+		ItemStack[] matrix = e.getInventory().getMatrix();
+		if(matrix[1] != null && matrix[4] != null && matrix[7] != null) {
+			if(matrix[1].getType().equals(Material.WHITE_STAINED_GLASS) &&
+					matrix[4].getType().equals(Material.WHITE_STAINED_GLASS) &&
+					matrix[7].getType().equals(Material.STICK)) {
+				
+				if(!(matrix[1].getAmount() == 32 && matrix[4].getAmount() == 32 && matrix[7].getAmount() == 1 )) {
+					e.getInventory().setResult(null);
+					
+				}
+			}
+		}
+	}
 	
 	
 	
