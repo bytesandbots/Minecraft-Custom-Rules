@@ -399,6 +399,9 @@ public final class Main extends JavaPlugin {
 	    		World curWorld=player.getLocation().getWorld();
 	             Location location = new Location (curWorld,43,88,623);
 	             player.teleport(location);
+	             for (PotionEffect effect : player.getActivePotionEffects()) {
+	                 player.removePotionEffect(effect.getType());
+	             }
 	             saveCreativeInventory(player);
 	             loadMMOInventory(player); 
     		}
