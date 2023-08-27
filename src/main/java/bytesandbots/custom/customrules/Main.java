@@ -257,7 +257,7 @@ public final class Main extends JavaPlugin {
 		
 		StoneSword.setItemMeta(sword2Meta);
 		
-		//Recipe for Aetherstone Sordeh
+		//Recipe for Aetherstone Sword
 		NamespacedKey key2 = new NamespacedKey(this, "aetherstone_sword");
 		ShapedRecipe craftSword2 = new ShapedRecipe(key2,StoneSword);
 		craftSword2.shape(" * "," * "," $ ");
@@ -268,7 +268,37 @@ public final class Main extends JavaPlugin {
 		craftSword2.setIngredient('*', new RecipeChoice.ExactChoice(aetherReq));
 		
 		getServer().addRecipe(craftSword2);
+		//Bloodsteel
+		ItemStack DiamondSword = new ItemStack(Material.DIAMOND_SWORD, 1);
+		ItemMeta sword3Meta= StoneSword.getItemMeta();
+		sword3Meta.setDisplayName(ChatColor.BOLD+""+ChatColor.ITALIC+""+ChatColor.RED+"Bloodsteel Sword");
+
 		
+		List<String> lore3 = new ArrayList<>();
+		lore3.add("Ability: Lifesteal");
+		lore3.add("Every time you hit an enemy,");
+		lore3.add("Gain 1 health");
+		
+		
+		sword3Meta.setLore(lore3);
+		AttributeModifier damage3 = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",21,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
+		sword3Meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage3);
+		sword3Meta.setUnbreakable(true);
+		
+		
+		DiamondSword.setItemMeta(sword3Meta);
+		
+		//Recipe for Bloodsteel Sword
+		NamespacedKey key3 = new NamespacedKey(this, "bloodsteel_sword");
+		ShapedRecipe craftSword3 = new ShapedRecipe(key3,DiamondSword);
+		craftSword3.shape(" * "," * "," $ ");
+		
+		ItemStack bloodsteelReq = new ItemStack(Material.RED_STAINED_GLASS,32);
+
+		craftSword3.setIngredient('$', Material.STICK);
+		craftSword3.setIngredient('*', new RecipeChoice.ExactChoice(bloodsteelReq));
+		
+		getServer().addRecipe(craftSword3);
 	}
 	
     
