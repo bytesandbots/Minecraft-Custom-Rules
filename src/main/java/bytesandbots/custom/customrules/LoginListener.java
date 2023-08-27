@@ -23,6 +23,7 @@ import org.bukkit.inventory.MerchantRecipe;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
@@ -490,6 +491,20 @@ public final class LoginListener implements Listener {
 			event.setCancelled(true);
 			
 		}
+		
+		     if(event instanceof EntityDamageByEntityEvent){
+		         EntityDamageByEntityEvent damageEvent = (EntityDamageByEntityEvent)event;
+		         if (damageEvent.getDamager() instanceof Player) {
+		        	 Player damager = (Player) damageEvent.getDamager();
+		        	 if(damager.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.BOLD+""+ChatColor.ITALIC+""+ChatColor.RED+"Bloodsteel Sword")) {
+		     
+		        		 damager.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 4)); 
+		        	 }
+		         }
+		     }
+		               
+
+	
 	}
 	
 

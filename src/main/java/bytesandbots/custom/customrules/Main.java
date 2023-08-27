@@ -270,7 +270,7 @@ public final class Main extends JavaPlugin {
 		getServer().addRecipe(craftSword2);
 		//Bloodsteel
 		ItemStack DiamondSword = new ItemStack(Material.DIAMOND_SWORD, 1);
-		ItemMeta sword3Meta= StoneSword.getItemMeta();
+		ItemMeta sword3Meta= DiamondSword.getItemMeta();
 		sword3Meta.setDisplayName(ChatColor.BOLD+""+ChatColor.ITALIC+""+ChatColor.RED+"Bloodsteel Sword");
 
 		
