@@ -496,9 +496,10 @@ public final class LoginListener implements Listener {
 		         EntityDamageByEntityEvent damageEvent = (EntityDamageByEntityEvent)event;
 		         if (damageEvent.getDamager() instanceof Player) {
 		        	 Player damager = (Player) damageEvent.getDamager();
-		        	 if(damager.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(ChatColor.BOLD+""+ChatColor.ITALIC+""+ChatColor.RED+"Bloodsteel Sword")) {
-		     
-		        		 damager.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 40, 4)); 
+		        	 if(damager.getInventory().getItemInMainHand().getItemMeta().getDisplayName().contains("Bloodsteel Sword")) {
+		        		 double chealth = damager.getHealth();
+		        		 damager.setHealth( chealth + 2);
+		        		 //damager.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1, 0)); 
 		        	 }
 		         }
 		     }
