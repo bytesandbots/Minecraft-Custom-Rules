@@ -28,6 +28,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +38,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -56,13 +59,17 @@ public final class LoginListener implements Listener {
 	public Map<String,Map<EntityType,Integer>> killCount = new HashMap<String,Map<EntityType,Integer>>();
 	
 	public Map<String,ItemStack[]> PVPInventories = new HashMap<String,ItemStack[]>();
+	public Map<String,Long> coolDownPlayers = new HashMap<String,Long>();
 	public Plugin plugin;
+	
+	
 	public LoginListener(List<String> ListOfUUIDs, Plugin p) {
 		plugin = p;
 		punishedPlayers.clear();
 		for (String uuid : ListOfUUIDs) {
 			punishedPlayers.add(uuid);
 		}
+		
 	}
 	public void unPunish(Player p) {
 		
@@ -496,10 +503,42 @@ public final class LoginListener implements Listener {
 		         EntityDamageByEntityEvent damageEvent = (EntityDamageByEntityEvent)event;
 		         if (damageEvent.getDamager() instanceof Player) {
 		        	 Player damager = (Player) damageEvent.getDamager();
-		        	 if(damager.getInventory().getItemInMainHand().getItemMeta().getDisplayName().contains("Bloodsteel Sword")) {
-		        		 double chealth = damager.getHealth();
-		        		 damager.setHealth( chealth + 2);
-		        		 //damager.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1, 0)); 
+		        	 if(damager.getInventory().getItemInMainHand().hasItemMeta()) {
+			        	 if(damager.getInventory().getItemInMainHand().getItemMeta().getDisplayName().contains("Bloodsteel Sword")) {
+			        		 
+			        		 long startTime = System.currentTimeMillis();
+			        		 
+			        		 if(coolDownPlayers.containsKey(damager.getUniqueId().toString())) {
+			        			 long endTime  = coolDownPlayers.get(damager.getUniqueId().toString());
+			        			 float coolDown = 500;
+			        			 if(startTime - endTime> (long)coolDown) {
+			        				 double chealth = damager.getHealth();
+			        				 if(chealth+1 >= 20) {
+			        					 damager.setHealth(damager.getMaxHealth());
+			        				 }
+			        				 else {
+			        					 damager.setHealth( chealth + 1); 
+			        					 
+			        				 }
+					        		 
+			        				 coolDownPlayers.put(damager.getUniqueId().toString(), startTime );
+			        			 }
+			        			 
+			        		 }
+			        		 else {
+			        			 double chealth = damager.getHealth();
+			        			 if(chealth+1 >= 20) {
+		        					 damager.setHealth(damager.getMaxHealth());
+		        				 }
+		        				 else {
+		        					 damager.setHealth( chealth + 1); 
+		        					 
+		        				 }
+				        		 coolDownPlayers.put(damager.getUniqueId().toString(), startTime );
+			        		 }
+			        		 
+			        		 //damager.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 1, 0)); 
+			        	 }
 		        	 }
 		         }
 		     }
