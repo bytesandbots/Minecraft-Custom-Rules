@@ -278,26 +278,41 @@ public final class LoginListener implements Listener {
         		if(block.getZ() >= 74 && block.getZ() <= 128) {
         			
         			int delay = -1;
+        			
         	        
         	        if (block.getType() == Material.LIME_STAINED_GLASS) {
-        	            delay = 5;
+        	        	ItemStack toDrop = new ItemStack(Material.LIME_STAINED_GLASS);
+        	        	player.getWorld().dropItem(block.getLocation(), toDrop);    	            
+        	        	delay = 5;
         	        }
         	        else if (block.getType() == Material.MAGENTA_STAINED_GLASS) {
+        	        	ItemStack toDrop = new ItemStack(Material.MAGENTA_STAINED_GLASS);
+        	        	player.getWorld().dropItem(block.getLocation(), toDrop);
         	            delay = 6;
         	        }
         	        else if (block.getType() == Material.RED_STAINED_GLASS) {
+        	        	ItemStack toDrop = new ItemStack(Material.RED_STAINED_GLASS);
+        	        	player.getWorld().dropItem(block.getLocation(), toDrop);
         	            delay = 7;
         	        }
         	        else if (block.getType() == Material.WHITE_STAINED_GLASS) {
+        	        	ItemStack toDrop = new ItemStack(Material.WHITE_STAINED_GLASS);
+        	        	player.getWorld().dropItem(block.getLocation(), toDrop);
         	            delay = 8;
         	        }
         	        else if (block.getType() == Material.ORANGE_STAINED_GLASS) {
+        	        	ItemStack toDrop = new ItemStack(Material.ORANGE_STAINED_GLASS);
+        	        	player.getWorld().dropItem(block.getLocation(), toDrop);
         	            delay = 9;
         	        }
         	        else if (block.getType() == Material.IRON_ORE) {
+        	        	ItemStack toDrop = new ItemStack(Material.IRON_ORE);
+        	        	player.getWorld().dropItem(block.getLocation(), toDrop);
         	            delay = 10;
         	        }
         	        else if (block.getType() == Material.DIAMOND_ORE) {
+        	        	ItemStack toDrop = new ItemStack(Material.DIAMOND_ORE);
+        	        	player.getWorld().dropItem(block.getLocation(), toDrop);
         	            delay = 11;
         	        }
         	        else {
@@ -644,23 +659,29 @@ public final class LoginListener implements Listener {
 	    Entity killer = e.getEntity().getKiller();
 	  
 	    if (killer instanceof Player){
-	    	if(entity.getType().equals(EntityType.ZOMBIE)) {
-	    		Map<EntityType,Integer>kills = new HashMap<EntityType,Integer>();
-    			int count = 1;
-    			
-	    		if(killCount.containsKey(killer.getUniqueId().toString())) {
-	    			kills = killCount.get(killer.getUniqueId().toString());
-	    		
-	    			if(kills.containsKey(entity.getType())){
-	    				count = kills.get(entity.getType());
-	    				count += 1;
-	    				
-	    			}
+	    	EntityType[] enemies = {EntityType.ZOMBIE,
+	    							EntityType.SKELETON,
+	    							EntityType.SPIDER};
+	    	
+	    	for(EntityType enemy : enemies) {
+		    	if(entity.getType().equals(enemy)) {
+		    		Map<EntityType,Integer>kills = new HashMap<EntityType,Integer>();
+	    			int count = 1;
 	    			
-	    		}
-	    		kills.put(entity.getType(), count);
-	    		killCount.put(killer.getUniqueId().toString(), kills);
-	    		
+		    		if(killCount.containsKey(killer.getUniqueId().toString())) {
+		    			kills = killCount.get(killer.getUniqueId().toString());
+		    		
+		    			if(kills.containsKey(entity.getType())){
+		    				count = kills.get(entity.getType());
+		    				count += 1;
+		    				
+		    			}
+		    			
+		    		}
+		    		kills.put(entity.getType(), count);
+		    		killCount.put(killer.getUniqueId().toString(), kills);
+		    		
+		    	}
 	    	}
 	      //your code
 	    }
