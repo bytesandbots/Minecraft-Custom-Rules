@@ -1,3 +1,7 @@
 ZOMBIE,10
 ZOMBIE,20
 SKELETON,5
+CREEPER,15
+SPIDER,20
+Reaper Fanatic,1
+Reaper BloodEater,1

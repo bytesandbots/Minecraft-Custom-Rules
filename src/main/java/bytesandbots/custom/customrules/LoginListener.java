@@ -57,6 +57,7 @@ public final class LoginListener implements Listener {
 	public List<String> arenaPlayers = new ArrayList<String>();
 	
 	public Map<String,Map<EntityType,Integer>> killCount = new HashMap<String,Map<EntityType,Integer>>();
+	public Map<String,Map<String,Integer>> namedKillCount = new HashMap<String,Map<String,Integer>>();
 	
 	public Map<String,ItemStack[]> PVPInventories = new HashMap<String,ItemStack[]>();
 	public Map<String,Long> coolDownPlayers = new HashMap<String,Long>();
@@ -661,26 +662,59 @@ public final class LoginListener implements Listener {
 	    if (killer instanceof Player){
 	    	EntityType[] enemies = {EntityType.ZOMBIE,
 	    							EntityType.SKELETON,
-	    							EntityType.SPIDER};
-	    	
-	    	for(EntityType enemy : enemies) {
-		    	if(entity.getType().equals(enemy)) {
-		    		Map<EntityType,Integer>kills = new HashMap<EntityType,Integer>();
-	    			int count = 1;
-	    			
-		    		if(killCount.containsKey(killer.getUniqueId().toString())) {
-		    			kills = killCount.get(killer.getUniqueId().toString());
-		    		
-		    			if(kills.containsKey(entity.getType())){
-		    				count = kills.get(entity.getType());
-		    				count += 1;
-		    				
-		    			}
+	    							EntityType.SPIDER,
+	    							EntityType.CREEPER
+	    							};
+	    	String[] specials = {"Reaper Fanatic","Reaper BloodEater"};
+	    	if(entity.getCustomName() != null) {
+		    	for(String specialEnemy : specials) {
+		    	
+		    		if(entity.getCustomName().equals(specialEnemy)) {
+		    			
+		    			Map<String,Integer>kills = new HashMap<String,Integer>();
+		    			int count = 1;
+		    			
+			    		if(namedKillCount.containsKey(killer.getUniqueId().toString())) {
+			    			kills = namedKillCount.get(killer.getUniqueId().toString());
+			    		
+			    			if(kills.containsKey(entity.getCustomName())){
+			    				count = kills.get(entity.getCustomName());
+			    				count += 1;
+			    				
+			    			}
+			    			
+			    		}
+			    		kills.put(entity.getCustomName(), count);
+			    		namedKillCount.put(killer.getUniqueId().toString(), kills);
+			    		
+			    		
+		    			
 		    			
 		    		}
-		    		kills.put(entity.getType(), count);
-		    		killCount.put(killer.getUniqueId().toString(), kills);
 		    		
+		    	}
+	    	}
+	    	//continue
+	    	else {
+		    	for(EntityType enemy : enemies) {
+			    	if(entity.getType().equals(enemy)) {
+			    		Map<EntityType,Integer>kills = new HashMap<EntityType,Integer>();
+		    			int count = 1;
+		    			
+			    		if(killCount.containsKey(killer.getUniqueId().toString())) {
+			    			kills = killCount.get(killer.getUniqueId().toString());
+			    		
+			    			if(kills.containsKey(entity.getType())){
+			    				count = kills.get(entity.getType());
+			    				count += 1;
+			    				
+			    			}
+			    			
+			    		}
+			    		kills.put(entity.getType(), count);
+			    		killCount.put(killer.getUniqueId().toString(), kills);
+			    		
+			    	}
 		    	}
 	    	}
 	      //your code
