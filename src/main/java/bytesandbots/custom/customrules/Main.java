@@ -720,6 +720,7 @@ public final class Main extends JavaPlugin {
     	    	}
     	    	if(kills == null) {
     				completedAll = false;
+    				System.out.println("nothing found");
     				player.sendMessage("Your new objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
     				break;
         			
@@ -744,6 +745,7 @@ public final class Main extends JavaPlugin {
         			}
         			else {
         				completedAll = false;
+        				System.out.println("New Object non special");
         				player.sendMessage("Your new objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
         				break;
         			}
@@ -761,6 +763,7 @@ public final class Main extends JavaPlugin {
         			}
         			else {
         				completedAll = false;
+        				System.out.println("New Object special");
         				player.sendMessage("Your new objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
         				break;
         			}

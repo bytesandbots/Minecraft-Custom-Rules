@@ -667,6 +667,7 @@ public final class LoginListener implements Listener {
 	    							};
 	    	String[] specials = {"Reaper Fanatic","Reaper BloodEater"};
 	    	if(entity.getCustomName() != null) {
+	    		System.out.println("Special Kill");
 		    	for(String specialEnemy : specials) {
 		    	
 		    		if(entity.getCustomName().equals(specialEnemy)) {
@@ -696,6 +697,7 @@ public final class LoginListener implements Listener {
 	    	}
 	    	//continue
 	    	else {
+	    		System.out.println("Non Special Kill");
 		    	for(EntityType enemy : enemies) {
 			    	if(entity.getType().equals(enemy)) {
 			    		Map<EntityType,Integer>kills = new HashMap<EntityType,Integer>();
@@ -711,6 +713,7 @@ public final class LoginListener implements Listener {
 			    			}
 			    			
 			    		}
+			    		System.out.println("Ded " + entity.getType().toString());
 			    		kills.put(entity.getType(), count);
 			    		killCount.put(killer.getUniqueId().toString(), kills);
 			    		
