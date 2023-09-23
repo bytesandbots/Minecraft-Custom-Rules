@@ -713,8 +713,10 @@ public final class LoginListener implements Listener {
 			    			}
 			    			
 			    		}
-			    		System.out.println("Ded " + entity.getType().toString());
+			    		
 			    		kills.put(entity.getType(), count);
+			    		System.out.println("Ded " + entity.getType().toString() + " : " + kills.toString());
+			    		
 			    		killCount.put(killer.getUniqueId().toString(), kills);
 			    		
 			    	}
