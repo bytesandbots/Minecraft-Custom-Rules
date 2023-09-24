@@ -62,17 +62,21 @@ public final class Main extends JavaPlugin {
 	String pestControlQuests = "plugins/CustomRules/pestControlQuests.txt";
 	
 	HashMap<String, HashMap<String, Location>> homes = new HashMap<>();
-	HashMap<String,Integer> pestQuests = new HashMap<String,Integer>();
+	HashMap<Integer,Map<String,Integer>> pestQuests = new HashMap<Integer,Map<String,Integer>>();
 	@Override
     public void onEnable() {
         // TODO Insert logic to be performed when the plugin is enabled
 		try {
 		      File myObj = new File(pestControlQuests);
 		      Scanner myReader = new Scanner(myObj);
+		      int i = 0;
 		      while (myReader.hasNextLine()) {
 		        String data = myReader.nextLine();
 		        String[] arrOfStr = data.split(",", 2);
-		        pestQuests.put(arrOfStr[0],Integer.parseInt(arrOfStr[1]));
+		        HashMap<String,Integer> detail = new HashMap<>();
+		        detail.put(arrOfStr[0],Integer.parseInt(arrOfStr[1]));
+		        pestQuests.put(i,detail);
+		        i++;
 		      }
 		      myReader.close();
 		      
@@ -708,75 +712,80 @@ public final class Main extends JavaPlugin {
     		
     		
     		Boolean completedAll = true;
-    		for(Map.Entry<String, Integer> mob : pestQuests.entrySet()) {
+    		for(Map.Entry<Integer, Map<String, Integer>> orderedEnemy : pestQuests.entrySet()) {
     			
-    			boolean special = false;
-    			String[] specials = {"Reaper Fanatic","Reaper BloodEater"};
-    	    	for(String specialEnemy : specials) {
-    	    		if(mob.getKey().equals(specialEnemy)) {
-    	    			
-    	    			special = true;
-    	    		}
-    	    	}
-    	    	
-    	    	
-    	    	
-    	    	if(!special) {
-    	    		if(kills == null) {
-        				completedAll = false;
-        				System.out.println("nothing found");
-        				player.sendMessage("Your new objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
-        				break;
-            			
-            		}
-    	    		EntityType mobToKill = EntityType.valueOf(mob.getKey().toUpperCase());
-    	    		if(kills.containsKey(mobToKill)) {
-    	    			int mobsKilled = kills.get(mobToKill);
-    	    			if(mobsKilled < mob.getValue()) {
-    	    				completedAll = false;
-    	    				int remaining = mobsKilled - mob.getValue();
-    	    				player.sendMessage("You still need to defeat "+Integer.toString(remaining) + " " +mob.getKey().toString() );
-    	    				break;
-    	    			}
-        			}
-        			else {
-        				completedAll = false;
-        				System.out.println("New Object non special");
-        				player.sendMessage("Your new objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
-        				break;
-        			}
-    	    	}
-    	    	else {
-    	    		if(SpecialKills == null) {
-        				completedAll = false;
-        				player.sendMessage("Your new SPECIAL objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
-        				break;
-            			
-            		}
-    	    		String mobToKill = mob.getKey();
-    	    		if(SpecialKills.containsKey(mobToKill)) {
-    	    			int mobsKilled = SpecialKills.get(mobToKill);
-    	    			if(mobsKilled < mob.getValue()) {
-    	    				completedAll = false;
-    	    				int remaining = mobsKilled - mob.getValue();
-    	    				player.sendMessage("You still need to defeat SPECIAL "+Integer.toString(remaining) + " " +mob.getKey().toString() );
-    	    				break;
-    	    			}
-        			}
-        			else {
-        				completedAll = false;
-        				System.out.println("New Object special");
-        				player.sendMessage("Your new objective is to kill SPECIAL "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
-        				break;
-        			}
-    	    		
-    	    	}
-    	    	
-    	    	
-    		
+    			for(Map.Entry<String, Integer> mob : orderedEnemy.getValue().entrySet()) {
     			
+	    			boolean special = false;
+	    			String[] specials = {"Reaper Fanatic","Reaper BloodEater"};
+	    	    	for(String specialEnemy : specials) {
+	    	    		if(mob.getKey().equals(specialEnemy)) {
+	    	    			
+	    	    			special = true;
+	    	    		}
+	    	    	}
+	    	    	
+	    	    	
+	    	    	
+	    	    	if(!special) {
+	    	    		if(kills == null) {
+	        				completedAll = false;
+	        				System.out.println("nothing found");
+	        				player.sendMessage("Your new objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
+	        				return true;
+	            			
+	            		}
+	    	    		EntityType mobToKill = EntityType.valueOf(mob.getKey().toUpperCase());
+	    	    		if(kills.containsKey(mobToKill)) {
+	    	    			int mobsKilled = kills.get(mobToKill);
+	    	    			if(mobsKilled < mob.getValue()) {
+	    	    				completedAll = false;
+	    	    				int remaining = mob.getValue() - mobsKilled;
+	    	    				player.sendMessage("You still need to defeat "+Integer.toString(remaining) + " " +mob.getKey().toString() );
+	    	    				return true;
+	    	    			}
+	        			}
+	        			else {
+	        				completedAll = false;
+	        				System.out.println("New Object non special");
+	        				player.sendMessage("Your new objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
+	        				return true;
+	        			}
+	    	    	}
+	    	    	else {
+	    	    		if(SpecialKills == null) {
+	        				completedAll = false;
+	        				player.sendMessage("Your new SPECIAL objective is to kill "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
+	        				return true;
+	            			
+	            		}
+	    	    		String mobToKill = mob.getKey();
+	    	    		if(SpecialKills.containsKey(mobToKill)) {
+	    	    			int mobsKilled = SpecialKills.get(mobToKill);
+	    	    			if(mobsKilled < mob.getValue()) {
+	    	    				completedAll = false;
+	    	    				int remaining =mob.getValue() - mobsKilled;
+	    	    				player.sendMessage("You still need to defeat SPECIAL "+Integer.toString(remaining) + " " +mob.getKey().toString() );
+	    	    				return true;
+	    	    			}
+	        			}
+	        			else {
+	        				completedAll = false;
+	        				System.out.println("New Object special");
+	        				player.sendMessage("Your new objective is to kill SPECIAL "+Integer.toString(mob.getValue()) + " " +mob.getKey().toString() );
+	        				return true;
+	        			}
+	    	    		
+	    	    	}
+	    	    	
+	    	    	
+	    		
+	    			
+	    			
+	    			
+	    		}
     			
-    			
+
     		}
     		if(completedAll) {
     			player.sendMessage("Congrats! You are done! Check back tommorow");
