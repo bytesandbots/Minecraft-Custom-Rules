@@ -669,15 +669,16 @@ public final class LoginListener implements Listener {
 	    	if(entity.getCustomName() != null) {
 	    		System.out.println("Special Kill");
 		    	for(String specialEnemy : specials) {
-		    	
-		    		if(entity.getCustomName().equals(specialEnemy)) {
-		    			
+		    		String sName = ChatColor.stripColor(entity.getCustomName());
+		    		
+		    		if(sName.contains(specialEnemy)) {
+		    			System.out.println(sName);
 		    			Map<String,Integer>kills = new HashMap<String,Integer>();
 		    			int count = 1;
 		    			
 			    		if(namedKillCount.containsKey(killer.getUniqueId().toString())) {
 			    			kills = namedKillCount.get(killer.getUniqueId().toString());
-			    		
+			    			System.out.println("Enemy found in dictionary");
 			    			if(kills.containsKey(entity.getCustomName())){
 			    				count = kills.get(entity.getCustomName());
 			    				count += 1;
@@ -685,7 +686,9 @@ public final class LoginListener implements Listener {
 			    			}
 			    			
 			    		}
-			    		kills.put(entity.getCustomName(), count);
+			    		kills.put(sName, count);
+			    		System.out.println("Ded " + sName + " : " + kills.toString());
+			    		
 			    		namedKillCount.put(killer.getUniqueId().toString(), kills);
 			    		
 			    		
