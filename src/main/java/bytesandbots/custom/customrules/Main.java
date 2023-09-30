@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -32,17 +31,12 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Villager.Profession;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.Merchant;
-import org.bukkit.inventory.MerchantRecipe;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -793,6 +787,24 @@ public final class Main extends JavaPlugin {
     		}
     		return true;
     		
+    	}
+    	
+    	else if(cmd.getName().equalsIgnoreCase("make")) {
+    		if(player.isOp()) {
+	    		if (args.length == 1) {
+		    		switch(args[0]) {
+		    			case "reaper_fanatic":
+		    				new CustomZombies().reaperFanatic(player,player.getLocation());
+		    				break;
+		    		}
+	    		}
+	    		else {
+	    			
+	    			player.sendMessage("make <name of Zombie>");
+	    		}
+	    		return true;
+    		}
+    		return false;
     	}
     	
     	return false; 

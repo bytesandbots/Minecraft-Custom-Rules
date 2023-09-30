@@ -34,4 +34,5 @@ commands:
     description: make a trader
   pestcontrol:
     description: command for pestcontrol
- 
+  make:
+    description: create a zombie
