@@ -667,18 +667,18 @@ public final class LoginListener implements Listener {
 	    							};
 	    	String[] specials = {"Reaper Fanatic","Reaper BloodEater"};
 	    	if(entity.getCustomName() != null) {
-	    		System.out.println("Special Kill");
+	    		//System.out.println("Special Kill");
 		    	for(String specialEnemy : specials) {
 		    		String sName = ChatColor.stripColor(entity.getCustomName());
 		    		
 		    		if(sName.contains(specialEnemy)) {
-		    			System.out.println(sName);
+		    			//System.out.println(sName);
 		    			Map<String,Integer>kills = new HashMap<String,Integer>();
 		    			int count = 1;
 		    			
 			    		if(namedKillCount.containsKey(killer.getUniqueId().toString())) {
 			    			kills = namedKillCount.get(killer.getUniqueId().toString());
-			    			System.out.println("Enemy found in dictionary");
+			    			//System.out.println("Enemy found in dictionary");
 			    			if(kills.containsKey(entity.getCustomName())){
 			    				count = kills.get(entity.getCustomName());
 			    				count += 1;
@@ -687,7 +687,7 @@ public final class LoginListener implements Listener {
 			    			
 			    		}
 			    		kills.put(sName, count);
-			    		System.out.println("Ded " + sName + " : " + kills.toString());
+			    		//System.out.println("Ded " + sName + " : " + kills.toString());
 			    		
 			    		namedKillCount.put(killer.getUniqueId().toString(), kills);
 			    		
@@ -700,7 +700,7 @@ public final class LoginListener implements Listener {
 	    	}
 	    	//continue
 	    	else {
-	    		System.out.println("Non Special Kill");
+	    		//System.out.println("Non Special Kill");
 		    	for(EntityType enemy : enemies) {
 			    	if(entity.getType().equals(enemy)) {
 			    		Map<EntityType,Integer>kills = new HashMap<EntityType,Integer>();
@@ -718,7 +718,7 @@ public final class LoginListener implements Listener {
 			    		}
 			    		
 			    		kills.put(entity.getType(), count);
-			    		System.out.println("Ded " + entity.getType().toString() + " : " + kills.toString());
+			    		//System.out.println("Ded " + entity.getType().toString() + " : " + kills.toString());
 			    		
 			    		killCount.put(killer.getUniqueId().toString(), kills);
 			    		
