@@ -1,5 +1,6 @@
 package bytesandbots.custom.customrules;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -29,6 +30,31 @@ public class CustomZombies {
 		reaper.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(100f);
 		
 		reaper.setHealth(100);
+		reaper.setCustomName(ChatColor.DARK_RED+"R"+"eaper Fanatic");
+		
+		
+	}
+	public void reaperbloodeater(Player p, Location loc) {
+		Zombie reaper = (Zombie) p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+		ItemStack weapon = new ItemStack(Material.DIAMOND_SHOVEL,1);
+		ItemStack boots = new ItemStack(Material.DIAMOND_BOOTS,1);
+		ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS,1);
+		ItemStack chestplate = new ItemStack(Material.DIAMOND_CHESTPLATE,1);
+		ItemStack head = new ItemStack(Material.ZOMBIE_HEAD,1);
+		ItemStack offhand = new ItemStack(Material.DIAMOND_SHOVEL,1);
+		reaper.getEquipment().setItemInMainHand(weapon);
+		reaper.getEquipment().setBoots(boots);
+		reaper.getEquipment().setLeggings(leggings);
+		reaper.getEquipment().setChestplate(chestplate);
+		reaper.getEquipment().setHelmet(head);
+		reaper.getEquipment().setItemInOffHand(offhand);
+		
+		reaper.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(20f);
+		reaper.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(.5f);
+		reaper.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1f);
+		reaper.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(250f);
+		
+		reaper.setHealth(250);
 		
 	}
 }
