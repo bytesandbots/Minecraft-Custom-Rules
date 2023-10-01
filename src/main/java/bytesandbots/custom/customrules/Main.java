@@ -796,6 +796,9 @@ public final class Main extends JavaPlugin {
 		    			case "reaper_fanatic":
 		    				new CustomZombies().reaperFanatic(player,player.getLocation());
 		    				break;
+		    			case "reaper_bloodeater":
+		    				new CustomZombies().reaperbloodeater(player,player.getLocation());
+		    				break;
 		    		}
 	    		}
 	    		else {
