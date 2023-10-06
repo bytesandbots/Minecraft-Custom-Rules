@@ -619,6 +619,40 @@ public final class Main extends JavaPlugin {
           	 player.teleport(location);
           	 return true;
     	}
+    	else if (cmd.getName().equalsIgnoreCase("gohome")){
+    		if(!player.isOp()) {
+    			return false;
+    			
+    		}
+    		World curWorld = player.getLocation().getWorld();
+          	 Location location = new Location(curWorld,67,65,-256);
+          	 player.teleport(location);
+          	 return true;
+    	}
+    	else if (cmd.getName().equalsIgnoreCase("gommo")){
+    		if(!player.isOp()) {
+    			return false;
+    			
+    		}
+    		World curWorld = player.getLocation().getWorld();
+          	 Location location = new Location(curWorld,43,88,623);
+          	 player.teleport(location);
+          	 return true;
+    	}
+    	else if (cmd.getName().equalsIgnoreCase("test")){
+    		if(!player.isOp()) {
+    			return false;
+    			
+    		}
+    		ItemStack item = new ItemStack(Material.DIAMOND);
+    		ItemMeta meta = item.getItemMeta();
+    		meta.setCustomModelData(1);
+    		meta.setDisplayName(ChatColor.RESET + "Compacted Diamond");
+    		item.setItemMeta(meta);
+    		player.getInventory().addItem(item);
+    	
+          	return true;
+    	}
     	
     	
     		

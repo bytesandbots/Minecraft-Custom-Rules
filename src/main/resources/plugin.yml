@@ -36,3 +36,9 @@ commands:
     description: command for pestcontrol
   make:
     description: create a zombie
+  gohome:
+    description: Go to Home, must be OP
+  gommo:
+    description: Go To MMO, must be OP
+  test:
+    description: Testing Script

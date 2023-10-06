@@ -30,7 +30,7 @@ public class CustomZombies {
 		reaper.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(100f);
 		
 		reaper.setHealth(100);
-		reaper.setCustomName(ChatColor.DARK_RED+"R"+"eaper Fanatic");
+		reaper.setCustomName(ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"R"+ChatColor.RESET+"eaper "+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"F"+ChatColor.RESET+"anatic");
 		
 		
 	}
@@ -55,7 +55,7 @@ public class CustomZombies {
 		reaper.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(250f);
 		
 		reaper.setHealth(250);
-		reaper.setCustomName(ChatColor.DARK_PURPLE+"R"+"eaper "+ChatColor.DARK_PURPLE+"B"+"loodEater");
+		reaper.setCustomName(ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"R"+ChatColor.RESET+"eaper "+ChatColor.DARK_PURPLE+""+ChatColor.BOLD+"B"+ChatColor.RESET+"loodEater");
 		
 	}
 }
