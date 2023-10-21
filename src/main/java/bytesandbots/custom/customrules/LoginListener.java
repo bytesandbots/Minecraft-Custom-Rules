@@ -732,6 +732,16 @@ public final class LoginListener implements Listener {
     public void OnCraft(CraftItemEvent e) {  
 		
 		String craftedObj = e.getRecipe().getResult().getItemMeta().getDisplayName();
+		if(craftedObj.contains("Compacted Diamond")){
+e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
+			
+			
+			
+			e.getInventory().setMatrix(new ItemStack[]{
+                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
+                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
+                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR)});
+		}
 	
 		if(craftedObj.contains("Titanium Sword")||craftedObj.contains("Aetherstone Katana")||craftedObj.contains("Bloodsteel Sword")) {
 			e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
@@ -752,6 +762,30 @@ public final class LoginListener implements Listener {
 	  public void onPlayerCraftItem(PrepareItemCraftEvent e){
 		
 		ItemStack[] matrix = e.getInventory().getMatrix();
+		boolean moreThanOne = false;
+		for(int i = 0; i < 9;i++) {
+			if(matrix[i] != null) {
+				if(matrix[i].getType().equals(Material.DIAMOND)) {
+					
+					if(matrix[i].getAmount() != 64) {
+						e.getInventory().setResult(null);
+						
+					}
+					else {
+						if(moreThanOne == true) {
+							e.getInventory().setResult(null);
+							break;
+							
+						}
+						moreThanOne = true;
+						
+					}
+				}
+				
+			}
+			
+		}
+
 		if(matrix[1] != null && matrix[4] != null && matrix[7] != null) {
 			if(matrix[1].getType().equals(Material.WHITE_STAINED_GLASS) &&
 					matrix[4].getType().equals(Material.WHITE_STAINED_GLASS) &&

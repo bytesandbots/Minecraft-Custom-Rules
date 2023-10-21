@@ -179,125 +179,23 @@ public final class Main extends JavaPlugin {
 		
 	      
 	    getServer().getPluginManager().registerEvents(actions , this);
-	
-	    customReciepes();
+	    NamespacedKey nn = new NamespacedKey(this, "rum");
+	    getServer().addRecipe(new Recipes().Rum(nn));
+	    NamespacedKey key1 = new NamespacedKey(this, "titanium_sword");
+	    getServer().addRecipe(new Recipes().Titanium_Sword(key1));
+	    NamespacedKey key2 = new NamespacedKey(this, "aetherstone_sword");
+	    getServer().addRecipe(new Recipes().Aetherstone_Sword(key2));
+	    NamespacedKey key3 = new NamespacedKey(this, "bloodsteel_sword");
+	    getServer().addRecipe(new Recipes().BloodSteel_Sword(key3));
+	    NamespacedKey key4 = new NamespacedKey(this, "compacted_diamond");
+	    getServer().addRecipe(new Recipes().compactedDiamond(key4));
+	    
+	    
+	    
+	    
     }
 	
-	public void customReciepes() {
-		
-		ItemStack rum = new ItemStack(Material.MILK_BUCKET, 1);
-		ItemMeta meta= rum.getItemMeta();
-		meta.setDisplayName("Rum");
-		rum.setItemMeta(meta);
-		NamespacedKey nn = new NamespacedKey(this, "rum");
-		ShapedRecipe craftRum = new ShapedRecipe(nn,rum);
-		craftRum.shape("%*%","%$%","%$%");
-		
-		craftRum.setIngredient('%', Material.EMERALD);
-		craftRum.setIngredient('$', Material.SUGAR_CANE);
-		craftRum.setIngredient('*', Material.BUCKET);
-		
-		getServer().addRecipe(craftRum);
-		
-		
-		
-		
-		
-		ItemStack ironSword = new ItemStack(Material.IRON_SWORD, 1);
-		ItemMeta swordMeta= ironSword.getItemMeta();
-		swordMeta.setDisplayName(ChatColor.BOLD+""+ChatColor.ITALIC+"Titanium Sword");
-
-		
-		List<String> lore = new ArrayList<>();
-		lore.add("A sword of strong titanium,");
-		lore.add("very difficult to forge though");
-		
-		
-		swordMeta.setLore(lore);
-		AttributeModifier damage = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",17,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
-		swordMeta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage);
-		swordMeta.setUnbreakable(true);
-		
-		
-		ironSword.setItemMeta(swordMeta);
-		NamespacedKey key1 = new NamespacedKey(this, "titanium_sword");
-		ShapedRecipe craftSword1 = new ShapedRecipe(key1,ironSword);
-		craftSword1.shape(" * "," * "," $ ");
-		
-		ItemStack titaniumReq = new ItemStack(Material.WHITE_STAINED_GLASS,32);
-
-		craftSword1.setIngredient('$', Material.STICK);
-		craftSword1.setIngredient('*', new RecipeChoice.ExactChoice(titaniumReq));
-		
-		getServer().addRecipe(craftSword1);
-		
-		
-		
-		
-		
-		
-		//Aetherstone
-		ItemStack StoneSword = new ItemStack(Material.STONE_SWORD, 1);
-		ItemMeta sword2Meta= StoneSword.getItemMeta();
-		sword2Meta.setDisplayName(ChatColor.BOLD+""+ChatColor.ITALIC+""+ChatColor.LIGHT_PURPLE+"Aetherstone Katana");
-
-		
-		List<String> lore2 = new ArrayList<>();
-		lore2.add("Made from pure Aetherstone,");
-		lore2.add("very difficult to forge though");
-		
-		
-		sword2Meta.setLore(lore2);
-		AttributeModifier damage2 = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",19,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
-		sword2Meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage2);
-		sword2Meta.setUnbreakable(true);
-		
-		
-		StoneSword.setItemMeta(sword2Meta);
-		
-		//Recipe for Aetherstone Sword
-		NamespacedKey key2 = new NamespacedKey(this, "aetherstone_sword");
-		ShapedRecipe craftSword2 = new ShapedRecipe(key2,StoneSword);
-		craftSword2.shape(" * "," * "," $ ");
-		
-		ItemStack aetherReq = new ItemStack(Material.MAGENTA_STAINED_GLASS,32);
-
-		craftSword2.setIngredient('$', Material.STICK);
-		craftSword2.setIngredient('*', new RecipeChoice.ExactChoice(aetherReq));
-		
-		getServer().addRecipe(craftSword2);
-		//Bloodsteel
-		ItemStack DiamondSword = new ItemStack(Material.DIAMOND_SWORD, 1);
-		ItemMeta sword3Meta= DiamondSword.getItemMeta();
-		sword3Meta.setDisplayName(ChatColor.BOLD+""+ChatColor.ITALIC+""+ChatColor.RED+"Bloodsteel Sword");
-
-		
-		List<String> lore3 = new ArrayList<>();
-		lore3.add("Ability: Lifesteal");
-		lore3.add("Every time you hit an enemy,");
-		lore3.add("Gain 1 health");
-		
-		
-		sword3Meta.setLore(lore3);
-		AttributeModifier damage3 = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",21,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
-		sword3Meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage3);
-		sword3Meta.setUnbreakable(true);
-		
-		
-		DiamondSword.setItemMeta(sword3Meta);
-		
-		//Recipe for Bloodsteel Sword
-		NamespacedKey key3 = new NamespacedKey(this, "bloodsteel_sword");
-		ShapedRecipe craftSword3 = new ShapedRecipe(key3,DiamondSword);
-		craftSword3.shape(" * "," * "," $ ");
-		
-		ItemStack bloodsteelReq = new ItemStack(Material.RED_STAINED_GLASS,32);
-
-		craftSword3.setIngredient('$', Material.STICK);
-		craftSword3.setIngredient('*', new RecipeChoice.ExactChoice(bloodsteelReq));
-		
-		getServer().addRecipe(craftSword3);
-	}
+	
 	
     
 	
@@ -644,39 +542,10 @@ public final class Main extends JavaPlugin {
     			return false;
     			
     		}
-    		ItemStack item = new ItemStack(Material.DIAMOND);
-    		ItemMeta meta = item.getItemMeta();
-    		meta.setCustomModelData(1);
-    		meta.setDisplayName(ChatColor.RESET + "Compacted Diamond");
-    		item.setItemMeta(meta);
+    		ItemStack item = new CustomItems().compactedDiamond();
     		player.getInventory().addItem(item);
     		
-    		
-    		ItemStack item2 = new ItemStack(Material.DIAMOND_SWORD);
-    		ItemMeta meta2 = item2.getItemMeta();
-    		meta2.setCustomModelData(1);
-    		meta2.setDisplayName(ChatColor.RED + "DarkBane");
-    		List<String> lore = new ArrayList<>();
-    		lore.add("Sweeping Edge X");
-    		meta2.setLore(lore);
-    		
-    		AttributeModifier attackSpeed = new AttributeModifier(UUID.randomUUID(),"generic.attack_speed",5,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
-    		meta2.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED,attackSpeed);
-    		
-    		AttributeModifier armor = new AttributeModifier(UUID.randomUUID(),"generic.armor",20,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
-    		meta2.addAttributeModifier(Attribute.GENERIC_ARMOR,armor);
-    		
-    		AttributeModifier attackDamage = new AttributeModifier(UUID.randomUUID(),"generic.attack_damage",54,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
-    		meta2.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,attackDamage);
-    		
-    		AttributeModifier maxHealth = new AttributeModifier(UUID.randomUUID(),"generic.max_health",10,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
-    		meta2.addAttributeModifier(Attribute.GENERIC_MAX_HEALTH,maxHealth);
-    		
-    		AttributeModifier movementSpeed = new AttributeModifier(UUID.randomUUID(),"generic.movement_speed",.3,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
-    		meta2.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED,movementSpeed);
-    		
-    		
-    		item2.setItemMeta(meta2);
+    		ItemStack item2 = new CustomItems().DarkBane();
     		player.getInventory().addItem(item2);
     	
           	return true;
