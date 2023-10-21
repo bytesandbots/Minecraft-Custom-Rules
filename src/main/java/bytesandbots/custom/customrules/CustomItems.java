@@ -44,7 +44,7 @@ public class CustomItems {
 		
 		AttributeModifier movementSpeed = new AttributeModifier(UUID.randomUUID(),"generic.movement_speed",.3,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
 		meta2.addAttributeModifier(Attribute.GENERIC_MOVEMENT_SPEED,movementSpeed);
-		
+		meta2.setUnbreakable(true);
 		
 		item2.setItemMeta(meta2);
 		return item2;
