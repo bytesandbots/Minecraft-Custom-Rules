@@ -139,11 +139,59 @@ public class Recipes{
 	}
 	
 	ShapelessRecipe compactedDiamond(NamespacedKey key4) {
-        ItemStack compactedDiamond = new CustomItems().compactedDiamond();
+        ItemStack compacted = new CustomItems().compactedDiamond();
         
 
-        ShapelessRecipe precipe = new ShapelessRecipe(key4,compactedDiamond);
+        ShapelessRecipe precipe = new ShapelessRecipe(key4,compacted);
         precipe.addIngredient(1, Material.DIAMOND);
+        
+        return precipe;
+    }
+	
+	ShapelessRecipe compactedIron(NamespacedKey key4) {
+        ItemStack compacted = new CustomItems().compactedIron();
+        
+
+        ShapelessRecipe precipe = new ShapelessRecipe(key4,compacted);
+        precipe.addIngredient(1, Material.IRON_INGOT);
+        
+        return precipe;
+    }
+	
+	ShapelessRecipe compactedKoshil(NamespacedKey key4) {
+        ItemStack compacted = new CustomItems().compactedKoshil();
+        
+
+        ShapelessRecipe precipe = new ShapelessRecipe(key4,compacted);
+        precipe.addIngredient(1, Material.LIME_STAINED_GLASS);
+        
+        return precipe;
+    }
+	
+	ShapelessRecipe compactedTitanium(NamespacedKey key4) {
+        ItemStack compacted = new CustomItems().compactedTitanium();
+        
+
+        ShapelessRecipe precipe = new ShapelessRecipe(key4,compacted);
+        precipe.addIngredient(1, Material.WHITE_STAINED_GLASS);
+        
+        return precipe;
+    }
+	ShapelessRecipe compactedBloodsteel(NamespacedKey key4) {
+        ItemStack compacted = new CustomItems().compactedBloodsteel();
+        
+
+        ShapelessRecipe precipe = new ShapelessRecipe(key4,compacted);
+        precipe.addIngredient(1, Material.RED_STAINED_GLASS);
+        
+        return precipe;
+    }
+	ShapelessRecipe compactedAetherstone(NamespacedKey key4) {
+        ItemStack compacted = new CustomItems().compactedAetherstone();
+        
+
+        ShapelessRecipe precipe = new ShapelessRecipe(key4,compacted);
+        precipe.addIngredient(1, Material.MAGENTA_STAINED_GLASS);
         
         return precipe;
     }

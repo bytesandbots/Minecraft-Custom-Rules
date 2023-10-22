@@ -732,8 +732,9 @@ public final class LoginListener implements Listener {
     public void OnCraft(CraftItemEvent e) {  
 		
 		String craftedObj = e.getRecipe().getResult().getItemMeta().getDisplayName();
-		if(craftedObj.contains("Compacted Diamond")){
-e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
+		if(craftedObj.contains("Compacted Diamond") || craftedObj.contains("Compacted Koshil") || craftedObj.contains("Compacted Titanium")
+				|| craftedObj.contains("Compacted Bloodsteel") || craftedObj.contains("Compacted Aetherstone") || craftedObj.contains("Compacted Iron")){
+			e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
 			
 			
 			
@@ -765,7 +766,8 @@ e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
 		boolean moreThanOne = false;
 		for(int i = 0; i < 9;i++) {
 			if(matrix[i] != null) {
-				if(matrix[i].getType().equals(Material.DIAMOND)) {
+				if(matrix[i].getType().equals(Material.DIAMOND) || matrix[i].getType().equals(Material.RED_STAINED_GLASS) || matrix[i].getType().equals(Material.PURPLE_STAINED_GLASS)
+						|| matrix[i].getType().equals(Material.WHITE_STAINED_GLASS) || matrix[i].getType().equals(Material.LIME_STAINED_GLASS) || matrix[i].getType().equals(Material.IRON_INGOT)) {
 					
 					if(matrix[i].getAmount() != 64) {
 						e.getInventory().setResult(null);

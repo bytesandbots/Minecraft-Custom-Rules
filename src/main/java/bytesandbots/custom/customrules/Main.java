@@ -189,6 +189,16 @@ public final class Main extends JavaPlugin {
 	    getServer().addRecipe(new Recipes().BloodSteel_Sword(key3));
 	    NamespacedKey key4 = new NamespacedKey(this, "compacted_diamond");
 	    getServer().addRecipe(new Recipes().compactedDiamond(key4));
+	    NamespacedKey key5 = new NamespacedKey(this, "compacted_aetherstone");
+	    getServer().addRecipe(new Recipes().compactedAetherstone(key5));
+	    NamespacedKey key6 = new NamespacedKey(this, "compacted_bloodsteel");
+	    getServer().addRecipe(new Recipes().compactedBloodsteel(key6));
+	    NamespacedKey key7 = new NamespacedKey(this, "compacted_iron");
+	    getServer().addRecipe(new Recipes().compactedIron(key7));
+	    NamespacedKey key8 = new NamespacedKey(this, "compacted_koshil");
+	    getServer().addRecipe(new Recipes().compactedKoshil(key8));
+	    NamespacedKey key9 = new NamespacedKey(this, "compacted_titanium");
+	    getServer().addRecipe(new Recipes().compactedTitanium(key9));
 	    
 	    
 	    
@@ -542,8 +552,6 @@ public final class Main extends JavaPlugin {
     			return false;
     			
     		}
-    		ItemStack item = new CustomItems().compactedDiamond();
-    		player.getInventory().addItem(item);
     		
     		ItemStack item2 = new CustomItems().DarkBane();
     		player.getInventory().addItem(item2);
