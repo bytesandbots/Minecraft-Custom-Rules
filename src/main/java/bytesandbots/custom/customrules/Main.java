@@ -199,10 +199,22 @@ public final class Main extends JavaPlugin {
 	    getServer().addRecipe(new Recipes().compactedKoshil(key8));
 	    NamespacedKey key9 = new NamespacedKey(this, "compacted_titanium");
 	    getServer().addRecipe(new Recipes().compactedTitanium(key9));
-	    
-	    
-	    
-	    
+	    NamespacedKey key10 = new NamespacedKey(this, "holy_beacon");
+	    getServer().addRecipe(new Recipes().HolyBeacon(key10));
+	    NamespacedKey key11 = new NamespacedKey(this, "refined_diamond_sword");
+	    getServer().addRecipe(new Recipes().RefinedDiamondSword(key11));
+	    NamespacedKey key12 = new NamespacedKey(this, "obsidian_sword");
+	    getServer().addRecipe(new Recipes().ObsidianSword(key12));
+	    NamespacedKey key13 = new NamespacedKey(this, "emerald_sword");
+	    getServer().addRecipe(new Recipes().EmeraldSword(key13));
+	    NamespacedKey key14 = new NamespacedKey(this, "soulfury");
+	    getServer().addRecipe(new Recipes().SoulFury(key14));
+	    NamespacedKey key15 = new NamespacedKey(this, "soulstriker");
+	    getServer().addRecipe(new Recipes().SoulStriker(key15));
+	    NamespacedKey key16 = new NamespacedKey(this, "darkbane");
+	    getServer().addRecipe(new Recipes().DarkBane(key16));
+	    NamespacedKey key17 = new NamespacedKey(this, "reaper_scythe");
+	    getServer().addRecipe(new Recipes().DarkBane(key17));
     }
 	
 	
