@@ -1,22 +1,12 @@
 package bytesandbots.custom.customrules;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.attribute.Attribute;
-import org.bukkit.attribute.AttributeModifier;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.RecipeChoice;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class Recipes{
 
@@ -65,7 +55,7 @@ public class Recipes{
 		item.shape(" * "," * "," $ ");
 		
 		ItemStack aetherReq = new CustomItems().compactedAetherstone();
-		aetherReq.setAmount(2);
+	
 
 		item.setIngredient('$', Material.STICK);
 		item.setIngredient('*', new RecipeChoice.ExactChoice(aetherReq));
@@ -84,7 +74,7 @@ public class Recipes{
 		item.shape(" * "," * "," $ ");
 		
 		ItemStack bloodsteelReq = new CustomItems().compactedBloodsteel();
-		bloodsteelReq.setAmount(2);
+	
 		item.setIngredient('*', new RecipeChoice.ExactChoice(bloodsteelReq));
 		item.setIngredient('$', Material.STICK);
 		

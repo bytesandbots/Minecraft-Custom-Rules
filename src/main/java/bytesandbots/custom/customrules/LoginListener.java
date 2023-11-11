@@ -9,27 +9,21 @@ import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.inventory.CraftingInventory;
-import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.Merchant;
 import org.bukkit.inventory.MerchantRecipe;
-import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +32,6 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -728,101 +721,43 @@ public final class LoginListener implements Listener {
 	      //your code
 	    }
 	  }
-	@EventHandler
-    public void OnCraft(CraftItemEvent e) {  
-		
-		String craftedObj = e.getRecipe().getResult().getItemMeta().getDisplayName();
-		if(craftedObj.contains("Compacted Diamond") || craftedObj.contains("Compacted Koshil") || craftedObj.contains("Compacted Titanium")
-				|| craftedObj.contains("Compacted Bloodsteel") || craftedObj.contains("Compacted Aetherstone") || craftedObj.contains("Compacted Iron")){
-			e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
-			
-			
-			
-			e.getInventory().setMatrix(new ItemStack[]{
-                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
-                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
-                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR)});
-		}
-	
-		if(craftedObj.contains("Titanium Sword")||craftedObj.contains("Aetherstone Katana")||craftedObj.contains("Bloodsteel Sword")) {
-			e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
-			
-			
-			
-			e.getInventory().setMatrix(new ItemStack[]{
-                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
-                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
-                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR)});
-			
-			
-		}
-		
-	}
+
 	
 	@EventHandler
 	  public void onPlayerCraftItem(PrepareItemCraftEvent e){
+		checkCraft(new CustomItems().TitaniumSword(),e.getInventory(),new CraftingRequirements().TitaniumSword());
+		checkCraft(new CustomItems().AetherStone_Sword(),e.getInventory(),new CraftingRequirements().AetherstoneSword());
+		checkCraft(new CustomItems().BloodSteel_Sword(),e.getInventory(),new CraftingRequirements().BloodSteelSword());
+		checkCraft(new CustomItems().DarkBane(),e.getInventory(),new CraftingRequirements().DarkBane());
+		checkCraft(new CustomItems().EmeraldSword(),e.getInventory(),new CraftingRequirements().EmeraldSword());
+		checkCraft(new CustomItems().HolyBeacon(),e.getInventory(),new CraftingRequirements().HolyBeacon());
+		checkCraft(new CustomItems().ObsidianSword(),e.getInventory(),new CraftingRequirements().ObsidianSword());
+		checkCraft(new CustomItems().ReaperScythe(),e.getInventory(),new CraftingRequirements().ReaperScythe());
+		checkCraft(new CustomItems().RefinedDiamondSword(),e.getInventory(),new CraftingRequirements().RefinedDiamondSword());
+		checkCraft(new CustomItems().Soulfury(),e.getInventory(),new CraftingRequirements().SoulFury());
+		checkCraft(new CustomItems().SoulStriker(),e.getInventory(),new CraftingRequirements().SoulStriker());
 		
-		ItemStack[] matrix = e.getInventory().getMatrix();
-		boolean moreThanOne = false;
-		for(int i = 0; i < 9;i++) {
-			if(matrix[i] != null) {
-				if(matrix[i].getType().equals(Material.DIAMOND) || matrix[i].getType().equals(Material.RED_STAINED_GLASS) || matrix[i].getType().equals(Material.PURPLE_STAINED_GLASS)
-						|| matrix[i].getType().equals(Material.WHITE_STAINED_GLASS) || matrix[i].getType().equals(Material.LIME_STAINED_GLASS) || matrix[i].getType().equals(Material.IRON_INGOT)) {
-					
-					if(matrix[i].getAmount() != 64) {
-						e.getInventory().setResult(null);
-						
-					}
-					else {
-						if(moreThanOne == true) {
-							e.getInventory().setResult(null);
-							break;
-							
-						}
-						moreThanOne = true;
-						
-					}
+	}
+	
+	public void checkCraft(ItemStack result, CraftingInventory inv, HashMap<Integer,ItemStack> ingredients) {
+		ItemStack[] matrix = inv.getMatrix();
+		for(int i = 0; i < 9; i++) {
+			if(ingredients.containsKey(i)) {
+				if(matrix[i] == null || !matrix[i].equals(ingredients.get(i))){
+					return;
 				}
 				
+			}
+			else {
+				if(matrix[i] != null) {
+					return;
+				}
 			}
 			
 		}
-
-		if(matrix[1] != null && matrix[4] != null && matrix[7] != null) {
-			if(matrix[1].getType().equals(Material.WHITE_STAINED_GLASS) &&
-					matrix[4].getType().equals(Material.WHITE_STAINED_GLASS) &&
-					matrix[7].getType().equals(Material.STICK)) {
-				
-				if(!(matrix[1].getAmount() == 32 && matrix[4].getAmount() == 32 && matrix[7].getAmount() == 1 )) {
-					e.getInventory().setResult(null);
-					
-				}
-			}
-		}
-		if(matrix[1] != null && matrix[4] != null && matrix[7] != null) {
-			if(matrix[1].getType().equals(Material.MAGENTA_STAINED_GLASS) &&
-					matrix[4].getType().equals(Material.MAGENTA_STAINED_GLASS) &&
-					matrix[7].getType().equals(Material.STICK)) {
-				
-				if(!(matrix[1].getAmount() == 32 && matrix[4].getAmount() == 32 && matrix[7].getAmount() == 1 )) {
-					e.getInventory().setResult(null);
-					
-				}
-			}
-		}
-		if(matrix[1] != null && matrix[4] != null && matrix[7] != null) {
-			if(matrix[1].getType().equals(Material.RED_STAINED_GLASS) &&
-					matrix[4].getType().equals(Material.RED_STAINED_GLASS) &&
-					matrix[7].getType().equals(Material.STICK)) {
-				
-				if(!(matrix[1].getAmount() == 32 && matrix[4].getAmount() == 32 && matrix[7].getAmount() == 1 )) {
-					e.getInventory().setResult(null);
-					
-				}
-			}
-		}
+		inv.setResult(result);
+		
 	}
-	
 	
 	
 	
