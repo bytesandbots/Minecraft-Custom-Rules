@@ -746,6 +746,14 @@ public final class LoginListener implements Listener {
 				if(matrix[i] == null || !matrix[i].equals(ingredients.get(i))){
 					return;
 				}
+				System.out.print("Need: ");
+				System.out.println(matrix[i].getAmount());
+				System.out.print("Have: ");
+				System.out.println(ingredients.get(i).getAmount());
+				if(matrix[i].getAmount() != ingredients.get(i).getAmount()) {
+					
+					return;
+				}
 				
 			}
 			else {
@@ -755,6 +763,7 @@ public final class LoginListener implements Listener {
 			}
 			
 		}
+		result.setAmount(1);
 		inv.setResult(result);
 		
 	}
