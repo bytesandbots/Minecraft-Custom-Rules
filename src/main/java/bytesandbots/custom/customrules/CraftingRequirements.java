@@ -106,11 +106,29 @@ public class CraftingRequirements {
 		
 	}
 	
-	public HashMap<Integer,ItemStack> EmeraldSword(){
+	public HashMap<Integer,ItemStack> KoshilSword(){
 		HashMap<Integer,ItemStack> reciepe = new HashMap<Integer,ItemStack>();
 		reciepe.put(0, null);
-		ItemStack cm = new ItemStack(Material.EMERALD);
-		cm.setAmount(16);
+		ItemStack cm = new CustomItems().compactedKoshil();
+		cm.setAmount(2);
+		reciepe.put(1, cm);
+		reciepe.put(2, null);
+		reciepe.put(3, null);
+		reciepe.put(4, cm);
+		reciepe.put(5, null);
+		reciepe.put(6, null);
+		reciepe.put(7, new ItemStack(Material.STICK));
+		reciepe.put(8, null);
+		
+		return reciepe;
+		
+	}
+	
+	public HashMap<Integer,ItemStack> AdamantSword(){
+		HashMap<Integer,ItemStack> reciepe = new HashMap<Integer,ItemStack>();
+		reciepe.put(0, null);
+		ItemStack cm = new CustomItems().compactedAdamant();
+		cm.setAmount(2);
 		reciepe.put(1, cm);
 		reciepe.put(2, null);
 		reciepe.put(3, null);

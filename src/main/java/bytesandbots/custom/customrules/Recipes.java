@@ -138,17 +138,36 @@ public class Recipes{
 		
 	}
 	
-	ShapedRecipe EmeraldSword(NamespacedKey key) {
+	ShapedRecipe KoshilSword(NamespacedKey key) {
 		//Bloodsteel
-		ItemStack sword = new CustomItems().EmeraldSword();
+		ItemStack sword = new CustomItems().KoshilSword();
 		
 		//Recipe for Bloodsteel Sword
 		
 		ShapedRecipe item = new ShapedRecipe(key,sword);
 		item.shape(" * "," * "," $ ");
 		
-		ItemStack req = new ItemStack(Material.EMERALD);
-		req.setAmount(16);
+		ItemStack req = new CustomItems().compactedKoshil();
+		req.setAmount(2);
+		item.setIngredient('*', new RecipeChoice.ExactChoice(req));
+		item.setIngredient('$', Material.STICK);
+		
+		
+		return item;
+		
+	}
+	
+	ShapedRecipe AdamantSword(NamespacedKey key) {
+		//Bloodsteel
+		ItemStack sword = new CustomItems().AdamantSword();
+		
+		//Recipe for Bloodsteel Sword
+		
+		ShapedRecipe item = new ShapedRecipe(key,sword);
+		item.shape(" * "," * "," $ ");
+		
+		ItemStack req = new CustomItems().compactedAdamant();
+		req.setAmount(2);
 		item.setIngredient('*', new RecipeChoice.ExactChoice(req));
 		item.setIngredient('$', Material.STICK);
 		
@@ -297,6 +316,16 @@ public class Recipes{
 
         ShapelessRecipe precipe = new ShapelessRecipe(key4,compacted);
         precipe.addIngredient(1, Material.IRON_INGOT);
+        
+        return precipe;
+    }
+	
+	ShapelessRecipe compactedAdamant(NamespacedKey key4) {
+        ItemStack compacted = new CustomItems().compactedAdamant();
+        
+
+        ShapelessRecipe precipe = new ShapelessRecipe(key4,compacted);
+        precipe.addIngredient(1, Material.ORANGE_STAINED_GLASS);
         
         return precipe;
     }

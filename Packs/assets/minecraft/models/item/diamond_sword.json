@@ -9,6 +9,61 @@
           "custom_model_data": 1
         },
         "model": "item/darkbane"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 2
+        },
+        "model": "item/bloodsteel_sword"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 3
+        },
+        "model": "item/aetherstone_sword"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 4
+        },
+        "model": "item/titanium_sword"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 5
+        },
+        "model": "item/refined_diamond_sword"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 6
+        },
+        "model": "item/obsidian_sword"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 7
+        },
+        "model": "item/koshil_sword"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 8
+        },
+        "model": "item/adamant_sword"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 9
+        },
+        "model": "item/soulfury"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 10
+        },
+        "model": "item/soulstriker"
       }
+	  
     ]
 }

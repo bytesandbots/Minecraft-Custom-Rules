@@ -729,7 +729,8 @@ public final class LoginListener implements Listener {
 		checkCraft(new CustomItems().AetherStone_Sword(),e.getInventory(),new CraftingRequirements().AetherstoneSword());
 		checkCraft(new CustomItems().BloodSteel_Sword(),e.getInventory(),new CraftingRequirements().BloodSteelSword());
 		checkCraft(new CustomItems().DarkBane(),e.getInventory(),new CraftingRequirements().DarkBane());
-		checkCraft(new CustomItems().EmeraldSword(),e.getInventory(),new CraftingRequirements().EmeraldSword());
+		checkCraft(new CustomItems().KoshilSword(),e.getInventory(),new CraftingRequirements().KoshilSword());
+		checkCraft(new CustomItems().AdamantSword(),e.getInventory(),new CraftingRequirements().AdamantSword());
 		checkCraft(new CustomItems().HolyBeacon(),e.getInventory(),new CraftingRequirements().HolyBeacon());
 		checkCraft(new CustomItems().ObsidianSword(),e.getInventory(),new CraftingRequirements().ObsidianSword());
 		checkCraft(new CustomItems().ReaperScythe(),e.getInventory(),new CraftingRequirements().ReaperScythe());

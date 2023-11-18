@@ -128,6 +128,14 @@ public class CustomItems {
 		item.setItemMeta(meta);
 		return item;
 	}
+	ItemStack compactedAdamant() {
+		ItemStack item = new ItemStack(Material.ORANGE_STAINED_GLASS);
+		ItemMeta meta = item.getItemMeta();
+		meta.setCustomModelData(1);
+		meta.setDisplayName(ChatColor.RESET + "Compacted Adamant");
+		item.setItemMeta(meta);
+		return item;
+	}
 	ItemStack DarkBane() {
 		ItemStack item2 = new ItemStack(Material.DIAMOND_SWORD);
 		ItemMeta meta2 = item2.getItemMeta();
@@ -188,8 +196,9 @@ public class CustomItems {
 	}
 	
 	ItemStack AetherStone_Sword() {
-		ItemStack sword = new ItemStack(Material.STONE_SWORD, 1);
+		ItemStack sword = new ItemStack(Material.DIAMOND_SWORD, 1);
 		ItemMeta meta= sword.getItemMeta();
+		meta.setCustomModelData(3);
 		meta.setDisplayName(ChatColor.BOLD+""+ChatColor.ITALIC+""+ChatColor.LIGHT_PURPLE+"Aetherstone Katana");
 
 		
@@ -236,9 +245,9 @@ public class CustomItems {
 	}
 	
 	ItemStack TitaniumSword() {
-		ItemStack item = new ItemStack(Material.IRON_SWORD, 1);
+		ItemStack item = new ItemStack(Material.DIAMOND, 1);
 		ItemMeta meta= item.getItemMeta();
-		meta.setCustomModelData(1);
+		meta.setCustomModelData(4);
 		meta.setDisplayName(ChatColor.BOLD+""+ChatColor.ITALIC+"Titanium Sword");
 
 		
@@ -262,7 +271,7 @@ public class CustomItems {
 	ItemStack RefinedDiamondSword() {
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
 		ItemMeta meta= item.getItemMeta();
-		meta.setCustomModelData(3);
+		meta.setCustomModelData(5);
 		meta.setDisplayName(ChatColor.AQUA +"T" +ChatColor.BLUE+"itanium Sword");
 
 		
@@ -286,7 +295,7 @@ public class CustomItems {
 	ItemStack ObsidianSword() {
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
 		ItemMeta meta= item.getItemMeta();
-		meta.setCustomModelData(4);
+		meta.setCustomModelData(6);
 		meta.setDisplayName(ChatColor.LIGHT_PURPLE +"O" +ChatColor.BLUE+"bsidian "+ChatColor.LIGHT_PURPLE +"S"+ChatColor.BLUE+"word");
 
 		
@@ -300,11 +309,28 @@ public class CustomItems {
 		
 	}
 	
-	ItemStack EmeraldSword() {
+	ItemStack KoshilSword() {
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
 		ItemMeta meta= item.getItemMeta();
-		meta.setCustomModelData(5);
-		meta.setDisplayName(ChatColor.GREEN +"E" +ChatColor.AQUA+"merald "+ChatColor.GREEN +"S"+ChatColor.AQUA+"word");
+		meta.setCustomModelData(7);
+		meta.setDisplayName(ChatColor.DARK_RED +"K" +ChatColor.RED+"oshil "+ChatColor.DARK_RED +"S"+ChatColor.RED+"word");
+
+		
+		AttributeModifier damage = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",7,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
+		meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage);
+		meta.setUnbreakable(true);
+		
+		item.setItemMeta(meta);
+		
+		return item;
+		
+	}
+	
+	ItemStack AdamantSword() {
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
+		ItemMeta meta= item.getItemMeta();
+		meta.setCustomModelData(8);
+		meta.setDisplayName(ChatColor.RED +"A" +ChatColor.AQUA+"damant "+ChatColor.GREEN +"S"+ChatColor.AQUA+"word");
 
 		
 		AttributeModifier damage = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",7,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
@@ -320,7 +346,7 @@ public class CustomItems {
 	ItemStack Soulfury() {
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
 		ItemMeta meta= item.getItemMeta();
-		meta.setCustomModelData(6);
+		meta.setCustomModelData(9);
 		meta.setDisplayName(ChatColor.WHITE+"S"+
 							ChatColor.LIGHT_PURPLE+"O"+
 							ChatColor.DARK_AQUA+"OULFU"+
@@ -357,7 +383,7 @@ public class CustomItems {
 	ItemStack SoulStriker() {
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
 		ItemMeta meta= item.getItemMeta();
-		meta.setCustomModelData(7);
+		meta.setCustomModelData(10);
 		meta.setDisplayName(ChatColor.DARK_AQUA + "" +ChatColor.BOLD + "S" + 
 				ChatColor.RESET + "" + ChatColor.DARK_AQUA + "oul" + 
 				ChatColor.BOLD +"S" + 
