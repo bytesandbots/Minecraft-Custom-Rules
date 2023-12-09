@@ -9,6 +9,7 @@ import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -722,43 +723,126 @@ public final class LoginListener implements Listener {
 	    }
 	  }
 
+	@EventHandler
+    public void OnCraft(CraftItemEvent e) {  
+		
+		if(e.getRecipe().getResult().hasItemMeta()) {
+			e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
+			e.getInventory().setMatrix(new ItemStack[]{
+                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
+                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
+                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR)});
+			
+		}
+
+		
+	}
 	
 	@EventHandler
 	  public void onPlayerCraftItem(PrepareItemCraftEvent e){
-		checkCraft(new CustomItems().TitaniumSword(),e.getInventory(),new CraftingRequirements().TitaniumSword());
-		checkCraft(new CustomItems().AetherStone_Sword(),e.getInventory(),new CraftingRequirements().AetherstoneSword());
-		checkCraft(new CustomItems().BloodSteel_Sword(),e.getInventory(),new CraftingRequirements().BloodSteelSword());
-		checkCraft(new CustomItems().DarkBane(),e.getInventory(),new CraftingRequirements().DarkBane());
-		checkCraft(new CustomItems().KoshilSword(),e.getInventory(),new CraftingRequirements().KoshilSword());
-		checkCraft(new CustomItems().AdamantSword(),e.getInventory(),new CraftingRequirements().AdamantSword());
-		checkCraft(new CustomItems().HolyBeacon(),e.getInventory(),new CraftingRequirements().HolyBeacon());
-		checkCraft(new CustomItems().ObsidianSword(),e.getInventory(),new CraftingRequirements().ObsidianSword());
-		checkCraft(new CustomItems().ReaperScythe(),e.getInventory(),new CraftingRequirements().ReaperScythe());
-		checkCraft(new CustomItems().RefinedDiamondSword(),e.getInventory(),new CraftingRequirements().RefinedDiamondSword());
-		checkCraft(new CustomItems().Soulfury(),e.getInventory(),new CraftingRequirements().SoulFury());
-		checkCraft(new CustomItems().SoulStriker(),e.getInventory(),new CraftingRequirements().SoulStriker());
+		if(e.getInventory().getResult() != null) {
+			
 		
+			if(e.getInventory().getResult().hasItemMeta()) {
+				e.getInventory().setResult(null);
+				
+				checkCraft(new CustomItems().TitaniumSword(),e.getInventory(),new CraftingRequirements().TitaniumSword());
+				checkCraft(new CustomItems().AetherStone_Sword(),e.getInventory(),new CraftingRequirements().AetherstoneSword());
+				checkCraft(new CustomItems().BloodSteel_Sword(),e.getInventory(),new CraftingRequirements().BloodSteelSword());
+				checkCraft(new CustomItems().DarkBane(),e.getInventory(),new CraftingRequirements().DarkBane());
+				checkCraft(new CustomItems().KoshilSword(),e.getInventory(),new CraftingRequirements().KoshilSword());
+				checkCraft(new CustomItems().AdamantSword(),e.getInventory(),new CraftingRequirements().AdamantSword());
+				checkCraft(new CustomItems().HolyBeacon(),e.getInventory(),new CraftingRequirements().HolyBeacon());
+				checkCraft(new CustomItems().ObsidianSword(),e.getInventory(),new CraftingRequirements().ObsidianSword());
+				checkCraft(new CustomItems().ReaperScythe(),e.getInventory(),new CraftingRequirements().ReaperScythe());
+				checkCraft(new CustomItems().RefinedDiamondSword(),e.getInventory(),new CraftingRequirements().RefinedDiamondSword());
+				checkCraft(new CustomItems().Soulfury(),e.getInventory(),new CraftingRequirements().SoulFury());
+				checkCraft(new CustomItems().SoulStriker(),e.getInventory(),new CraftingRequirements().SoulStriker());
+				
+			
+				checkShapelessCraft(new CustomItems().compactedAdamant(),e.getInventory(),new CustomItems().Adamant(),true);
+				checkShapelessCraft(new CustomItems().compactedAetherstone(),e.getInventory(),new CustomItems().Aetherstone(),true);
+				checkShapelessCraft(new CustomItems().compactedBloodsteel(),e.getInventory(),new CustomItems().Bloodsteel(),true);
+				checkShapelessCraft(new CustomItems().compactedDiamond(),e.getInventory(),new ItemStack(Material.DIAMOND),true);
+				checkShapelessCraft(new CustomItems().compactedIron(),e.getInventory(),new ItemStack(Material.IRON_INGOT),true);
+				checkShapelessCraft(new CustomItems().compactedKoshil(),e.getInventory(),new CustomItems().Koshil(),true);
+				checkShapelessCraft(new CustomItems().compactedTitanium(),e.getInventory(),new CustomItems().Titanium(),true);
+				
+			
+			}
+		}
+		
+		
+	}
+	
+	public void checkShapelessCraft(ItemStack result, CraftingInventory inv, ItemStack ingredient, Boolean compacted) {
+		ItemStack[] matrix = inv.getMatrix();
+		int found =0;
+		for(int i = 0; i < 9; i++) {
+			if(matrix[i] == null) {
+				continue;
+				
+			}
+			if(compacted) {
+				if(ingredient.hasItemMeta()) {
+					System.out.println("--");
+					System.out.println(i);
+					System.out.println(matrix[i].hasItemMeta());
+					System.out.println(matrix[i].getType().name());
+					System.out.println(matrix[i].getItemMeta().getAsString());
+					System.out.println(ChatColor.stripColor(matrix[i].getItemMeta().getDisplayName()));
+					System.out.println("-->");
+					System.out.println(ChatColor.stripColor(ingredient.getItemMeta().getDisplayName()));
+					System.out.println("--");
+					
+					if(matrix[i].getItemMeta().getDisplayName().equals(ingredient.getItemMeta().getDisplayName()) && matrix[i].getAmount() == 64){
+						System.out.println("yay - found at"+matrix[i].toString()+" :" + matrix[i].toString());
+						found++;
+					}
+				}
+				else {
+					if(matrix[i].getItemMeta().getDisplayName().equals(ingredient.getType().name())
+							&& matrix[i].getAmount() == 64){
+						System.out.println("yay - found at"+matrix[i].toString()+" :" + matrix[i].toString());
+						found++;
+					}
+					
+				}
+			}
+			else {
+				if(matrix[i].equals(ingredient) && matrix[i].getAmount() == ingredient.getAmount()){
+					found++;
+				}
+			}
+		}
+		if(found == 1) {
+			result.setAmount(1);
+			inv.setResult(result);
+		}
 	}
 	
 	public void checkCraft(ItemStack result, CraftingInventory inv, HashMap<Integer,ItemStack> ingredients) {
 		ItemStack[] matrix = inv.getMatrix();
 		for(int i = 0; i < 9; i++) {
-			if(ingredients.containsKey(i)) {
-				if(matrix[i] == null || !matrix[i].equals(ingredients.get(i))){
-					return;
-				}
-				System.out.print("Need: ");
-				System.out.println(matrix[i].getAmount());
-				System.out.print("Have: ");
-				System.out.println(ingredients.get(i).getAmount());
-				if(matrix[i].getAmount() != ingredients.get(i).getAmount()) {
+			if(matrix[i] == null) {
+				if(ingredients.get(i) == null) {
+					continue;
 					
-					return;
 				}
-				
+				else {
+					return;
+					
+				}
 			}
 			else {
-				if(matrix[i] != null) {
+				
+				if(matrix[i].getItemMeta().getDisplayName().equals(ingredients.get(i).getItemMeta().getDisplayName())
+						
+						&& matrix[i].getAmount() == ingredients.get(i).getAmount()) {
+					continue;
+						
+				}
+				else {
 					return;
 				}
 			}
