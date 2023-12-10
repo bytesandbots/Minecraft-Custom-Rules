@@ -563,8 +563,6 @@ public final class Main extends JavaPlugin {
     			
     		}
     		
-    		ItemStack item2 = new CustomItems().DarkBane();
-    		player.getInventory().addItem(item2);
     	
           	return true;
     	}
@@ -747,6 +745,26 @@ public final class Main extends JavaPlugin {
 		    				break;
 		    			case "reaper_bloodeater":
 		    				new CustomZombies().reaperbloodeater(player,player.getLocation());
+		    				break;
+		    			case "adamant":
+		    				ItemStack item2 = new CustomItems().Adamant();
+		    	    		player.getInventory().addItem(item2);
+		    				break;
+		    			case "aetherstone":
+		    				ItemStack item3 = new CustomItems().Aetherstone();
+		    	    		player.getInventory().addItem(item3);
+		    				break;
+		    			case "bloodsteel":
+		    				ItemStack item4 = new CustomItems().Bloodsteel();
+		    	    		player.getInventory().addItem(item4);
+		    				break;
+		    			case "koshil":
+		    				ItemStack item5 = new CustomItems().Koshil();
+		    	    		player.getInventory().addItem(item5);
+		    				break;
+		    			case "titanium":
+		    				ItemStack item6 = new CustomItems().Titanium();
+		    	    		player.getInventory().addItem(item6);
 		    				break;
 		    		}
 	    		}

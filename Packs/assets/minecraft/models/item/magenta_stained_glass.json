@@ -1,17 +1,17 @@
 {
-  "parent": "minecraft:block/white_stained_glass",
+  "parent": "minecraft:block/magenta_stained_glass",
     "overrides": [
       {
         "predicate": {
           "custom_model_data": 1
         },
-        "model": "item/titanium"
+        "model": "item/aetherstone"
       },
 	  {
         "predicate": {
           "custom_model_data": 2
         },
-        "model": "item/compacted_titanium"
+        "model": "item/compacted_aetherstone"
       }
     ]
 }

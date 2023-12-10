@@ -5,6 +5,12 @@
         "predicate": {
           "custom_model_data": 1
         },
+        "model": "item/koshil"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 2
+        },
         "model": "item/compacted_koshil"
       }
     ]

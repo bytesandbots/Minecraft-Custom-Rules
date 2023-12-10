@@ -726,14 +726,20 @@ public final class LoginListener implements Listener {
 	@EventHandler
     public void OnCraft(CraftItemEvent e) {  
 		
-		if(e.getRecipe().getResult().hasItemMeta()) {
-			e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
-			e.getInventory().setMatrix(new ItemStack[]{
-                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
-                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
-                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR)});
+		if(e.getInventory().getResult() != null) {
+
+			if(e.getRecipe().getResult().hasItemMeta()) {
+				e.getWhoClicked().setItemOnCursor(e.getRecipe().getResult());
+				e.getInventory().setMatrix(new ItemStack[]{
+	                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
+	                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR),
+	                    new ItemStack(Material.AIR),new ItemStack(Material.AIR),new ItemStack(Material.AIR)});
+				
+			}
 			
 		}
+
+		
 
 		
 	}
@@ -767,8 +773,7 @@ public final class LoginListener implements Listener {
 				checkShapelessCraft(new CustomItems().compactedIron(),e.getInventory(),new ItemStack(Material.IRON_INGOT),true);
 				checkShapelessCraft(new CustomItems().compactedKoshil(),e.getInventory(),new CustomItems().Koshil(),true);
 				checkShapelessCraft(new CustomItems().compactedTitanium(),e.getInventory(),new CustomItems().Titanium(),true);
-				
-			
+		
 			}
 		}
 		
@@ -785,25 +790,14 @@ public final class LoginListener implements Listener {
 			}
 			if(compacted) {
 				if(ingredient.hasItemMeta()) {
-					System.out.println("--");
-					System.out.println(i);
-					System.out.println(matrix[i].hasItemMeta());
-					System.out.println(matrix[i].getType().name());
-					System.out.println(matrix[i].getItemMeta().getAsString());
-					System.out.println(ChatColor.stripColor(matrix[i].getItemMeta().getDisplayName()));
-					System.out.println("-->");
-					System.out.println(ChatColor.stripColor(ingredient.getItemMeta().getDisplayName()));
-					System.out.println("--");
-					
+			
 					if(matrix[i].getItemMeta().getDisplayName().equals(ingredient.getItemMeta().getDisplayName()) && matrix[i].getAmount() == 64){
-						System.out.println("yay - found at"+matrix[i].toString()+" :" + matrix[i].toString());
 						found++;
 					}
 				}
 				else {
 					if(matrix[i].getItemMeta().getDisplayName().equals(ingredient.getType().name())
 							&& matrix[i].getAmount() == 64){
-						System.out.println("yay - found at"+matrix[i].toString()+" :" + matrix[i].toString());
 						found++;
 					}
 					

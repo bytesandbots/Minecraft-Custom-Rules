@@ -18,6 +18,7 @@ public class CustomItems {
 	ItemStack Koshil() {
 		ItemStack item = new ItemStack(Material.LIME_STAINED_GLASS);
 		ItemMeta meta = item.getItemMeta();
+		meta.setCustomModelData(1);
 		meta.setDisplayName(ChatColor.GREEN + "Koshil");
 		item.setItemMeta(meta);
 		return item;
@@ -25,6 +26,7 @@ public class CustomItems {
 	ItemStack Titanium() {
 		ItemStack item = new ItemStack(Material.WHITE_STAINED_GLASS);
 		ItemMeta meta = item.getItemMeta();
+		meta.setCustomModelData(1);
 		meta.setDisplayName(ChatColor.WHITE + "Titanium");
 		item.setItemMeta(meta);
 		return item;
@@ -32,6 +34,7 @@ public class CustomItems {
 	ItemStack Bloodsteel() {
 		ItemStack item = new ItemStack(Material.RED_STAINED_GLASS);
 		ItemMeta meta = item.getItemMeta();
+		meta.setCustomModelData(1);
 		meta.setDisplayName(ChatColor.RED + "Bloodsteel");
 		item.setItemMeta(meta);
 		return item;
@@ -39,6 +42,7 @@ public class CustomItems {
 	ItemStack Aetherstone() {
 		ItemStack item = new ItemStack(Material.MAGENTA_STAINED_GLASS);
 		ItemMeta meta = item.getItemMeta();
+		meta.setCustomModelData(1);
 		meta.setDisplayName(ChatColor.LIGHT_PURPLE + "Aetherstone");
 		item.setItemMeta(meta);
 		return item;
@@ -47,6 +51,7 @@ public class CustomItems {
 	ItemStack Adamant() {
 		ItemStack item = new ItemStack(Material.ORANGE_STAINED_GLASS);
 		ItemMeta meta = item.getItemMeta();
+		meta.setCustomModelData(1);
 		meta.setDisplayName(ChatColor.YELLOW + "Adamant");
 		item.setItemMeta(meta);
 		return item;
@@ -99,7 +104,7 @@ public class CustomItems {
 	ItemStack compactedKoshil() {
 		ItemStack item = new ItemStack(Material.LIME_STAINED_GLASS);
 		ItemMeta meta = item.getItemMeta();
-		meta.setCustomModelData(1);
+		meta.setCustomModelData(2);
 		meta.setDisplayName(ChatColor.RESET + "Compacted Koshil");
 		item.setItemMeta(meta);
 		return item;
@@ -107,7 +112,7 @@ public class CustomItems {
 	ItemStack compactedTitanium() {
 		ItemStack item = new ItemStack(Material.WHITE_STAINED_GLASS);
 		ItemMeta meta = item.getItemMeta();
-		meta.setCustomModelData(1);
+		meta.setCustomModelData(2);
 		meta.setDisplayName(ChatColor.RESET + "Compacted Titanium");
 		item.setItemMeta(meta);
 		return item;
@@ -115,7 +120,7 @@ public class CustomItems {
 	ItemStack compactedBloodsteel() {
 		ItemStack item = new ItemStack(Material.RED_STAINED_GLASS);
 		ItemMeta meta = item.getItemMeta();
-		meta.setCustomModelData(1);
+		meta.setCustomModelData(2);
 		meta.setDisplayName(ChatColor.RESET + "Compacted Bloodsteel");
 		item.setItemMeta(meta);
 		return item;
@@ -123,7 +128,7 @@ public class CustomItems {
 	ItemStack compactedAetherstone() {
 		ItemStack item = new ItemStack(Material.MAGENTA_STAINED_GLASS);
 		ItemMeta meta = item.getItemMeta();
-		meta.setCustomModelData(1);
+		meta.setCustomModelData(2);
 		meta.setDisplayName(ChatColor.RESET + "Compacted Aetherstone");
 		item.setItemMeta(meta);
 		return item;
@@ -131,7 +136,7 @@ public class CustomItems {
 	ItemStack compactedAdamant() {
 		ItemStack item = new ItemStack(Material.ORANGE_STAINED_GLASS);
 		ItemMeta meta = item.getItemMeta();
-		meta.setCustomModelData(1);
+		meta.setCustomModelData(2);
 		meta.setDisplayName(ChatColor.RESET + "Compacted Adamant");
 		item.setItemMeta(meta);
 		return item;
@@ -245,7 +250,7 @@ public class CustomItems {
 	}
 	
 	ItemStack TitaniumSword() {
-		ItemStack item = new ItemStack(Material.DIAMOND, 1);
+		ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
 		ItemMeta meta= item.getItemMeta();
 		meta.setCustomModelData(4);
 		meta.setDisplayName(ChatColor.BOLD+""+ChatColor.ITALIC+"Titanium Sword");
