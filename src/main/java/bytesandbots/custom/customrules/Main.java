@@ -746,6 +746,12 @@ public final class Main extends JavaPlugin {
 		    			case "reaper_bloodeater":
 		    				new CustomZombies().reaperbloodeater(player,player.getLocation());
 		    				break;
+		    			case "reaper_minion":
+		    				new CustomZombies().reaperMinion(player,player.getLocation());
+		    				break;
+		    			case "reaper_deathreaper":
+		    				new CustomZombies().deathReaper(player,player.getLocation());
+		    				break;
 		    			case "adamant":
 		    				ItemStack item2 = new CustomItems().Adamant();
 		    	    		player.getInventory().addItem(item2);
