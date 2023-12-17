@@ -2,6 +2,8 @@ package bytesandbots.custom.customrules;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -29,9 +31,11 @@ import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Villager.Profession;
+import org.bukkit.entity.Wither;
 import org.bukkit.inventory.ItemStack;
 public final class Main extends JavaPlugin {
 	
@@ -42,6 +46,7 @@ public final class Main extends JavaPlugin {
 	HashMap<String,String> CreativePlayerList = new HashMap<>();
 	
 	LoginListener actions;
+	
 	
 	String punishedPlayerFileName = "plugins/CustomRules/punishedPlayerNames.txt";
 	String mmoPlayerFileName = "plugins/CustomRules/MMOPlayerInventory.txt";
@@ -740,6 +745,10 @@ public final class Main extends JavaPlugin {
     		if(player.isOp()) {
 	    		if (args.length == 1) {
 		    		switch(args[0]) {
+		    			case "grim_reaper":
+		    				final Wither nwither = new CustomZombies().grimReaper(player,player.getLocation());
+		    				witherLogic(nwither);
+	    				break;
 		    			case "reaper_fanatic":
 		    				new CustomZombies().reaperFanatic(player,player.getLocation());
 		    				break;
@@ -918,6 +927,47 @@ public void loadCreativeInventory(Player p) {
     		
     
     	saveMMOPlayers();
+    	
+    }
+    
+	
+	
+	public void witherLogic(final Wither nwither) {
+    	if(!nwither.isDead()) {
+		    	int time = 30; //time given in hours
+		        new BukkitRunnable() {
+		            @Override
+		            public void run() {
+		            	if(nwither.getTarget() == null) {
+		            		return;
+		            		
+		            	}
+		            	if(nwither.getTarget() instanceof Player) {
+		            		
+			            	Player p = (Player) nwither.getTarget();
+			            	
+			            	if(p == null) {
+			            		return;
+			            		
+			            	}
+			            	Location loc = nwither.getEyeLocation();
+			            	Vector direction = nwither.getLocation().getDirection();
+			            	Location fireballLoc = loc.add(direction);
+			            	
+			            	Fireball fireball = p.getWorld().spawn(fireballLoc, Fireball.class);
+			        		//nwither.getTarget()
+			        		
+			        		Vector vector = p.getLocation().add(0, 1, 0).toVector().subtract(nwither.getLocation().toVector().multiply(1.0));
+			        		fireball.setVelocity(vector);
+			        		
+			        		if(nwither.isDead()) {
+			        			this.cancel();
+			        		}
+		            	}
+		            }
+		        }.runTaskTimer(this, time, 0);
+    		
+    	}
     	
     }
 

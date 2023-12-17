@@ -5,11 +5,29 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Wither;
 import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 public class CustomZombies {
+	
+	
+	public Wither grimReaper(Player p, Location loc) {
+		Wither nwither = (Wither) p.getWorld().spawnEntity(loc,EntityType.WITHER);
+		nwither.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(2000F);
+		
+		
+		nwither.setHealth(2000);
+		
+		
+		nwither.setCustomName(ChatColor.DARK_PURPLE+"Grim Reaper");
+		return nwither;
+		
+	}
 	public void reaperMinion(Player p, Location loc) {
 		Zombie reaper = (Zombie) p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
 		
