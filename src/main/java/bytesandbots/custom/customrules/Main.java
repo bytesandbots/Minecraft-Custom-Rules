@@ -740,7 +740,19 @@ public final class Main extends JavaPlugin {
     		return true;
     		
     	}
-    	
+    	else if(cmd.getName().equalsIgnoreCase("group")) {
+    		switch(args[0]) {
+				case "invite":
+					
+					break;
+				case "leave":
+					break;
+				case "view":
+					break;
+				case "kick":
+					
+    		}
+    	}
     	else if(cmd.getName().equalsIgnoreCase("make")) {
     		if(player.isOp()) {
 	    		if (args.length == 1) {
