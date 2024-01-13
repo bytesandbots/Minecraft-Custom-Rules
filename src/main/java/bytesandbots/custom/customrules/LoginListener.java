@@ -37,6 +37,7 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Villager.Profession;
@@ -432,10 +433,15 @@ public final class LoginListener implements Listener {
         
   
     }
-	
-	
 	@EventHandler
-    public void onPlayerDamage(EntityDamageEvent event) {
+	public void onPlayerD(EntityDamageByEntityEvent event) {
+	if (((EntityDamageByEntityEvent) event).getDamager() instanceof LightningStrike) {
+		int finaldamage = (int) ((50)-event.getDamage());
+		event.setDamage(finaldamage);
+	}
+	}
+	@EventHandler
+    public void onPlayerDamage(EntityDamageEvent event) {		
 		//e.getEntity() <-- entity that got hit
 		//e.getDamager() <-- entity that hit the entity
 		

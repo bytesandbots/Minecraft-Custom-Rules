@@ -934,7 +934,7 @@ public void loadCreativeInventory(Player p) {
 	
 	public void witherLogic(final Wither nwither) {
     	if(!nwither.isDead()) {
-		    	int time = 30; //time given in hours
+		    	int time = 8; //time given in hours
 		        new BukkitRunnable() {
 		            @Override
 		            public void run() {
@@ -966,6 +966,29 @@ public void loadCreativeInventory(Player p) {
 		            	}
 		            }
 		        }.runTaskTimer(this, time, 0);
+		        int Ltime = 60; //time given in hours
+		        new BukkitRunnable() {
+		            @Override
+		            public void run() {
+		            	if(nwither.getTarget() == null) {
+		            		return;
+		            		
+		            	}
+		            	if(nwither.getTarget() instanceof Player) {
+		            		
+			            	Player p = (Player) nwither.getTarget();
+			            	
+			            	if(p == null) {
+			            		return;
+			            		
+			            	}
+			                p.getWorld().strikeLightning(p.getLocation());
+			        		if(nwither.isDead()) {
+			        			this.cancel();
+			        		}
+		            	}
+		            }
+		        }.runTaskTimer(this, Ltime, 0);
     		
     	}
     	
