@@ -965,7 +965,7 @@ public void loadCreativeInventory(Player p) {
 			        		}
 		            	}
 		            }
-		        }.runTaskTimer(this, time, 0);
+		        }.runTaskTimer(this, time, time);
 		        int Ltime = 60; //time given in hours
 		        new BukkitRunnable() {
 		            @Override
@@ -988,7 +988,7 @@ public void loadCreativeInventory(Player p) {
 			        		}
 		            	}
 		            }
-		        }.runTaskTimer(this, Ltime, 0);
+		        }.runTaskTimer(this, Ltime, Ltime);
     		
     	}
     	
