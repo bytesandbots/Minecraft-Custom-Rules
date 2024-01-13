@@ -8,6 +8,7 @@ import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
@@ -431,6 +432,14 @@ public final class LoginListener implements Listener {
         
   
     }
+	
+	
+	@EventHandler
+    public void onPlayerDamage(EntityDamageEvent event) {
+		//e.getEntity() <-- entity that got hit
+		//e.getDamager() <-- entity that hit the entity
+		
+	}
 	
 	@EventHandler
 	public void onMove(PlayerMoveEvent event) {
