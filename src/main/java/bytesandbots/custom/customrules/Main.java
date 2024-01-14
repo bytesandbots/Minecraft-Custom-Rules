@@ -55,6 +55,8 @@ public final class Main extends JavaPlugin {
 	
 	HashMap<String, HashMap<String, Location>> homes = new HashMap<>();
 	HashMap<Integer,Map<String,Integer>> pestQuests = new HashMap<Integer,Map<String,Integer>>();
+	HashMap<String,List<String>>invite = new HashMap<>();
+	HashMap<String,List<String>>Groups = new HashMap<>();
 	@Override
     public void onEnable() {
         // TODO Insert logic to be performed when the plugin is enabled
@@ -743,13 +745,34 @@ public final class Main extends JavaPlugin {
     	else if(cmd.getName().equalsIgnoreCase("group")) {
     		switch(args[0]) {
 				case "invite":
-					
+					String Playerinvite = args[1];
+					String UUID = Bukkit.getPlayer(Playerinvite).getUniqueId().toString();
+					String Leader = player.getUniqueId().toString();
+					List<String>NewGroup= new ArrayList<String>();
+					NewGroup.add(UUID);
+					invite.put(Leader,NewGroup);
 					break;
 				case "leave":
 					break;
 				case "view":
+					String LeaderName = args[1];
+					String LeaderID = Bukkit.getPlayer(LeaderName).getUniqueId().toString();
+					List<String>Members = Groups.get(LeaderID);
+					for (int i = 0;i<Members.size();i++) {
+						player.sendMessage(Members.get(i));
+					}
 					break;
 				case "kick":
+					break;
+				case "accept":
+					String PlayerAccept = args[1];
+					List<String>Group= new ArrayList<String>();
+					String PlayerID = Bukkit.getPlayer(PlayerAccept).getUniqueId().toString();
+					Group.add(PlayerID);
+					Groups.put(PlayerID, Group);
+					
+					
+					break;
 					
     		}
     	}
