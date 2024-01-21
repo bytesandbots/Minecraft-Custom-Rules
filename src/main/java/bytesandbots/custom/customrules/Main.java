@@ -771,8 +771,13 @@ public final class Main extends JavaPlugin {
 					String LeaderName = args[1];
 					String LeaderID = Bukkit.getPlayer(LeaderName).getUniqueId().toString();
 					List<String>Members = Groups.get(LeaderID);
+					int groupSize = Members.size() + 1;
+					player.sendMessage("Group size: "+ String.valueOf(groupSize));
+					player.sendMessage("Leader: " + LeaderName);
+					
 					for (int i = 0;i<Members.size();i++) {
-						player.sendMessage(Members.get(i));
+						player.sendMessage(Bukkit.getPlayer(Members.get(i)).getDisplayName());
+						
 					}
 					break;
 				case "kick":
