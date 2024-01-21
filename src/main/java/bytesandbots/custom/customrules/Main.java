@@ -801,7 +801,8 @@ public final class Main extends JavaPlugin {
 					
 					Groups.put(LeaderIDn, Group);
 					
-					
+					player.sendMessage("You have joined the team, good luck!");
+					 Bukkit.getPlayer(LeaderNamen).sendMessage(player.getName()+" just joined your party");
 					break;
 					
     		}
