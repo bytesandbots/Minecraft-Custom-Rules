@@ -748,7 +748,16 @@ public final class Main extends JavaPlugin {
 					String Playerinvite = args[1];
 					String UUID = Bukkit.getPlayer(Playerinvite).getUniqueId().toString();
 					String Leader = player.getUniqueId().toString();
-					List<String>NewGroup= new ArrayList<String>();
+					List<String>NewGroup;
+					
+					if(invite.containsKey(Leader)) {
+						NewGroup = invite.get(Leader);
+						
+					}
+					else {
+						NewGroup = new ArrayList<String>();
+						
+					}
 					NewGroup.add(UUID);
 					invite.put(Leader,NewGroup);
 					break;
@@ -766,9 +775,25 @@ public final class Main extends JavaPlugin {
 					break;
 				case "accept":
 					String PlayerAccept = args[1];
-					List<String>Group= new ArrayList<String>();
+					
 					String PlayerID = Bukkit.getPlayer(PlayerAccept).getUniqueId().toString();
+					List<String>Group;
+					if(Groups.containsKey(PlayerID)) {
+						Group = invite.get(PlayerID);
+						
+					}
+					else {
+						Group = new ArrayList<String>();
+						
+					}
 					Group.add(PlayerID);
+					
+					String myUname = player.getUniqueId().toString();
+					String myID = Bukkit.getPlayer(myUname).getUniqueId().toString();
+					
+					invite.get(PlayerID).remove(myID);
+					
+					
 					Groups.put(PlayerID, Group);
 					
 					
