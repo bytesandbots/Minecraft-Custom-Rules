@@ -40,5 +40,8 @@ commands:
     description: Go to Home, must be OP
   gommo:
     description: Go To MMO, must be OP
+  group:
+    description: Create a party
   test:
     description: Testing Script
+  

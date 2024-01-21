@@ -760,6 +760,10 @@ public final class Main extends JavaPlugin {
 					}
 					NewGroup.add(UUID);
 					invite.put(Leader,NewGroup);
+					
+					player.sendMessage("Invitation Sent!");
+					Bukkit.getPlayer(Playerinvite).sendMessage("You have been invited to join by "+player.getName());
+					Bukkit.getPlayer(Playerinvite).sendMessage("Accept by typing in /group accept "+player.getName());
 					break;
 				case "leave":
 					break;
@@ -774,27 +778,28 @@ public final class Main extends JavaPlugin {
 				case "kick":
 					break;
 				case "accept":
-					String PlayerAccept = args[1];
+					String LeaderNamen = args[1];
 					
-					String PlayerID = Bukkit.getPlayer(PlayerAccept).getUniqueId().toString();
+					String LeaderIDn = Bukkit.getPlayer(LeaderNamen).getUniqueId().toString();
 					List<String>Group;
-					if(Groups.containsKey(PlayerID)) {
-						Group = invite.get(PlayerID);
+					if(Groups.containsKey(LeaderIDn)) {
+						Group = invite.get(LeaderIDn);
 						
 					}
 					else {
 						Group = new ArrayList<String>();
 						
 					}
-					Group.add(PlayerID);
-					
 					String myUname = player.getUniqueId().toString();
-					String myID = Bukkit.getPlayer(myUname).getUniqueId().toString();
 					
-					invite.get(PlayerID).remove(myID);
+					Group.add(myUname);
 					
 					
-					Groups.put(PlayerID, Group);
+					
+					invite.get(LeaderIDn).remove(myUname);
+					
+					
+					Groups.put(LeaderIDn, Group);
 					
 					
 					break;
