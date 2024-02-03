@@ -83,7 +83,14 @@ public class CustomItems {
 		item.setItemMeta(meta);
 		return item;
 	}
-	
+	ItemStack HellCatalyst() {
+		ItemStack item = new ItemStack(Material.NETHER_STAR);
+		ItemMeta meta = item.getItemMeta();
+		meta.setCustomModelData(1);
+		meta.setDisplayName(ChatColor.DARK_RED + "Hell Catalyst");
+		item.setItemMeta(meta);
+		return item;
+	}
 	
 	ItemStack compactedDiamond() {
 		ItemStack item = new ItemStack(Material.DIAMOND);

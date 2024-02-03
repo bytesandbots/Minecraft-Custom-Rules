@@ -1,0 +1,26 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "minecraft:item/amethyst_shard"
+  },
+    "overrides": [
+      {
+        "predicate": {
+          "custom_model_data": 1
+        },
+        "model": "item/scythe_handle"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 2
+        },
+        "model": "item/scythe_blade_fragment"
+      },
+	  {
+        "predicate": {
+          "custom_model_data": 3
+        },
+        "model": "item/death_fragment"
+      }
+    ]
+}

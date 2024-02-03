@@ -852,6 +852,22 @@ public final class Main extends JavaPlugin {
 		    				ItemStack item6 = new CustomItems().Titanium();
 		    	    		player.getInventory().addItem(item6);
 		    				break;
+		    			case "scythe_blade_fragment":
+		    				ItemStack item7 = new CustomItems().ScytheBladeFragment();
+		    	    		player.getInventory().addItem(item7);
+		    				break;
+		    			case "scythe_handle":
+		    				ItemStack item8 = new CustomItems().ScytheHandle();
+		    	    		player.getInventory().addItem(item8);
+		    				break;
+		    			case "hell_catalyst":
+		    				ItemStack item9 = new CustomItems().HellCatalyst();
+		    	    		player.getInventory().addItem(item9);
+		    				break;
+		    			case "death_fragment":
+		    				ItemStack item10 = new CustomItems().DeathFragment();
+		    	    		player.getInventory().addItem(item10);
+		    				break;
 		    		}
 	    		}
 	    		else {
