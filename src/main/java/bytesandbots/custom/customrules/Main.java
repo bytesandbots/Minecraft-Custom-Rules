@@ -872,6 +872,15 @@ public final class Main extends JavaPlugin {
 		    				ItemStack item11 = new CustomItems().BloodSteel_Sword();
 		    				player.getInventory().addItem(item11);
 		    				break;
+		    			case "aetherstone_sword":
+		    				ItemStack item12 = new CustomItems().AetherStone_Sword();
+		    				player.getInventory().addItem(item12);
+		    			case "darkbane":
+		    				ItemStack item13 = new CustomItems().DarkBane();
+		    				player.getInventory().addItem(item13);
+		    			case "koshil_sword":
+		    				ItemStack item14 = new CustomItems().KoshilSword();
+		    				player.getInventory().addItem(item14);
 		    		}
 	    		}
 	    		else {
