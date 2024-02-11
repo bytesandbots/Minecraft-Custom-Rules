@@ -868,6 +868,10 @@ public final class Main extends JavaPlugin {
 		    				ItemStack item10 = new CustomItems().DeathFragment();
 		    	    		player.getInventory().addItem(item10);
 		    				break;
+		    			case "bloodsteel_sword":
+		    				ItemStack item11 = new CustomItems().BloodSteel_Sword();
+		    				player.getInventory().addItem(item11);
+		    				break;
 		    		}
 	    		}
 	    		else {
