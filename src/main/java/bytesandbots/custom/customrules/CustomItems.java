@@ -328,7 +328,7 @@ public class CustomItems {
 		meta.setDisplayName(ChatColor.DARK_RED +"K" +ChatColor.RED+"oshil "+ChatColor.DARK_RED +"S"+ChatColor.RED+"word");
 
 		
-		AttributeModifier damage = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",7,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
+		AttributeModifier damage = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",9,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
 		meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage);
 		meta.setUnbreakable(true);
 		
