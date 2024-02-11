@@ -843,17 +843,42 @@ public final class LoginListener implements Listener {
 					
 				}
 			}
-			else {
+			else if(ingredients.get(i) == null) {
 				
-				if(matrix[i].getItemMeta().getDisplayName().equals(ingredients.get(i).getItemMeta().getDisplayName())
+				return;
+			}
+			else {
+				if(ingredients.get(i).hasItemMeta()) {
+					if(matrix[i].hasItemMeta()) {
+						if(matrix[i].getItemMeta().getDisplayName().equals(ingredients.get(i).getItemMeta().getDisplayName())
+								
+								&& matrix[i].getAmount() == ingredients.get(i).getAmount()) {
+							continue;
+								
+						}
+						else {
+							return;
+						}
 						
-						&& matrix[i].getAmount() == ingredients.get(i).getAmount()) {
-					continue;
+					}
+					else {
 						
+						return;
+					}
 				}
 				else {
-					return;
+					if(matrix[i].getType().name().equals(ingredients.get(i).getType().name())
+							
+							&& matrix[i].getAmount() == ingredients.get(i).getAmount()) {
+						continue;
+							
+					}
+					else {
+						return;
+					}
+					
 				}
+				
 			}
 			
 		}
