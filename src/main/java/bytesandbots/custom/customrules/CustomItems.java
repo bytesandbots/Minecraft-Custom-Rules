@@ -478,6 +478,56 @@ public class CustomItems {
 		return item;
 		
 	}
+	ItemStack TitaniumChestplate() {
+		ItemStack item = new ItemStack(Material.IRON_CHESTPLATE);
+		ArmorMeta meta = (ArmorMeta)item.getItemMeta();
+		meta.setDisplayName(ChatColor.GREEN +"Titanium Chestplate");
+		meta.setUnbreakable(true);
+		
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, false);
+		
+		ArmorTrim pt = new ArmorTrim(TrimMaterial.QUARTZ,TrimPattern.SILENCE);
+		meta.setTrim(pt);
+		
+		item.setItemMeta(meta);
+		
+		return item;
+		
+	}
+	ItemStack TitaniumLeggings() {
+		ItemStack item = new ItemStack(Material.IRON_LEGGINGS);
+		ArmorMeta meta = (ArmorMeta)item.getItemMeta();
+		meta.setDisplayName(ChatColor.GREEN +"Titanium Leggings");
+		meta.setUnbreakable(true);
+		
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, false);
+		
+		ArmorTrim pt = new ArmorTrim(TrimMaterial.QUARTZ,TrimPattern.SILENCE);
+		meta.setTrim(pt);
+		
+		item.setItemMeta(meta);
+		
+		return item;
+		
+	}
+	ItemStack TitaniumBoots() {
+		ItemStack item = new ItemStack(Material.IRON_BOOTS);
+		ArmorMeta meta = (ArmorMeta)item.getItemMeta();
+		meta.setDisplayName(ChatColor.GREEN +"Titanium Boots");
+		meta.setUnbreakable(true);
+		
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, false);
+		
+		ArmorTrim pt = new ArmorTrim(TrimMaterial.QUARTZ,TrimPattern.SILENCE);
+		meta.setTrim(pt);
+		
+		item.setItemMeta(meta);
+		
+		return item;
+		
+	}
+	
+	
 	
 	
 }
