@@ -468,8 +468,8 @@ public class CustomItems {
 		meta.setDisplayName(ChatColor.GREEN +"Titanium Helmet");
 		meta.setUnbreakable(true);
 		
-		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, false);
-		
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, true);
+
 		ArmorTrim pt = new ArmorTrim(TrimMaterial.QUARTZ,TrimPattern.SILENCE);
 		meta.setTrim(pt);
 		
@@ -484,7 +484,7 @@ public class CustomItems {
 		meta.setDisplayName(ChatColor.GREEN +"Titanium Chestplate");
 		meta.setUnbreakable(true);
 		
-		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, false);
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, true);
 		
 		ArmorTrim pt = new ArmorTrim(TrimMaterial.QUARTZ,TrimPattern.SILENCE);
 		meta.setTrim(pt);
@@ -500,7 +500,7 @@ public class CustomItems {
 		meta.setDisplayName(ChatColor.GREEN +"Titanium Leggings");
 		meta.setUnbreakable(true);
 		
-		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, false);
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, true);
 		
 		ArmorTrim pt = new ArmorTrim(TrimMaterial.QUARTZ,TrimPattern.SILENCE);
 		meta.setTrim(pt);
@@ -516,8 +516,7 @@ public class CustomItems {
 		meta.setDisplayName(ChatColor.GREEN +"Titanium Boots");
 		meta.setUnbreakable(true);
 		
-		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, false);
-		
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, true);
 		ArmorTrim pt = new ArmorTrim(TrimMaterial.QUARTZ,TrimPattern.SILENCE);
 		meta.setTrim(pt);
 		

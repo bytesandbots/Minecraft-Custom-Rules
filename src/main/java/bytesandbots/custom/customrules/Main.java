@@ -885,7 +885,7 @@ public final class Main extends JavaPlugin {
 		    				player.getInventory().addItem(item14);
 		    			
 		    				break;
-		    			case "titanium armor":
+		    			case "titanium_armor":
 		    				ItemStack item15 = new CustomItems().TitaniumHelmet();
 		    				player.getInventory().addItem(item15);
 		    				ItemStack item16 = new CustomItems().TitaniumChestplate();
