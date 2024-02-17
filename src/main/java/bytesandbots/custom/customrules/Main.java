@@ -883,6 +883,7 @@ public final class Main extends JavaPlugin {
 		    			case "koshil_sword":
 		    				ItemStack item14 = new CustomItems().KoshilSword();
 		    				player.getInventory().addItem(item14);
+		    			
 		    				break;
 		    		}
 	    		}

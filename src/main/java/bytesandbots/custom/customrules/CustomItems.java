@@ -11,7 +11,11 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ArmorMeta;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.trim.ArmorTrim;
+import org.bukkit.inventory.meta.trim.TrimMaterial;
+import org.bukkit.inventory.meta.trim.TrimPattern;
 
 public class CustomItems {
 
@@ -458,6 +462,22 @@ public class CustomItems {
 		
 	}
 	
+	ItemStack TitaniumHelmet() {
+		ItemStack item = new ItemStack(Material.IRON_HELMET);
+		ArmorMeta meta = (ArmorMeta)item.getItemMeta();
+		meta.setDisplayName(ChatColor.GREEN +"Titanium Helmet");
+		meta.setUnbreakable(true);
+		
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 12, false);
+		
+		ArmorTrim pt = new ArmorTrim(TrimMaterial.QUARTZ,TrimPattern.SILENCE);
+		meta.setTrim(pt);
+		
+		item.setItemMeta(meta);
+		
+		return item;
+		
+	}
 	
 	
 }
