@@ -905,6 +905,13 @@ public final class Main extends JavaPlugin {
 		    				player.getInventory().addItem(item21);
 		    				ItemStack item22 = new CustomItems().Koshil_Boots();
 		    				player.getInventory().addItem(item22);
+		    				break;
+		    			
+		    			case "reaper_scythe":
+		    				ItemStack item23 = new CustomItems().ReaperScythe();
+		    				player.getInventory().addItem(item23);
+		    				
+		    				break;
 		    			
 		    		}
 	    		}
