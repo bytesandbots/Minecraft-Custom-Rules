@@ -290,7 +290,7 @@ public class CustomItems {
 		ItemStack item = new ItemStack(Material.DIAMOND_SWORD, 1);
 		ItemMeta meta= item.getItemMeta();
 		meta.setCustomModelData(5);
-		meta.setDisplayName(ChatColor.AQUA +"T" +ChatColor.BLUE+"itanium Sword");
+		meta.setDisplayName(ChatColor.AQUA +"R" +ChatColor.BLUE+"efined Diamond Sword");
 
 		
 		List<String> lore = new ArrayList<>();
