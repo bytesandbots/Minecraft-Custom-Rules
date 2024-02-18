@@ -367,7 +367,7 @@ public class CustomItems {
 		meta.setCustomModelData(9);
 		meta.setDisplayName(ChatColor.WHITE+"S"+
 							ChatColor.LIGHT_PURPLE+"O"+
-							ChatColor.DARK_AQUA+"OULFU"+
+							ChatColor.DARK_AQUA+"ULFU"+
 							ChatColor.LIGHT_PURPLE+"R"+
 							ChatColor.WHITE+"Y");
 		
