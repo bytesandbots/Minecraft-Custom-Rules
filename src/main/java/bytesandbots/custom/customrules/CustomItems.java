@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeModifier;
@@ -12,6 +13,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ArmorMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.ArmorTrim;
 import org.bukkit.inventory.meta.trim.TrimMaterial;
@@ -524,6 +526,82 @@ public class CustomItems {
 		
 		return item;
 		
+	}
+	ItemStack Koshil_Helmet() {
+		ItemStack item = new ItemStack(Material.LEATHER_HELMET);
+		LeatherArmorMeta meta = (LeatherArmorMeta)item.getItemMeta();
+		meta.setDisplayName(ChatColor.GREEN +"Koshil Helmet");
+		meta.setUnbreakable(true);
+		meta.setColor(Color.LIME);
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 20, true);
+		
+		item.setItemMeta(meta);
+		ArmorMeta meta2 = (ArmorMeta)item.getItemMeta();
+		ArmorTrim pt = new ArmorTrim(TrimMaterial.EMERALD,TrimPattern.COAST);
+		meta2.setTrim(pt);
+		item.setItemMeta(meta2);
+		return item;
+		
+	
+	}
+	ItemStack Koshil_Chestplate() {
+		ItemStack item = new ItemStack(Material.LEATHER_CHESTPLATE);
+		LeatherArmorMeta meta = (LeatherArmorMeta)item.getItemMeta();
+		meta.setDisplayName(ChatColor.GREEN +"Koshil Chestplate");
+		meta.setUnbreakable(true);
+		meta.setColor(Color.LIME);
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 20, true);
+		
+		item.setItemMeta(meta);
+		ArmorMeta meta2 = (ArmorMeta)item.getItemMeta();
+		ArmorTrim pt = new ArmorTrim(TrimMaterial.EMERALD,TrimPattern.COAST);
+		meta2.setTrim(pt);
+		item.setItemMeta (meta2);
+		
+		
+		return item;
+		
+	
+		
+	
+	}
+	ItemStack Koshil_Leggings() {
+		ItemStack item = new ItemStack(Material.LEATHER_LEGGINGS);
+		LeatherArmorMeta meta = (LeatherArmorMeta)item.getItemMeta();
+		meta.setDisplayName(ChatColor.GREEN +"Koshil Leggings");
+		meta.setUnbreakable(true);
+		meta.setColor(Color.LIME);
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 20, true);
+		
+		item.setItemMeta(meta);
+		ArmorMeta meta2 = (ArmorMeta) item.getItemMeta();
+		ArmorTrim pt = new ArmorTrim(TrimMaterial.EMERALD,TrimPattern.COAST);
+		meta2.setTrim(pt);
+		item.setItemMeta(meta2);
+		
+		
+		return item;
+		
+	
+	}
+	ItemStack Koshil_Boots() {
+		ItemStack item = new ItemStack(Material.LEATHER_BOOTS);
+		LeatherArmorMeta meta = (LeatherArmorMeta)item.getItemMeta();
+		meta.setDisplayName(ChatColor.GREEN +"Koshil Boots");
+		meta.setUnbreakable(true);
+		meta.setColor(Color.LIME);
+		meta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 20, true);
+		
+		item.setItemMeta(meta);
+		ArmorMeta meta2 = (ArmorMeta) item.getItemMeta();
+		ArmorTrim pt = new ArmorTrim(TrimMaterial.EMERALD,TrimPattern.COAST);
+		meta2.setTrim(pt);
+		item.setItemMeta(meta2);
+		
+		
+		return item;
+		
+	
 	}
 	
 	
