@@ -896,6 +896,16 @@ public final class Main extends JavaPlugin {
 		    				player.getInventory().addItem(item18);
 		    			
 		    				break;
+		    			case "koshil_armor":
+		    				ItemStack item19 = new CustomItems().Koshil_Helmet();
+		    				player.getInventory().addItem(item19);
+		    				ItemStack item20 = new CustomItems().Koshil_Chestplate();
+		    				player.getInventory().addItem(item20);
+		    				ItemStack item21 = new CustomItems().Koshil_Leggings();
+		    				player.getInventory().addItem(item21);
+		    				ItemStack item22 = new CustomItems().Koshil_Boots();
+		    				player.getInventory().addItem(item22);
+		    			
 		    		}
 	    		}
 	    		else {
