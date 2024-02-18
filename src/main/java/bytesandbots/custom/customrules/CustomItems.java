@@ -439,6 +439,7 @@ public class CustomItems {
 		lore.add(ChatColor.RED+"Swing your scythe around");
 		lore.add(ChatColor.RED+"dealing massive damage around you!");
 		lore.add(ChatColor.RED+"Cooldown: 3 seconds");
+		meta.setLore(lore);
 		
 		AttributeModifier attackSpeed = new AttributeModifier(UUID.randomUUID(),"generic.attack_speed",10,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
 		meta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED,attackSpeed);
