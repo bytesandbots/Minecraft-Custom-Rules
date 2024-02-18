@@ -912,6 +912,11 @@ public final class Main extends JavaPlugin {
 		    				player.getInventory().addItem(item23);
 		    				
 		    				break;
+		    			case "refined_diamond_sword":
+		    				ItemStack item24 = new CustomItems().RefinedDiamondSword();
+		    				player.getInventory().addItem(item24);
+		    				
+		    				break;
 		    			
 		    		}
 	    		}

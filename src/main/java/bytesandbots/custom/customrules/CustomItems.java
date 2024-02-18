@@ -351,7 +351,7 @@ public class CustomItems {
 		meta.setDisplayName(ChatColor.RED +"A" +ChatColor.AQUA+"damant "+ChatColor.GREEN +"S"+ChatColor.AQUA+"word");
 
 		
-		AttributeModifier damage = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",7,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
+		AttributeModifier damage = new AttributeModifier(UUID.randomUUID(),"generic.attackDamage",45,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
 		meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,damage);
 		meta.setUnbreakable(true);
 		
@@ -440,10 +440,10 @@ public class CustomItems {
 		lore.add(ChatColor.RED+"dealing massive damage around you!");
 		lore.add(ChatColor.RED+"Cooldown: 3 seconds");
 		
-		AttributeModifier attackSpeed = new AttributeModifier(UUID.randomUUID(),"generic.attack_speed",4,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
+		AttributeModifier attackSpeed = new AttributeModifier(UUID.randomUUID(),"generic.attack_speed",10,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
 		meta.addAttributeModifier(Attribute.GENERIC_ATTACK_SPEED,attackSpeed);
 		
-
+	
 		AttributeModifier attackDamage = new AttributeModifier(UUID.randomUUID(),"generic.attack_damage",45,AttributeModifier.Operation.ADD_NUMBER,EquipmentSlot.HAND);
 		meta.addAttributeModifier(Attribute.GENERIC_ATTACK_DAMAGE,attackDamage);
 		
@@ -462,6 +462,7 @@ public class CustomItems {
 		
 		return item;
 		
+
 	}
 	
 	ItemStack TitaniumHelmet() {
