@@ -917,6 +917,10 @@ public final class Main extends JavaPlugin {
 		    				player.getInventory().addItem(item24);
 		    				
 		    				break;
+		    			case "soulfury":
+		    				ItemStack item25 = new CustomItems().Soulfury();
+		    				player.getInventory().addItem(item25);
+		    				break;
 		    			
 		    		}
 	    		}
