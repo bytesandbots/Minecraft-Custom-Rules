@@ -46,6 +46,7 @@ public final class Main extends JavaPlugin {
 	HashMap<String,String> CreativePlayerList = new HashMap<>();
 	
 	LoginListener actions;
+	LeifsArena arenamode;
 	
 	
 	String punishedPlayerFileName = "plugins/CustomRules/punishedPlayerNames.txt";
@@ -176,7 +177,7 @@ public final class Main extends JavaPlugin {
 		      e.printStackTrace();
 		}
 		actions = new LoginListener(PunishedPlayers,this);
-		
+		arenamode = new LeifsArena(this);
 	      
 	    getServer().getPluginManager().registerEvents(actions , this);
 	    NamespacedKey nn = new NamespacedKey(this, "rum");
@@ -404,7 +405,6 @@ public final class Main extends JavaPlugin {
     			}
     			else if(args.length < 1) {
     				
-    				//player.sendMessage("Need a name. ex. /punish <playername>");
     				String playerName = player.getName();
 	    			String response =  AddPlayertoPunishList(playerName);
 	    			player.sendMessage(response);
@@ -431,7 +431,6 @@ public final class Main extends JavaPlugin {
     			}
     			else if(args.length < 1) {
     				
-    				//player.sendMessage("Need a name. ex. /unpunish <playername>");
     				String playerName = player.getName();
 	    			String response =  RemovePlayertoPunishList(playerName);
 	    			player.sendMessage(response);
@@ -509,6 +508,31 @@ public final class Main extends JavaPlugin {
     				player.sendMessage(ChatColor.GOLD  + "Sorry, you have no homes!");
     			}
     		}
+    	}
+    	else if(cmd.getName().equalsIgnoreCase("fight")) {
+    		if(args.length == 1) {
+    			World curWorld = player.getLocation().getWorld();
+    			Location arena = new Location(curWorld, 90, 65, -233);
+    			player.teleport(arena);
+    			player.setGameMode(GameMode.SURVIVAL);
+    			
+    			String Playerinvite = args[0];
+    			Player other = Bukkit.getPlayer(Playerinvite);
+    			other.teleport(arena);
+    			other.setGameMode(GameMode.SURVIVAL);
+    			return true;
+    		}
+    		return false;
+					
+    	}
+    	//10, 65, -305: Coordinates of new arena
+    	else if(cmd.getName().equalsIgnoreCase("arenamode")) {
+    		World curWorld = player.getLocation().getWorld();
+			Location arena = new Location(curWorld, 10, 65, -305);
+			player.teleport(arena);
+			player.setGameMode(GameMode.SURVIVAL);
+			player.sendTitle("Welcome to the arena!", "(The new one.)", 10, 70, 20);
+			arenamode.startGame(player);
     	}
     	else if (cmd.getName().equalsIgnoreCase("survival")) {
     		player.setGameMode(GameMode.SURVIVAL);

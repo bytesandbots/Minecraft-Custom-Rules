@@ -44,4 +44,7 @@ commands:
     description: Create a party
   test:
     description: Testing Script
-  
+  fight:
+    description: /pvp command but better
+  arenamode:
+    description: An arena with waves
