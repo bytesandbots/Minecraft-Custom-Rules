@@ -13,6 +13,8 @@ public class LeifsArena implements Listener {
 	public Plugin plugin;
 	public int spawned;
 	
+	Player player;
+	
 	public LeifsArena(Plugin P) {
 		plugin = P;
 		
@@ -34,22 +36,32 @@ public class LeifsArena implements Listener {
 	}
 	
 	public void startGame(Player p) {
+		player = p;
 		p.sendMessage("Prepare for " + ChatColor.YELLOW + "" + ChatColor.BOLD + "BATTLE!");
-		spawnWave(p);
+		spawnWave(player);
 	}
 	public void spawnWave(Player p) {
 		switch(wave) {
 			case 1:
+				p.sendMessage("Wave 1");
 				new LeifsCustomMobs().robotZombie(p, p.getLocation());
 				new LeifsCustomMobs().robotZombie(p, p.getLocation());
 				new LeifsCustomMobs().robotZombie(p, p.getLocation());
 				new LeifsCustomMobs().robotZombie(p, p.getLocation());
 				break;
 			case 2:
-				
+				p.sendMessage("Wave 2");
+				new LeifsCustomMobs().robotZombie(p, p.getLocation());
+				new LeifsCustomMobs().robotZombie(p, p.getLocation());
+				new LeifsCustomMobs().robotZombie(p, p.getLocation());
+				new LeifsCustomMobs().robotZombie(p, p.getLocation());
 				break;
 			case 3:
-				
+				p.sendMessage("Wave 3");
+				new LeifsCustomMobs().robotZombie(p, p.getLocation());
+				new LeifsCustomMobs().robotZombie(p, p.getLocation());
+				new LeifsCustomMobs().robotZombie(p, p.getLocation());
+				new LeifsCustomMobs().robotZombie(p, p.getLocation());
 				break;
 				
 			default:
