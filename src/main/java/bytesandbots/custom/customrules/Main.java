@@ -30,12 +30,17 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Villager.Profession;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.entity.Wither;
+import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 public final class Main extends JavaPlugin {
 	
@@ -47,7 +52,7 @@ public final class Main extends JavaPlugin {
 	
 	LoginListener actions;
 	LeifsArena arenamode;
-	
+
 	
 	String punishedPlayerFileName = "plugins/CustomRules/punishedPlayerNames.txt";
 	String mmoPlayerFileName = "plugins/CustomRules/MMOPlayerInventory.txt";
