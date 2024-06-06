@@ -29,7 +29,7 @@ public class LeifsArena implements Listener {
 	    	
 	    	if(spawned <= 0) {
 	    		wave ++;
-	    		spawnWave((Player)killer);
+	    		spawnWave(player);
 	    	}
 	    }
 	    
