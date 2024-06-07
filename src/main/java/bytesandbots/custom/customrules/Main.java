@@ -30,17 +30,12 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.entity.Villager.Profession;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.entity.Wither;
-import org.bukkit.entity.Zombie;
 import org.bukkit.inventory.ItemStack;
 public final class Main extends JavaPlugin {
 	
@@ -560,8 +555,8 @@ public final class Main extends JavaPlugin {
     	}
     	else if (cmd.getName().equalsIgnoreCase("hummus")){
     		player.sendMessage("CARROTS AND HUMMUS MUAHAHAHAHAHAHAHAHA");
-    		player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,Integer.MAX_VALUE,50));
-    		player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,Integer.MAX_VALUE,255));
+    		//player.addPotionEffect(new PotionEffect(PotionEffectType.DAMAGE_RESISTANCE,Integer.MAX_VALUE,50));
+    		//player.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE,Integer.MAX_VALUE,255));
     		player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION,Integer.MAX_VALUE,255));
     		player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED,500,255));
     		

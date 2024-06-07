@@ -22,7 +22,6 @@ public class LeifsArena implements Listener {
 	@EventHandler
 	  public void onDeath(EntityDeathEvent e){
 	    Entity entity = e.getEntity();
-	    Entity killer = e.getEntity().getKiller();
 	    
 	    if(entity.getCustomName() != null) {
 	    	spawned --;
