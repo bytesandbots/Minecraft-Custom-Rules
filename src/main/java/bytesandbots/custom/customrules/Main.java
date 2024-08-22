@@ -528,7 +528,7 @@ public final class Main extends JavaPlugin {
     	//10, 65, -305: Coordinates of new arena
     	else if(cmd.getName().equalsIgnoreCase("arenamode")) {
     		World curWorld = player.getLocation().getWorld();
-			Location arena = new Location(curWorld, 10, 65, -305);
+			Location arena = new Location(curWorld, 11, 60, -305);
 			player.teleport(arena);
 			player.setGameMode(GameMode.SURVIVAL);
 			player.sendTitle("Welcome to the arena!", "(The new one.)", 10, 70, 20);
