@@ -45,6 +45,6 @@ commands:
   test:
     description: Testing Script
   fight:
-    description: /pvp command but better
+    description: pvp command but better
   arenamode:
     description: An arena with waves
