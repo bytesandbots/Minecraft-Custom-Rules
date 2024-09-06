@@ -27,6 +27,7 @@ public class LeifsArena implements Listener {
 	    	spawned --;
 	    	
 	    	if(spawned <= 0) {
+	    		player.sendMessage("Next Wave");
 	    		wave ++;
 	    		spawnWave(player);
 	    	}
