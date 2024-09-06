@@ -22,7 +22,7 @@ public class LeifsArena implements Listener {
 	@EventHandler
 	  public void onDeath(EntityDeathEvent e){
 	    Entity entity = e.getEntity();
-	    
+	    player.sendMessage("OOF: Something died.");
 	    if(entity.getCustomName() != null) {
 	    	spawned --;
 	    	
