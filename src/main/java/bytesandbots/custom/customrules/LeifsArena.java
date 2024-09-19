@@ -1,14 +1,10 @@
 package bytesandbots.custom.customrules;
 
 import org.bukkit.ChatColor;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.plugin.Plugin;
 
-public class LeifsArena implements Listener {
+public class LeifsArena {
 	public int wave = 1;
 	public Plugin plugin;
 	public int spawned = 4;
@@ -19,20 +15,8 @@ public class LeifsArena implements Listener {
 		plugin = P;
 	}
 	
-	@EventHandler
-	  public void onDeath(EntityDeathEvent e){
-	    Entity entity = e.getEntity();
-	    player.sendMessage("OOF: Something died.");
-	    if(entity.getCustomName() != null) {
-	    	spawned --;
-	    	
-	    	if(spawned <= 0) {
-	    		player.sendMessage("Next Wave");
-	    		wave ++;
-	    		spawnWave(player);
-	    	}
-	    }
-	    
+	
+
 	    
 	    
 	    
@@ -105,7 +89,8 @@ public class LeifsArena implements Listener {
 	    	}
 	      //your code
 	    }*/
-	  }
+	
+
 	
 	public void startGame(Player p) {
 		player = p;

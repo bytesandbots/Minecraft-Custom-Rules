@@ -176,8 +176,9 @@ public final class Main extends JavaPlugin {
 		        }
 		      e.printStackTrace();
 		}
-		actions = new LoginListener(PunishedPlayers,this);
 		arenamode = new LeifsArena(this);
+		actions = new LoginListener(PunishedPlayers,arenamode,this);
+		
 	      
 	    getServer().getPluginManager().registerEvents(actions , this);
 	    NamespacedKey nn = new NamespacedKey(this, "rum");

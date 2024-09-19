@@ -9,6 +9,7 @@ import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
@@ -34,6 +35,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
@@ -56,15 +58,15 @@ public final class LoginListener implements Listener {
 	public Map<String,ItemStack[]> PVPInventories = new HashMap<String,ItemStack[]>();
 	public Map<String,Long> coolDownPlayers = new HashMap<String,Long>();
 	public Plugin plugin;
+	public LeifsArena LeifsArenaSignal;
 	
-	
-	public LoginListener(List<String> ListOfUUIDs, Plugin p) {
+	public LoginListener(List<String> ListOfUUIDs, LeifsArena LA, Plugin p) {
 		plugin = p;
 		punishedPlayers.clear();
 		for (String uuid : ListOfUUIDs) {
 			punishedPlayers.add(uuid);
 		}
-		
+		LeifsArenaSignal = LA;
 	}
 	public void unPunish(Player p) {
 		
@@ -94,7 +96,22 @@ public final class LoginListener implements Listener {
        
 	}
 	
-	
+	@EventHandler
+	  public void OnLeifCustomDeath(EntityDeathEvent e){
+		Player p = LeifsArenaSignal.player;
+	    Entity entity = e.getEntity();
+	    p.sendMessage("OOF: Something died.");
+	    if(entity.getCustomName() != null) {
+	    	LeifsArenaSignal.spawned --;
+	    	
+	    	if(LeifsArenaSignal.spawned <= 0) {
+	    		p.sendMessage("Next Wave");
+	    		LeifsArenaSignal.wave ++;
+	    		LeifsArenaSignal.spawnWave(p);
+	    	}
+	    }
+	    
+	  }
 	
 	@EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {

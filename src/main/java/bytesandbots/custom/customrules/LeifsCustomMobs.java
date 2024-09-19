@@ -35,4 +35,54 @@ public class LeifsCustomMobs {
 		
 		robot.setHealth(50);
 	}
+	public void wrestlerZombie(Player p, Location loc) {
+		Zombie wrestler = (Zombie) p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+		
+		wrestler.setCustomName(ChatColor.RED + "Wrestler" + ChatColor.RESET + " Zombie");
+		
+		ItemStack weapon = new ItemStack(Material.RED_WOOL, 1);
+		ItemStack boots = new ItemStack(Material.GREEN_WOOL, 1);
+		ItemStack leggings = new ItemStack(Material.IRON_LEGGINGS, 1);
+		ItemStack chestplate = new ItemStack(Material.ENCHANTED_BOOK, 1);
+		ItemStack head = new ItemStack(Material.SEA_LANTERN, 1);
+		
+		wrestler.getEquipment().setItemInMainHand(weapon);
+		wrestler.getEquipment().setBoots(boots);
+		wrestler.getEquipment().setLeggings(leggings);
+		wrestler.getEquipment().setChestplate(chestplate);
+		wrestler.getEquipment().setHelmet(head);
+		
+		wrestler.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(3f);
+		wrestler.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1f);
+		wrestler.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(.2f);
+		
+		wrestler.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(150f);
+		
+		wrestler.setHealth(40);
+	}
+	public void MageZombie(Player p, Location loc) {
+		Zombie mage = (Zombie) p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+		
+		mage.setCustomName(ChatColor.RED + "Wrestler" + ChatColor.RESET + " Zombie");
+		
+		ItemStack weapon = new ItemStack(Material.RED_WOOL, 1);
+		ItemStack boots = new ItemStack(Material.LEATHER_BOOTS, 1);
+		ItemStack leggings = new ItemStack(Material.DIAMOND_LEGGINGS, 1);
+		ItemStack chestplate = new ItemStack(Material.BLUE_WOOL, 1);
+		ItemStack head = new ItemStack(Material.JACK_O_LANTERN, 1);
+		
+		mage.getEquipment().setItemInMainHand(weapon);
+		mage.getEquipment().setBoots(boots);
+		mage.getEquipment().setLeggings(leggings);
+		mage.getEquipment().setChestplate(chestplate);
+		mage.getEquipment().setHelmet(head);
+		
+		mage.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(3f);
+		mage.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1f);
+		mage.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(.1f);
+		
+		mage.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(150f);
+		
+		mage.setHealth(80);
+	}
 }
