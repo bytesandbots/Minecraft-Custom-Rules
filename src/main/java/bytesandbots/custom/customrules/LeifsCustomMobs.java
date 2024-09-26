@@ -60,7 +60,32 @@ public class LeifsCustomMobs {
 		
 		wrestler.setHealth(40);
 	}
-	public void MageZombie(Player p, Location loc) {
+	public void woolZombie(Player p, Location loc) {
+		Zombie wool = (Zombie) p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
+		
+		wool.setCustomName(ChatColor.BLUE + "Wool" + ChatColor.RESET + " Zombie");
+		
+		ItemStack weapon = new ItemStack(Material.TRIDENT, 1);
+		ItemStack boots = new ItemStack(Material.BLUE_WOOL, 1);
+		ItemStack leggings = new ItemStack(Material.RED_WOOL, 1);
+		ItemStack chestplate = new ItemStack(Material.YELLOW_WOOL, 1);
+		ItemStack head = new ItemStack(Material.ORANGE_WOOL, 1);
+		
+		wool.getEquipment().setItemInMainHand(weapon);
+		wool.getEquipment().setBoots(boots);
+		wool.getEquipment().setLeggings(leggings);
+		wool.getEquipment().setChestplate(chestplate);
+		wool.getEquipment().setHelmet(head);
+		
+		wool.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(4f);
+		wool.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1f);
+		wool.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(.1f);
+		
+		wool.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(150f);
+		
+		wool.setHealth(60);
+	}
+	/*public void MageZombie(Player p, Location loc) {
 		Zombie mage = (Zombie) p.getWorld().spawnEntity(loc, EntityType.ZOMBIE);
 		
 		mage.setCustomName(ChatColor.RED + "Wrestler" + ChatColor.RESET + " Zombie");
@@ -84,5 +109,5 @@ public class LeifsCustomMobs {
 		mage.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(150f);
 		
 		mage.setHealth(80);
-	}
+	}*/
 }

@@ -100,6 +100,12 @@ public final class LoginListener implements Listener {
 	  public void OnLeifCustomDeath(EntityDeathEvent e){
 		Player p = LeifsArenaSignal.player;
 	    Entity entity = e.getEntity();
+	    String type = entity.getType().toString();
+	    
+	    if(type == "PLAYER") {
+	    	LeifsArenaSignal.stopGame(p);
+	    }
+	    
 	    p.sendMessage("OOF: Something died.");
 	    if(entity.getCustomName() != null) {
 	    	LeifsArenaSignal.spawned --;
