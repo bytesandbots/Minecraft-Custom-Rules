@@ -106,7 +106,6 @@ public final class LoginListener implements Listener {
 	    	LeifsArenaSignal.stopGame(p);
 	    }
 	    
-	    p.sendMessage("OOF: Something died.");
 	    if(entity.getCustomName() != null) {
 	    	LeifsArenaSignal.spawned --;
 	    	
